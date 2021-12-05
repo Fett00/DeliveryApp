@@ -7,13 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainMenueViewController: UIViewController {
+    
+    var categoryCollectionView: UICollectionView!
+    var mealsCollectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        
     }
-
-
 }
 
