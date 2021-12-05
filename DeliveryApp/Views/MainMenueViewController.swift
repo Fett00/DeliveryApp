@@ -19,6 +19,18 @@ class MainMenueViewController: UIViewController {
 
         configureCategoryCollectionView()
         configuremealsCollectionView()
+        
+        NetworkWorker.shared.getCategories { result in
+            
+            switch result{
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let categories):
+                for i in categories.categories{
+                    print(i.strCategory)
+                }
+            }
+        }
     }
     
     func configureCategoryCollectionView(){

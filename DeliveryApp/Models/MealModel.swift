@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+//Модель блюда
 struct MealModel: Decodable{
     
     let strMeal: String

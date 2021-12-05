@@ -7,10 +7,19 @@
 
 import Foundation
 
+//Модель всех категорий
+struct CategoriesModel: Decodable{
+    
+    let categories: [CategoryModel]
+}
+
+//Модель одной категории
 struct CategoryModel: Decodable{
     
     let idCategory: String
     let strCategory: String
     
-    let meals: [MealModel]
+    //var meals: [MealModel] = []
 }
+
+

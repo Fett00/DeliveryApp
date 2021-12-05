@@ -19,6 +19,7 @@
 		5A5CA762275CE9B0003CFAA0 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */; };
 		5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */; };
 		5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */; };
+		5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealCollectionViewCell copy.swift"; sourceTree = "<group>"; };
+		5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				5A5CA740275CC819003CFAA0 /* AppDelegate.swift */,
 				5A5CA742275CC819003CFAA0 /* SceneDelegate.swift */,
+				5A5CA769275CF75D003CFAA0 /* Workers */,
 				5A5CA763275CEFEE003CFAA0 /* Views */,
 				5A5CA760275CE99E003CFAA0 /* Extension */,
 				5A5CA75F275CE51C003CFAA0 /* Models */,
@@ -115,6 +118,14 @@
 				5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		5A5CA769275CF75D003CFAA0 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */,
+			);
+			path = Workers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 				5A5CA745275CC819003CFAA0 /* MainMenueViewController.swift in Sources */,
 				5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */,
 				5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */,
+				5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */,
 				5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */,
 				5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */,
 				5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */,
