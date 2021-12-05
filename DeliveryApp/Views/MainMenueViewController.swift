@@ -29,6 +29,10 @@ class MainMenueViewController: UIViewController {
         
         categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
+        categoryCollectionView.dataSource = self
+        categoryCollectionView.delegate = self
+        categoryCollectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.id)
+        
         view.addSubview(categoryCollectionView)
         
         categoryCollectionView.backgroundColor = .brown
@@ -56,21 +60,44 @@ class MainMenueViewController: UIViewController {
     }
 }
 
-//extension MainMenueViewController: UICollectionViewDataSource{
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        10
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//        let cell = UICollectionViewCell()
-//
-//        cell.backgroundColor = .blue
-//
-//        return cell
-//    }
-//}
+extension MainMenueViewController: UICollectionViewDataSource{
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        switch collectionView{
+            
+        case categoryCollectionView:
+            return 10
+            
+        case mealsCollectionView:
+            return 10
+            
+        default:
+            return 10
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == categoryCollectionView{
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.id, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+            
+            cell.categoryLable.text = "Beef"
+            
+            return cell
+        }
+        else if collectionView == mealsCollectionView {
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MealCollectionViewCell.id, for: indexPath) as? MealCollectionViewCell else { return UICollectionViewCell() }
+            
+            return cell
+        }
+        else{
+            return UICollectionViewCell()
+        }
+    }
+}
 
 extension MainMenueViewController: UICollectionViewDelegate{
     
