@@ -10,4 +10,5 @@ import UIKit
 enum Images{
     
     static let emptyMeal = UIImage(named: "food-delivery")!
+    static let cart = UIImage(systemName: "cart")!
 }
