@@ -117,8 +117,8 @@
 		5A5CA764275CEFF8003CFAA0 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */,
 				5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */,
+				5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
