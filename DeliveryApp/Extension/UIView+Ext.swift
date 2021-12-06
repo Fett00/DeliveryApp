@@ -38,4 +38,23 @@ extension UIView {
             self.heightAnchor.constraint(equalToConstant: height).isActive = true
         }
     }
+    
+    func constraints(centerX: NSLayoutXAxisAnchor?, centerY: NSLayoutYAxisAnchor?, xPadding: CGFloat, yPadding: CGFloat){
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let centerX = centerX {
+            
+            self.centerXAnchor.constraint(equalTo: centerX, constant: xPadding).isActive = true
+        }
+        if let centerY = centerY {
+            
+            self.centerYAnchor.constraint(equalTo: centerY, constant: yPadding).isActive = true
+        }
+    }
+    
+    func addSubview(_ views: UIView...){
+        
+        let _ = views.map { self.addSubview($0) }
+    }
 }
