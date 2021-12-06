@@ -20,6 +20,7 @@
 		5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */; };
 		5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */; };
 		5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */; };
+		5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76C275E307C003CFAA0 /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealCollectionViewCell copy.swift"; sourceTree = "<group>"; };
 		5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
+		5A5CA76C275E307C003CFAA0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */,
+				5A5CA76C275E307C003CFAA0 /* Enums.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */,
 				5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */,
 				5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */,
+				5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */,
 				5A5CA758275CE14B003CFAA0 /* PresentItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
