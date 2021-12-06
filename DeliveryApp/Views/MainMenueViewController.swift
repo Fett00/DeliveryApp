@@ -17,6 +17,7 @@ class MainMenueViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
 
+        configureMainMenue()
         configureCategoryCollectionView()
         configureMealsCollectionView()
         
@@ -37,6 +38,16 @@ class MainMenueViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+    }
+    
+    func configureMainMenue(){
+        
+        let cartImage = Images.cart
+        
+        self.navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: cartImage,
+                                                                                      style: .plain,
+                                                                                      target: self,
+                                                                                      action: #selector(openCart))
     }
     
     func configureCategoryCollectionView(){
@@ -83,6 +94,10 @@ class MainMenueViewController: UIViewController {
         
         let safeArea = view.safeAreaLayoutGuide
         mealsCollectionView.constraints(top: categoryCollectionView.bottomAnchor, bottom: view.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
+    }
+    
+    @objc func openCart(){
+        
     }
 }
 
