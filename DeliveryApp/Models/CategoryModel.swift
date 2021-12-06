@@ -19,7 +19,7 @@ struct CategoryModel: Decodable{
     let idCategory: String
     let strCategory: String
     
-    //var meals: [MealModel] = []
+    var meals: [MealModel]? //Почему не работает var meals: [MealModel] = []
 }
 
 

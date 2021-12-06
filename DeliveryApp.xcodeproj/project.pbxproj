@@ -104,9 +104,9 @@
 		5A5CA763275CEFEE003CFAA0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5A5CA764275CEFF8003CFAA0 /* Cells */,
 				5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */,
 				5A5CA757275CE14B003CFAA0 /* PresentItemViewController.swift */,
+				5A5CA764275CEFF8003CFAA0 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";

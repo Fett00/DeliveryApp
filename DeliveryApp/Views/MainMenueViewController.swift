@@ -11,7 +11,7 @@ class MainMenueViewController: UIViewController {
     
     var categoryCollectionView: UICollectionView! //Категории
     var mealsCollectionView: UICollectionView! //Меню с едой
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +28,7 @@ class MainMenueViewController: UIViewController {
             case .success(let categories):
                 for i in categories.categories{
                     print(i.strCategory)
+                    
                 }
             }
         }
