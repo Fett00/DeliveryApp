@@ -18,7 +18,7 @@ class MainMenueViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         configureCategoryCollectionView()
-        configuremealsCollectionView()
+        configureMealsCollectionView()
         
         NetworkWorker.shared.getCategories { result in
             
@@ -34,28 +34,33 @@ class MainMenueViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
+    
     func configureCategoryCollectionView(){
         
         let layout = UICollectionViewFlowLayout()
         
-        layout.scrollDirection = .horizontal
-        
         categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        view.addSubview(categoryCollectionView)
         
         categoryCollectionView.dataSource = self
         categoryCollectionView.delegate = self
         categoryCollectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.id)
         
-        view.addSubview(categoryCollectionView)
-        
-        categoryCollectionView.backgroundColor = .brown
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = .zero
+        categoryCollectionView.showsHorizontalScrollIndicator = false
         
         let safeArea = view.safeAreaLayoutGuide
         categoryCollectionView.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 40)
         
     }
     
-    func configuremealsCollectionView(){
+    func configureMealsCollectionView(){
         
         let layout = UICollectionViewFlowLayout()
         
@@ -63,10 +68,18 @@ class MainMenueViewController: UIViewController {
         
         view.addSubview(mealsCollectionView)
         
-        mealsCollectionView.backgroundColor = .blue
+        mealsCollectionView.delegate = self
+        mealsCollectionView.dataSource = self
+        mealsCollectionView.register(MealCollectionViewCell.self, forCellWithReuseIdentifier: MealCollectionViewCell.id)
         
-//        mealsCollectionView.delegate = self
-//        mealsCollectionView.dataSource = self
+        let insets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
+        let spacing = 20.0
+        let deviceWidth = view.frame.width
+        let itemSize = (deviceWidth - insets.left - insets.right - spacing) / 2
+        layout.minimumInteritemSpacing = spacing
+        layout.minimumLineSpacing = spacing
+        layout.sectionInset = insets
+        layout.itemSize = CGSize(width: itemSize, height: itemSize)
         
         let safeArea = view.safeAreaLayoutGuide
         mealsCollectionView.constraints(top: categoryCollectionView.bottomAnchor, bottom: view.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
@@ -97,12 +110,15 @@ extension MainMenueViewController: UICollectionViewDataSource{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.id, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
             
             cell.categoryLable.text = "Beef"
+            cell.backgroundColor = .secondarySystemBackground
             
             return cell
         }
         else if collectionView == mealsCollectionView {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MealCollectionViewCell.id, for: indexPath) as? MealCollectionViewCell else { return UICollectionViewCell() }
+            
+            cell.backgroundColor = .secondarySystemBackground
             
             return cell
         }

@@ -17,6 +17,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.addSubview(categoryLable)
+        categoryLable.textAlignment = .center
         
         categoryLable.constraints(top: topAnchor, bottom: bottomAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
     }

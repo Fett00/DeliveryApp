@@ -11,7 +11,4 @@ class MealCollectionViewCell: UICollectionViewCell {
     
     static let id = "MealCellID" //идентификатор ячейки
     
-    override func prepareForReuse() {
-        
-    }
 }
