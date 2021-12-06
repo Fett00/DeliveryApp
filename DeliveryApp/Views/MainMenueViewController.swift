@@ -79,7 +79,7 @@ class MainMenueViewController: UIViewController {
         layout.minimumInteritemSpacing = spacing
         layout.minimumLineSpacing = spacing
         layout.sectionInset = insets
-        layout.itemSize = CGSize(width: itemSize, height: itemSize)
+        layout.itemSize = CGSize(width: itemSize, height: itemSize * 2)
         
         let safeArea = view.safeAreaLayoutGuide
         mealsCollectionView.constraints(top: categoryCollectionView.bottomAnchor, bottom: view.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
