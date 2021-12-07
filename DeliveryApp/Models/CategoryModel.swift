@@ -10,7 +10,7 @@ import Foundation
 //Модель всех категорий
 struct CategoriesModel: Decodable{
     
-    let categories: [CategoryModel]
+    var categories: [CategoryModel]
 }
 
 //Модель одной категории
