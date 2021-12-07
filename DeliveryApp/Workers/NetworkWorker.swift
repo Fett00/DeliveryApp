@@ -16,7 +16,7 @@ class NetworkWorker {
     
     private let categoriesURL = "https://www.themealdb.com/api/json/v1/1/categories.php" //АПИ для получения категорий
     
-    private let mealsURL = "www.themealdb.com/api/json/v1/1/filter.php?c=" //АПИ для получения блюд для категории
+    private let mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" //АПИ для получения блюд для категории
     
     
     func getCategories(handler: @escaping (Result<CategoriesModel, URLError>)->()){
