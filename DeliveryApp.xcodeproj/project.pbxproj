@@ -18,7 +18,7 @@
 		5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */; };
 		5A5CA762275CE9B0003CFAA0 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */; };
 		5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */; };
-		5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */; };
+		5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */; };
 		5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */; };
 		5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76C275E307C003CFAA0 /* Enums.swift */; };
 /* End PBXBuildFile section */
@@ -37,7 +37,7 @@
 		5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealCollectionViewCell copy.swift"; sourceTree = "<group>"; };
+		5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
 		5A5CA76C275E307C003CFAA0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */,
-				5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell copy.swift */,
+				5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -202,7 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A5CA762275CE9B0003CFAA0 /* UIView+Ext.swift in Sources */,
-				5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell copy.swift in Sources */,
+				5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell.swift in Sources */,
 				5A5CA75A275CE18F003CFAA0 /* MealModel.swift in Sources */,
 				5A5CA745275CC819003CFAA0 /* MainMenueViewController.swift in Sources */,
 				5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */,

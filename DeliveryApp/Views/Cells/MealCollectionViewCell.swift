@@ -67,7 +67,7 @@ class MealCollectionViewCell: UICollectionViewCell {
         self.layer.cornerCurve = .continuous
         self.layer.cornerRadius = 20
         
-        mealImage.tintColor = .systemGray
+        mealImage.tintColor = .systemGray3
         mealImage.contentMode = .scaleAspectFit//.scaleAspectFill
         mealImage.clipsToBounds = true
         mealImage.layer.cornerCurve = .continuous
