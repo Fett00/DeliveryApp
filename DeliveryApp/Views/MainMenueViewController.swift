@@ -62,6 +62,8 @@ class MainMenueViewController: UIViewController {
         categoryCollectionView.delegate = self
         categoryCollectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.id)
         
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
         layout.scrollDirection = .horizontal
         layout.sectionInset = .zero
         categoryCollectionView.showsHorizontalScrollIndicator = false

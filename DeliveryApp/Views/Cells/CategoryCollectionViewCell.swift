@@ -19,7 +19,10 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         self.addSubview(categoryLable)
         categoryLable.textAlignment = .center
         
-        categoryLable.constraints(top: topAnchor, bottom: bottomAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
+        self.layer.cornerCurve = .continuous
+        self.layer.cornerRadius = 10
+        
+        categoryLable.constraints(top: topAnchor, bottom: bottomAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: 5, paddingleft: 10, paddingRight: 10, width: 0, height: 0)
     }
     
     required init?(coder: NSCoder) {
