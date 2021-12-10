@@ -44,10 +44,10 @@ class MainMenueViewController: UIViewController {
         
         let cartImage = Images.cart
         
-        self.navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: cartImage,
-                                                                                      style: .plain,
-                                                                                      target: self,
-                                                                                      action: #selector(openCart))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: cartImage,
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(openCart))
     }
     
     func configureCategoryCollectionView(){
@@ -147,5 +147,18 @@ extension MainMenueViewController: UICollectionViewDataSource{
 
 extension MainMenueViewController: UICollectionViewDelegate{
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == categoryCollectionView{
+            
+            
+        }
+        else if collectionView == mealsCollectionView {
+            
+            let viewToPresent = UINavigationController(rootViewController: PresentMealViewController())
+            
+            self.navigationController?.present(viewToPresent, animated: true, completion: nil)
+        }
+    }
 }
 
