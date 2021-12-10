@@ -72,6 +72,7 @@ class MealCollectionViewCell: UICollectionViewCell {
         mealImage.clipsToBounds = true
         mealImage.layer.cornerCurve = .continuous
         mealImage.layer.cornerRadius = 20
+        mealImage.image = Images.emptyMeal //placeholder
         
         mealName.textAlignment = .left
         mealName.numberOfLines = 2
@@ -86,19 +87,22 @@ class MealCollectionViewCell: UICollectionViewCell {
         addToCartButton.layer.borderWidth = 0.2
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20
-        addToCartButton.showsTouchWhenHighlighted = true
+        //addToCartButton.showsTouchWhenHighlighted = true
         
         mealImage.translatesAutoresizingMaskIntoConstraints = false
         mealName.translatesAutoresizingMaskIntoConstraints = false
         
+        //TEMP DATA//
         mealName.text = "Пицца Четыре сыра"
         mealImage.image = Images.emptyMeal
-        addToCartButton.setTitle("\(Int.random(in: 100...4000))р.", for: .normal)
+        addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
+        //________//
     }
     
     func setUpCell(with meal: MealModel){
         
         mealName.text = meal.strMeal
         mealImage.image = Images.emptyMeal
+        addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
     }
 }
