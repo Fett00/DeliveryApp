@@ -65,7 +65,7 @@ class MainMenueViewController: UIViewController {
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
         layout.scrollDirection = .horizontal
-        layout.sectionInset = .zero
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         categoryCollectionView.showsHorizontalScrollIndicator = false
         
         let safeArea = view.safeAreaLayoutGuide
@@ -127,7 +127,6 @@ extension MainMenueViewController: UICollectionViewDataSource{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.id, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
             
             cell.categoryLable.text = "Beef"
-            cell.backgroundColor = .secondarySystemBackground
             
             return cell
         }
@@ -135,7 +134,6 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MealCollectionViewCell.id, for: indexPath) as? MealCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.backgroundColor = .secondarySystemBackground
             
             return cell
         }

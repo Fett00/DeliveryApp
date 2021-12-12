@@ -16,6 +16,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = .secondarySystemBackground
+        
         self.addSubview(categoryLable)
         categoryLable.textAlignment = .center
         

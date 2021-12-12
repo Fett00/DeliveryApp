@@ -18,6 +18,8 @@ class MealCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = .secondarySystemBackground
+        
         confCell()
     }
     
