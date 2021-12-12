@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowsScene.coordinateSpace.bounds)
         window?.windowScene = windowsScene
-        window?.rootViewController = UINavigationController(rootViewController: MainMenueViewController()) 
+        window?.rootViewController = ProjectAssembler.assemble()
         window?.makeKeyAndVisible()
     }
 

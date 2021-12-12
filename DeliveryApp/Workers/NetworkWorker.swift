@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol NetworkWorkerProtocol{
+    
+}
+
 
 class NetworkWorker {
     
@@ -90,4 +94,9 @@ class NetworkWorker {
             handler(.failure(URLError(.unknown)))
         }.resume()
     }
+}
+
+fileprivate class NetworkWorkerSingleton{
+    
+    
 }
