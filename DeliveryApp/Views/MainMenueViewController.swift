@@ -12,6 +12,7 @@ class MainMenueViewController: UIViewController {
     //TEMP
     var categoriesSTR = [CategoryModel]()
     var mealsSTR = [MealModel]()
+    var currentCategory = 0
     //
     
     var categoryCollectionView: UICollectionView! //Категории
@@ -41,7 +42,7 @@ class MainMenueViewController: UIViewController {
         super.viewWillAppear(animated)
         
         dataWorker.requestCategories()
-        dataWorker.requsetMeals(for: "Beef")
+        //dataWorker.requsetMeals(for: "Beef") // Перенес в делегат после получения списка категорий
     }
     
     func configureMainMenue(){
@@ -154,7 +155,8 @@ extension MainMenueViewController: UICollectionViewDelegate{
         
         if collectionView == categoryCollectionView{
             
-            
+            currentCategory = indexPath.row
+            dataWorker.requsetMeals(for: categoriesSTR[currentCategory].strCategory)
         }
         else if collectionView == mealsCollectionView {
             
@@ -171,6 +173,10 @@ extension MainMenueViewController: DataWorkerDelegate{
         categoriesSTR = categories
         
         categoryCollectionView.reloadData()
+        
+        if !categoriesSTR.isEmpty{
+            dataWorker.requsetMeals(for: categoriesSTR[currentCategory].strCategory)
+        }
     }
     
     func getMeals(meals: [MealModel]) {
