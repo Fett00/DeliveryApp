@@ -7,42 +7,40 @@
 
 import UIKit
 
-protocol DataWorkerProtocol{
+protocol DataWorkerProtocol: AnyObject{
     
+    var delegate: DataWorkerDelegate? { get set }
     
+    func requestCategories()
+    
+    func requsetMeals(for category: String)
+}
+
+protocol DataWorkerDelegate: AnyObject {
+    
+    func getCategories(categories: [String])
+    
+    func getMeals()
 }
 
 class DataWorker: DataWorkerProtocol{
     
+    weak var delegate: DataWorkerDelegate?
+    
+    //Нужен ли инит
+    //Как закрыть эти свойства от внешнего доступа
     var coreDataWorker: CoreDataWorkerProtocol!
     var jsonDecoderWorker: JSONDecoderWorkerProtocol!
     var networkWorker: NetworkWorkerProtocol!
-
-    func firstGetCategories(){
+    
+    
+    func requestCategories() {
         
-//        var categories: [CategoryModel] = []
-//        let group = DispatchGroup()
-//
-//        group.enter()
-//        NetworkWorker.shared.getCategories { result in
-//
-//            switch result {
-//            case .failure(let error):
-//
-//                print(error.localizedDescription)
-//
-//            case .success(let model):
-//
-//                categories = model.categories
-//            }
-//            group.leave()
-//        }
-//
-//        group.wait()
-//
-//        //Дописать
-        
+        delegate?.getCategories(categories: ["Beef", "Chkn", "Fish", "Potat"])
     }
     
+    func requsetMeals(for category: String) {
+        
+    }
 }
 

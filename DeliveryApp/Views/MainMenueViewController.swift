@@ -9,6 +9,10 @@ import UIKit
 
 class MainMenueViewController: UIViewController {
     
+    //TEMP
+    var categoriesSTR = [String]()
+    //
+    
     var categoryCollectionView: UICollectionView! //Категории
     var mealsCollectionView: UICollectionView! //Меню с едой
     
@@ -18,6 +22,8 @@ class MainMenueViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        
+        dataWorker.delegate = self
 
         configureMainMenue()
         configureCategoryCollectionView()
@@ -28,6 +34,12 @@ class MainMenueViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        dataWorker.requestCategories()
     }
     
     func configureMainMenue(){
@@ -100,7 +112,7 @@ extension MainMenueViewController: UICollectionViewDataSource{
         switch collectionView{
             
         case categoryCollectionView:
-            return 10
+            return categoriesSTR.count
             
         case mealsCollectionView:
             return 10
@@ -116,7 +128,7 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.id, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.categoryLable.text = "Beef"
+            cell.categoryLable.text = categoriesSTR[indexPath.row]
             
             return cell
         }
@@ -145,6 +157,20 @@ extension MainMenueViewController: UICollectionViewDelegate{
             
             self.present(PresentMealViewController(), animated: true, completion: nil)
         }
+    }
+}
+
+extension MainMenueViewController: DataWorkerDelegate{
+    
+    func getCategories(categories: [String]) {
+        
+        categoriesSTR = categories
+        
+        categoryCollectionView.reloadData()
+    }
+    
+    func getMeals() {
+        
     }
 }
 
