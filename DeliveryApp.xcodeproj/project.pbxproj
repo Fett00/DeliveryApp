@@ -24,6 +24,7 @@
 		5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */; };
 		5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */; };
 		5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76C275E307C003CFAA0 /* Enums.swift */; };
+		5ACB230C276E9FFB00782216 /* JSONDecoderWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACB230B276E9FFB00782216 /* JSONDecoderWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
 		5A5CA76C275E307C003CFAA0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		5ACB230B276E9FFB00782216 /* JSONDecoderWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */,
 				5A00483F27663BDC00C02952 /* CoreDataWorker.swift */,
 				5A00484127663C2300C02952 /* DataWorker.swift */,
+				5ACB230B276E9FFB00782216 /* JSONDecoderWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				5A004844276643E400C02952 /* ProjectAssembler.swift in Sources */,
 				5A00484027663BDC00C02952 /* CoreDataWorker.swift in Sources */,
 				5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */,
+				5ACB230C276E9FFB00782216 /* JSONDecoderWorker.swift in Sources */,
 				5A00484227663C2300C02952 /* DataWorker.swift in Sources */,
 				5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */,
 				5A5CA758275CE14B003CFAA0 /* PresentItemViewController.swift in Sources */,

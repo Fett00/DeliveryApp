@@ -9,13 +9,26 @@ import UIKit
 
 class ProjectAssembler{
     
-    static func assemble() -> UIViewController{
+    //singleton
+    public static let shared = ProjectAssembler()
+    private init(){}
+    
+    let dataWorker = DataWorker()
+    let networkWorker = NetworkWorker()
+    let jsonWorker = JSONDecoderWorker()
+    let coreDataWorker = CoreDataWorker()
+    
+    func assemble() -> UIViewController{
         
-        let mainViewController = UINavigationController(rootViewController: MainMenueViewController())
+        dataWorker.coreDataWorker = coreDataWorker
+        dataWorker.jsonDecoderWorker = jsonWorker
+        dataWorker.networkWorker = networkWorker
         
-        //Дописать
+        let mainViewController = MainMenueViewController()
         
-        return mainViewController
+        mainViewController.dataWorker = dataWorker
+        
+        return UINavigationController(rootViewController: mainViewController)
     }
 }
 

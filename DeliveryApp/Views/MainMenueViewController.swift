@@ -12,6 +12,8 @@ class MainMenueViewController: UIViewController {
     var categoryCollectionView: UICollectionView! //Категории
     var mealsCollectionView: UICollectionView! //Меню с едой
     
+    var dataWorker: DataWorkerProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,19 +22,7 @@ class MainMenueViewController: UIViewController {
         configureMainMenue()
         configureCategoryCollectionView()
         configureMealsCollectionView()
-        
-        NetworkWorker.shared.getCategories { result in
-            
-            switch result{
-            case .failure(let error):
-                print(error.localizedDescription)
-            case .success(let categories):
-                for i in categories.categories{
-                    print(i.strCategory)
-                    
-                }
-            }
-        }
+
     }
     
     override func viewDidLayoutSubviews() {

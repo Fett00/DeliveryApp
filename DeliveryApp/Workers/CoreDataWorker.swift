@@ -8,6 +8,14 @@
 import UIKit
 import CoreData
 
+protocol CoreDataWorkerProtocol{
+    
+}
+
+class CoreDataWorker: CoreDataWorkerProtocol{
+    
+}
+
 //class CoreDataWorker{
 //
 //    //Создание контекста для работы с CoreData

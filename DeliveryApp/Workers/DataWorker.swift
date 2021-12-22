@@ -7,35 +7,40 @@
 
 import UIKit
 
-class DataWorker{
+protocol DataWorkerProtocol{
     
-    //singleton
-    static public let shared = DataWorker()
-    private init(){}
+    
+}
+
+class DataWorker: DataWorkerProtocol{
+    
+    var coreDataWorker: CoreDataWorkerProtocol!
+    var jsonDecoderWorker: JSONDecoderWorkerProtocol!
+    var networkWorker: NetworkWorkerProtocol!
 
     func firstGetCategories(){
         
-        var categories: [CategoryModel] = []
-        let group = DispatchGroup()
-        
-        group.enter()
-        NetworkWorker.shared.getCategories { result in
-            
-            switch result {
-            case .failure(let error):
-                
-                print(error.localizedDescription)
-                
-            case .success(let model):
-                
-                categories = model.categories
-            }
-            group.leave()
-        }
-        
-        group.wait()
-        
-        //Дописать
+//        var categories: [CategoryModel] = []
+//        let group = DispatchGroup()
+//
+//        group.enter()
+//        NetworkWorker.shared.getCategories { result in
+//
+//            switch result {
+//            case .failure(let error):
+//
+//                print(error.localizedDescription)
+//
+//            case .success(let model):
+//
+//                categories = model.categories
+//            }
+//            group.leave()
+//        }
+//
+//        group.wait()
+//
+//        //Дописать
         
     }
     
