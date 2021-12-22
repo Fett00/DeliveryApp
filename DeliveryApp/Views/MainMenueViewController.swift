@@ -143,9 +143,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
         }
         else if collectionView == mealsCollectionView {
             
-            let viewToPresent = UINavigationController(rootViewController: PresentMealViewController())
-            
-            self.navigationController?.present(viewToPresent, animated: true, completion: nil)
+            self.present(PresentMealViewController(), animated: true, completion: nil)
         }
     }
 }

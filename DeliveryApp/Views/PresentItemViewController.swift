@@ -15,6 +15,7 @@ class PresentMealViewController: UIViewController{
     let mealName = UILabel()
     let addToCartButton = UIButton()
     let mealDescription = UILabel()
+    let bar = UINavigationBar()
     
     init(meal: MealModel) {
         
@@ -44,13 +45,19 @@ class PresentMealViewController: UIViewController{
     
     func configureView(){
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dissmisView))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dissmisView))
+        let navigationItem = UINavigationItem()
+        navigationItem.rightBarButtonItem = doneButton
         
-        view.addSubview(mealImage, mealName, mealDescription, addToCartButton)
+        bar.items = [navigationItem]
+
+        view.addSubview(mealImage, mealName, mealDescription, addToCartButton, bar)
         
         let safeArea = view.safeAreaLayoutGuide
         
-        mealImage.constraints(top: safeArea.topAnchor, bottom: safeArea.centerYAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 10, paddingRight: 10, width: 0, height: 0)
+        bar.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
+        
+        mealImage.constraints(top: bar.bottomAnchor, bottom: safeArea.centerYAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 10, paddingRight: 10, width: 0, height: 0)
         
         mealName.constraints(top: mealImage.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
