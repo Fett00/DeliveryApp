@@ -155,8 +155,20 @@ extension MainMenueViewController: UICollectionViewDelegate{
         
         if collectionView == categoryCollectionView{
             
-            currentCategory = indexPath.row
-            dataWorker.requsetMeals(for: categoriesSTR[currentCategory].strCategory)
+            let topRow = IndexPath(row: 0, section: 0)
+            
+            if currentCategory != indexPath.row{
+                
+                currentCategory = indexPath.row
+                dataWorker.requsetMeals(for: categoriesSTR[currentCategory].strCategory)
+                
+                mealsCollectionView.scrollToItem(at: topRow, at: .top, animated: false)
+            }
+            
+            else{
+                mealsCollectionView.scrollToItem(at: topRow, at: .top, animated: true)
+            }
+            
         }
         else if collectionView == mealsCollectionView {
             
