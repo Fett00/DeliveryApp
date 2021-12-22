@@ -18,7 +18,7 @@ protocol DataWorkerProtocol: AnyObject{
 
 protocol DataWorkerDelegate: AnyObject {
     
-    func getCategories(categories: [String])
+    func getCategories(categories: [CategoryModel])
     
     func getMeals()
 }
@@ -33,10 +33,41 @@ class DataWorker: DataWorkerProtocol{
     var jsonDecoderWorker: JSONDecoderWorkerProtocol!
     var networkWorker: NetworkWorkerProtocol!
     
+    //АПИ для получения категорий
+    private let categoriesURL = "https://www.themealdb.com/api/json/v1/1/categories.php"
+    
+    //АПИ для получения блюд для категории
+    private let mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
+    
     
     func requestCategories() {
         
-        delegate?.getCategories(categories: ["Beef", "Chkn", "Fish", "Potat"])
+        DispatchQueue.global(qos: .userInteractive).async { [ self ] //нужен ли weak/unowned
+            
+            var rawData = Data()
+            
+            let group = DispatchGroup()
+            
+            group.enter()
+            self.networkWorker.getData(from: self.categoriesURL) { result in
+                
+                switch result {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let data):
+                    
+                    rawData = data
+                }
+                group.leave()
+            }
+            
+            group.wait()
+            guard let categoriesToReturn = self.jsonDecoderWorker.decodeC(data: rawData) else { return }
+            
+            DispatchQueue.main.async {
+                self.delegate?.getCategories(categories: categoriesToReturn.categories)
+            }
+        }
     }
     
     func requsetMeals(for category: String) {

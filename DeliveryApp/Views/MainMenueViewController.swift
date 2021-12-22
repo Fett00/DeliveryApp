@@ -10,7 +10,7 @@ import UIKit
 class MainMenueViewController: UIViewController {
     
     //TEMP
-    var categoriesSTR = [String]()
+    var categoriesSTR = [CategoryModel]()
     //
     
     var categoryCollectionView: UICollectionView! //Категории
@@ -128,7 +128,7 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.id, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.categoryLable.text = categoriesSTR[indexPath.row]
+            cell.setUpCell(with: categoriesSTR[indexPath.row])
             
             return cell
         }
@@ -162,7 +162,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
 
 extension MainMenueViewController: DataWorkerDelegate{
     
-    func getCategories(categories: [String]) {
+    func getCategories(categories: [CategoryModel]) {
         
         categoriesSTR = categories
         

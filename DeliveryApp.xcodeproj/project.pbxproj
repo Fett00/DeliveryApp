@@ -135,10 +135,10 @@
 		5A5CA769275CF75D003CFAA0 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */,
-				5A00483F27663BDC00C02952 /* CoreDataWorker.swift */,
 				5A00484127663C2300C02952 /* DataWorker.swift */,
+				5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */,
 				5ACB230B276E9FFB00782216 /* JSONDecoderWorker.swift */,
+				5A00483F27663BDC00C02952 /* CoreDataWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";

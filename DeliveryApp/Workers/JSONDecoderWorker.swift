@@ -10,6 +10,9 @@ import Foundation
 protocol JSONDecoderWorkerProtocol{
     
     func decode<TypeOf: Decodable>(data: Data) -> TypeOf?
+    
+    //TEMP
+    func decodeC(data: Data) -> CategoriesModel?
 }
 
 //Класс для парсинга данных в json
@@ -26,6 +29,19 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
         
         do {
             return try decoder.decode(TypeOf.self, from: data)
+        } catch {
+            
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    
+    //TEMP
+    func decodeC(data: Data) -> CategoriesModel?{
+        
+        do {
+            return try decoder.decode(CategoriesModel.self, from: data)
         } catch {
             
             print(error.localizedDescription)
