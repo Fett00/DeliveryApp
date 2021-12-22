@@ -20,7 +20,7 @@ protocol DataWorkerDelegate: AnyObject {
     
     func getCategories(categories: [CategoryModel])
     
-    func getMeals()
+    func getMeals(meals: [MealModel])
 }
 
 class DataWorker: DataWorkerProtocol{
@@ -72,6 +72,32 @@ class DataWorker: DataWorkerProtocol{
     
     func requsetMeals(for category: String) {
         
+        DispatchQueue.global(qos: .userInteractive).async { [ self ] //нужен ли weak/unowned
+            
+            var rawData = Data()
+            
+            let group = DispatchGroup()
+            
+            group.enter()
+            self.networkWorker.getData(from: self.mealsURL + category) { result in
+                
+                switch result {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let data):
+                    
+                    rawData = data
+                }
+                group.leave()
+            }
+            
+            group.wait()
+            guard let mealsToReturn = self.jsonDecoderWorker.decodeM(data: rawData) else { return }
+            
+            DispatchQueue.main.async {
+                self.delegate?.getMeals(meals: mealsToReturn.meals)
+            }
+        }
     }
 }
 

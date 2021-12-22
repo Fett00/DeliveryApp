@@ -37,7 +37,7 @@ class MealCollectionViewCell: UICollectionViewCell {
         
         let cellFrame = self.bounds
         let buttonHeight = 50.0
-        let lableHeight = mealName.font.lineHeight * 2
+        let lableHeight = mealName.font.lineHeight * 3
         let originX = 10.0
         let inset = 10.0
         let widthX = cellFrame.maxX - originX * 2
@@ -77,7 +77,7 @@ class MealCollectionViewCell: UICollectionViewCell {
         mealImage.image = Images.emptyMeal //placeholder
         
         mealName.textAlignment = .left
-        mealName.numberOfLines = 2
+        mealName.numberOfLines = 3
         mealName.setContentCompressionResistancePriority( .defaultHigh, for: .vertical)
         mealName.setContentHuggingPriority(.defaultLow, for: .vertical)
         mealName.setContentCompressionResistancePriority( .defaultHigh, for: .horizontal)

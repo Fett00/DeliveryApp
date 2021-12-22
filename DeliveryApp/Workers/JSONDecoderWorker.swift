@@ -13,6 +13,8 @@ protocol JSONDecoderWorkerProtocol{
     
     //TEMP
     func decodeC(data: Data) -> CategoriesModel?
+    func decodeM(data: Data) -> MealsModel?
+    //
 }
 
 //Класс для парсинга данных в json
@@ -42,6 +44,16 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
         
         do {
             return try decoder.decode(CategoriesModel.self, from: data)
+        } catch {
+            
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    func decodeM(data: Data) -> MealsModel?{
+        
+        do {
+            return try decoder.decode(MealsModel.self, from: data)
         } catch {
             
             print(error.localizedDescription)

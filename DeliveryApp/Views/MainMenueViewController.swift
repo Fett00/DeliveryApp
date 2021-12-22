@@ -11,6 +11,7 @@ class MainMenueViewController: UIViewController {
     
     //TEMP
     var categoriesSTR = [CategoryModel]()
+    var mealsSTR = [MealModel]()
     //
     
     var categoryCollectionView: UICollectionView! //Категории
@@ -40,6 +41,7 @@ class MainMenueViewController: UIViewController {
         super.viewWillAppear(animated)
         
         dataWorker.requestCategories()
+        dataWorker.requsetMeals(for: "Beef")
     }
     
     func configureMainMenue(){
@@ -115,7 +117,7 @@ extension MainMenueViewController: UICollectionViewDataSource{
             return categoriesSTR.count
             
         case mealsCollectionView:
-            return 10
+            return mealsSTR.count
             
         default:
             return 10
@@ -136,6 +138,7 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MealCollectionViewCell.id, for: indexPath) as? MealCollectionViewCell else { return UICollectionViewCell() }
             
+            cell.setUpCell(with: mealsSTR[indexPath.row])
             
             return cell
         }
@@ -155,7 +158,8 @@ extension MainMenueViewController: UICollectionViewDelegate{
         }
         else if collectionView == mealsCollectionView {
             
-            self.present(PresentMealViewController(), animated: true, completion: nil)
+            //TEMP
+            self.present(PresentMealViewController(meal: mealsSTR[indexPath.row]), animated: true, completion: nil)
         }
     }
 }
@@ -169,8 +173,11 @@ extension MainMenueViewController: DataWorkerDelegate{
         categoryCollectionView.reloadData()
     }
     
-    func getMeals() {
+    func getMeals(meals: [MealModel]) {
         
+        mealsSTR = meals
+        
+        mealsCollectionView.reloadData()
     }
 }
 

@@ -72,6 +72,7 @@ class PresentMealViewController: UIViewController{
         
         mealName.setContentHuggingPriority(.defaultHigh, for: .vertical)
         mealName.font = UIFont.preferredFont(forTextStyle: .title1)
+        mealName.numberOfLines = 3
         
         mealDescription.numberOfLines = 0
         
@@ -81,9 +82,10 @@ class PresentMealViewController: UIViewController{
         addToCartButton.layer.cornerRadius = 20
         //addToCartButton.showsTouchWhenHighlighted = true
         
+        mealName.text = meal.strMeal
+        
         //TEMP DATA//
         mealImage.image = Images.emptyMeal
-        mealName.text = "Пицца Четыре сыра"
         mealDescription.text = "Пицца 4 сыра относится к так называемому типу белых пицц («pizza Bianca»), т.е. в неё не кладётся традиционный для большинства пицц томатный соус и помидоры. Самое главное тут сыры, а точнее их сочетание. Здесь важно, чтобы у вас присутствовали четыре разных типа сыров: мягкий, твердый, ароматный (пряный) и голубой сыры. "
         addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
         //________//
