@@ -19,7 +19,9 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = .secondarySystemBackground
         
         self.addSubview(categoryLable)
+        
         categoryLable.textAlignment = .center
+        categoryLable.font = UIFont.systemFont(ofSize: 24)
         
         self.layer.cornerCurve = .continuous
         self.layer.cornerRadius = 10

@@ -39,7 +39,6 @@ class DataWorker: DataWorkerProtocol{
     //АПИ для получения блюд для категории
     private let mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
     
-    
     func requestCategories() {
         
         DispatchQueue.global(qos: .userInteractive).async { [ self ] //нужен ли weak/unowned

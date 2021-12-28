@@ -93,12 +93,6 @@ class MealCollectionViewCell: UICollectionViewCell {
         
         mealImage.translatesAutoresizingMaskIntoConstraints = false
         mealName.translatesAutoresizingMaskIntoConstraints = false
-        
-        //TEMP DATA//
-        mealName.text = "Пицца Четыре сыра"
-        mealImage.image = Images.emptyMeal
-        addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
-        //________//
     }
     
     func setUpCell(with meal: MealModel){

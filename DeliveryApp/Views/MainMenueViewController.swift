@@ -9,11 +9,10 @@ import UIKit
 
 class MainMenueViewController: UIViewController {
     
-    //TEMP
-    var categoriesSTR = [CategoryModel]()
-    var mealsSTR = [MealModel]()
+
+    var categoryModels = [CategoryModel]()
     var currentCategory = 0
-    //
+    var mealModels = [MealModel]()
     
     var categoryCollectionView: UICollectionView! //Категории
     var mealsCollectionView: UICollectionView! //Меню с едой
@@ -69,8 +68,10 @@ class MainMenueViewController: UIViewController {
         
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
+        //TODO: - Исправить проблему с высотой Collection View
         layout.scrollDirection = .horizontal
         layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        //layout.content
         categoryCollectionView.showsHorizontalScrollIndicator = false
         
         let safeArea = view.safeAreaLayoutGuide
@@ -115,13 +116,13 @@ extension MainMenueViewController: UICollectionViewDataSource{
         switch collectionView{
             
         case categoryCollectionView:
-            return categoriesSTR.count
+            return categoryModels.count
             
         case mealsCollectionView:
-            return mealsSTR.count
+            return mealModels.count
             
         default:
-            return 10
+            return 0
         }
     }
 
@@ -131,7 +132,7 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.id, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.setUpCell(with: categoriesSTR[indexPath.row])
+            cell.setUpCell(with: categoryModels[indexPath.row])
             
             return cell
         }
@@ -139,7 +140,7 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MealCollectionViewCell.id, for: indexPath) as? MealCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.setUpCell(with: mealsSTR[indexPath.row])
+            cell.setUpCell(with: mealModels[indexPath.row])
             
             return cell
         }
@@ -160,7 +161,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
             if currentCategory != indexPath.row{
                 
                 currentCategory = indexPath.row
-                dataWorker.requsetMeals(for: categoriesSTR[currentCategory].strCategory)
+                dataWorker.requsetMeals(for: categoryModels[currentCategory].strCategory)
                 
                 mealsCollectionView.scrollToItem(at: topRow, at: .top, animated: false)
             }
@@ -172,8 +173,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
         }
         else if collectionView == mealsCollectionView {
             
-            //TEMP
-            self.present(PresentMealViewController(meal: mealsSTR[indexPath.row]), animated: true, completion: nil)
+            self.present(PresentMealViewController(meal: mealModels[indexPath.row]), animated: true, completion: nil)
         }
     }
 }
@@ -182,18 +182,18 @@ extension MainMenueViewController: DataWorkerDelegate{
     
     func getCategories(categories: [CategoryModel]) {
         
-        categoriesSTR = categories
+        categoryModels = categories
         
         categoryCollectionView.reloadData()
         
-        if !categoriesSTR.isEmpty{
-            dataWorker.requsetMeals(for: categoriesSTR[currentCategory].strCategory)
+        if !categoryModels.isEmpty{
+            dataWorker.requsetMeals(for: categoryModels[currentCategory].strCategory)
         }
     }
     
     func getMeals(meals: [MealModel]) {
         
-        mealsSTR = meals
+        mealModels = meals
         
         mealsCollectionView.reloadData()
     }

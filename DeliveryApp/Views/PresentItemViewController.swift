@@ -45,7 +45,7 @@ class PresentMealViewController: UIViewController{
     
     func configureView(){
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dissmisView))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissView))
         let navigationItem = UINavigationItem()
         navigationItem.rightBarButtonItem = doneButton
         
@@ -57,7 +57,7 @@ class PresentMealViewController: UIViewController{
         
         bar.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
         
-        mealImage.constraints(top: bar.bottomAnchor, bottom: safeArea.centerYAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 10, paddingRight: 10, width: 0, height: 0)
+        mealImage.constraints(top: bar.bottomAnchor, bottom: safeArea.centerYAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 10, paddingRight: 10, width: 0, height: 0)
         
         mealName.constraints(top: mealImage.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
@@ -69,6 +69,7 @@ class PresentMealViewController: UIViewController{
         
         mealImage.tintColor = .systemGray3
         mealImage.contentMode = .scaleAspectFit
+        mealImage.image = Images.emptyMeal //placeholder
         
         mealName.setContentHuggingPriority(.defaultHigh, for: .vertical)
         mealName.font = UIFont.preferredFont(forTextStyle: .title1)
@@ -84,14 +85,15 @@ class PresentMealViewController: UIViewController{
         
         mealName.text = meal.strMeal
         
+        
         //TEMP DATA//
-        mealImage.image = Images.emptyMeal
         mealDescription.text = "Пицца 4 сыра относится к так называемому типу белых пицц («pizza Bianca»), т.е. в неё не кладётся традиционный для большинства пицц томатный соус и помидоры. Самое главное тут сыры, а точнее их сочетание. Здесь важно, чтобы у вас присутствовали четыре разных типа сыров: мягкий, твердый, ароматный (пряный) и голубой сыры. "
         addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
         //________//
+        
     }
     
-    @objc func dissmisView(){
+    @objc func dismissView(){
         
         self.dismiss(animated: true, completion: nil)
     }
