@@ -9,7 +9,7 @@ import Foundation
 
 protocol JSONDecoderWorkerProtocol{
     
-    func decode<TypeOf: Decodable>(data: Data) -> TypeOf?
+    func decode<T: Decodable>(data: Data) -> T?
     
     //TEMP
     func decodeC(data: Data) -> CategoriesModel?
@@ -27,10 +27,10 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
         return dec
     }()
     
-    func decode<TypeOf: Decodable>(data: Data) -> TypeOf?{
+    func decode<T: Decodable>(data: Data) -> T?{
         
         do {
-            return try decoder.decode(TypeOf.self, from: data)
+            return try decoder.decode(T.self, from: data)
         } catch {
             
             print(error.localizedDescription)

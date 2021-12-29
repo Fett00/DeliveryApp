@@ -13,7 +13,9 @@ protocol DataWorkerProtocol: AnyObject{
     
     func requestCategories()
     
-    func requsetMeals(for category: String)
+    func requestMeals(for category: String)
+    
+    func requestImageData(for mealUrl: String)
 }
 
 protocol DataWorkerDelegate: AnyObject {
@@ -69,7 +71,7 @@ class DataWorker: DataWorkerProtocol{
         }
     }
     
-    func requsetMeals(for category: String) {
+    func requestMeals(for category: String) {
         
         DispatchQueue.global(qos: .userInteractive).async { [ self ] //нужен ли weak/unowned
             
@@ -97,6 +99,12 @@ class DataWorker: DataWorkerProtocol{
                 self.delegate?.getMeals(meals: mealsToReturn.meals)
             }
         }
+    }
+    
+    
+    func requestImageData(for mealUrl: String) {
+        
+        
     }
 }
 

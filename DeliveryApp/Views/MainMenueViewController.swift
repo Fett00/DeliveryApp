@@ -19,6 +19,18 @@ class MainMenueViewController: UIViewController {
     
     var dataWorker: DataWorkerProtocol!
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+//        configureMainMenue()
+//        configureCategoryCollectionView()
+//        configureMealsCollectionView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,7 +87,7 @@ class MainMenueViewController: UIViewController {
         categoryCollectionView.showsHorizontalScrollIndicator = false
         
         let safeArea = view.safeAreaLayoutGuide
-        categoryCollectionView.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 40)
+        categoryCollectionView.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 50)
         
     }
     
@@ -101,7 +113,7 @@ class MainMenueViewController: UIViewController {
         layout.itemSize = CGSize(width: itemSize, height: itemSize * 2)
         
         let safeArea = view.safeAreaLayoutGuide
-        mealsCollectionView.constraints(top: categoryCollectionView.bottomAnchor, bottom: view.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
+        mealsCollectionView.constraints(top: categoryCollectionView.bottomAnchor, bottom: view.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     @objc func openCart(){
@@ -161,7 +173,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
             if currentCategory != indexPath.row{
                 
                 currentCategory = indexPath.row
-                dataWorker.requsetMeals(for: categoryModels[currentCategory].strCategory)
+                dataWorker.requestMeals(for: categoryModels[currentCategory].strCategory)
                 
                 mealsCollectionView.scrollToItem(at: topRow, at: .top, animated: false)
             }
@@ -182,12 +194,13 @@ extension MainMenueViewController: DataWorkerDelegate{
     
     func getCategories(categories: [CategoryModel]) {
         
-        categoryModels = categories
-        
-        categoryCollectionView.reloadData()
-        
-        if !categoryModels.isEmpty{
-            dataWorker.requsetMeals(for: categoryModels[currentCategory].strCategory)
+        if !categories.isEmpty{
+            
+            categoryModels = categories
+            
+            categoryCollectionView.reloadData()
+            
+            dataWorker.requestMeals(for: categoryModels[currentCategory].strCategory)
         }
     }
     
