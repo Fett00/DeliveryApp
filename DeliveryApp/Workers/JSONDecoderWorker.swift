@@ -38,7 +38,6 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
         }
     }
     
-    
     //TEMP
     func decodeC(data: Data) -> CategoriesModel?{
         
@@ -50,6 +49,7 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
             return nil
         }
     }
+    
     func decodeM(data: Data) -> MealsModel?{
         
         do {

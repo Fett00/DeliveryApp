@@ -101,7 +101,6 @@ class DataWorker: DataWorkerProtocol{
         }
     }
     
-    
     func requestImageData(for mealUrl: String) {
         
         
