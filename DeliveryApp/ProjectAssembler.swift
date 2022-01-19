@@ -13,20 +13,26 @@ class ProjectAssembler{
     public static let shared = ProjectAssembler()
     private init(){}
     
-    let dataWorker = DataWorker()
-    let networkWorker = NetworkWorker()
-    let jsonWorker = JSONDecoderWorker()
-    let coreDataWorker = CoreDataWorker()
+    private let dataWorker = DataWorker()
+    private let networkWorker = NetworkWorker()
+    private let jsonDecoderWorker = JSONDecoderWorker()
+    private let jsonEncoderWorker = JSONEncoderWorker()
+    private let coreDataWorker = CoreDataWorker()
+    
+    let cartVC = CartViewController()
     
     func assemble() -> UIViewController{
         
         dataWorker.coreDataWorker = coreDataWorker
-        dataWorker.jsonDecoderWorker = jsonWorker
+        dataWorker.jsonDecoderWorker = jsonDecoderWorker
+        dataWorker.jsonEncoderWorker = jsonEncoderWorker
         dataWorker.networkWorker = networkWorker
         
         let mainViewController = MainMenueViewController()
         
         mainViewController.dataWorker = dataWorker
+        
+        cartVC.dataWorker = dataWorker
         
         return UINavigationController(rootViewController: mainViewController)
     }

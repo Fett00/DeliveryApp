@@ -1,5 +1,5 @@
 //
-//  JSONDecoderWorker.swift
+//  JSONWorker.swift
 //  DeliveryApp
 //
 //  Created by Садык Мусаев on 19.12.2021.
@@ -15,6 +15,11 @@ protocol JSONDecoderWorkerProtocol{
     func decodeC(data: Data) -> CategoriesModel?
     func decodeM(data: Data) -> MealsModel?
     //
+}
+
+protocol JSONEncoderWorkerProtocol{
+    
+    func encode<T: Encodable>(model: T) -> Data?
 }
 
 //Класс для парсинга данных в json
@@ -59,5 +64,13 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
             print(error.localizedDescription)
             return nil
         }
+    }
+}
+
+class JSONEncoderWorker: JSONEncoderWorkerProtocol{
+    
+    func encode<T: Encodable>(model: T) -> Data? {
+        
+        return try? JSONEncoder().encode(model)
     }
 }

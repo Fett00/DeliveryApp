@@ -25,7 +25,10 @@
 		5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */; };
 		5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76C275E307C003CFAA0 /* Enums.swift */; };
 		5ABEF9D92773F09E00352FF9 /* CustomCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABEF9D82773F09E00352FF9 /* CustomCollectionView.swift */; };
-		5ACB230C276E9FFB00782216 /* JSONDecoderWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACB230B276E9FFB00782216 /* JSONDecoderWorker.swift */; };
+		5ACB230C276E9FFB00782216 /* JSONWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACB230B276E9FFB00782216 /* JSONWorker.swift */; };
+		5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB227983DE400C33980 /* CartViewController.swift */; };
+		5AE3AFB72798449800C33980 /* CartContent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB52798449800C33980 /* CartContent+CoreDataClass.swift */; };
+		5AE3AFB82798449800C33980 /* CartContent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB62798449800C33980 /* CartContent+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +52,10 @@
 		5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
 		5A5CA76C275E307C003CFAA0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		5ABEF9D82773F09E00352FF9 /* CustomCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionView.swift; sourceTree = "<group>"; };
-		5ACB230B276E9FFB00782216 /* JSONDecoderWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderWorker.swift; sourceTree = "<group>"; };
+		5ACB230B276E9FFB00782216 /* JSONWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWorker.swift; sourceTree = "<group>"; };
+		5AE3AFB227983DE400C33980 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		5AE3AFB52798449800C33980 /* CartContent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartContent+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5AE3AFB62798449800C33980 /* CartContent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartContent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,7 @@
 				5A5CA740275CC819003CFAA0 /* AppDelegate.swift */,
 				5A5CA742275CC819003CFAA0 /* SceneDelegate.swift */,
 				5A004843276643E400C02952 /* ProjectAssembler.swift */,
+				5A5CA76C275E307C003CFAA0 /* Enums.swift */,
 				5A5CA769275CF75D003CFAA0 /* Workers */,
 				5A5CA763275CEFEE003CFAA0 /* Views */,
 				5A5CA760275CE99E003CFAA0 /* Extension */,
@@ -92,7 +99,6 @@
 				5A5CA74C275CC81C003CFAA0 /* Assets.xcassets */,
 				5A5CA74E275CC81C003CFAA0 /* LaunchScreen.storyboard */,
 				5A5CA751275CC81C003CFAA0 /* Info.plist */,
-				5A5CA749275CC819003CFAA0 /* DeliveryApp.xcdatamodeld */,
 			);
 			path = DeliveryApp;
 			sourceTree = "<group>";
@@ -110,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */,
-				5A5CA76C275E307C003CFAA0 /* Enums.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 				5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */,
 				5A5CA757275CE14B003CFAA0 /* PresentItemViewController.swift */,
 				5ABEF9D82773F09E00352FF9 /* CustomCollectionView.swift */,
+				5AE3AFB227983DE400C33980 /* CartViewController.swift */,
 				5A5CA764275CEFF8003CFAA0 /* Cells */,
 			);
 			path = Views;
@@ -140,10 +146,21 @@
 			children = (
 				5A00484127663C2300C02952 /* DataWorker.swift */,
 				5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */,
-				5ACB230B276E9FFB00782216 /* JSONDecoderWorker.swift */,
+				5ACB230B276E9FFB00782216 /* JSONWorker.swift */,
 				5A00483F27663BDC00C02952 /* CoreDataWorker.swift */,
+				5AE3AFB42798435E00C33980 /* CoreDataItems */,
 			);
 			path = Workers;
+			sourceTree = "<group>";
+		};
+		5AE3AFB42798435E00C33980 /* CoreDataItems */ = {
+			isa = PBXGroup;
+			children = (
+				5AE3AFB62798449800C33980 /* CartContent+CoreDataProperties.swift */,
+				5AE3AFB52798449800C33980 /* CartContent+CoreDataClass.swift */,
+				5A5CA749275CC819003CFAA0 /* DeliveryApp.xcdatamodeld */,
+			);
+			path = CoreDataItems;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,15 +241,18 @@
 				5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */,
 				5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */,
 				5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */,
+				5AE3AFB72798449800C33980 /* CartContent+CoreDataClass.swift in Sources */,
 				5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */,
 				5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */,
 				5A004844276643E400C02952 /* ProjectAssembler.swift in Sources */,
 				5A00484027663BDC00C02952 /* CoreDataWorker.swift in Sources */,
 				5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */,
-				5ACB230C276E9FFB00782216 /* JSONDecoderWorker.swift in Sources */,
+				5ACB230C276E9FFB00782216 /* JSONWorker.swift in Sources */,
 				5A00484227663C2300C02952 /* DataWorker.swift in Sources */,
 				5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */,
+				5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */,
 				5A5CA758275CE14B003CFAA0 /* PresentItemViewController.swift in Sources */,
+				5AE3AFB82798449800C33980 /* CartContent+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

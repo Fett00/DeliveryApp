@@ -14,7 +14,7 @@ struct MealsModel: Decodable{
 }
 
 //Модель блюда
-struct MealModel: Decodable{
+struct MealModel: Codable{
     
     let strMeal: String
     let strMealThumb: String

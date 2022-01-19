@@ -87,7 +87,7 @@ class PresentMealViewController: UIViewController{
         
         
         //TEMP DATA//
-        mealDescription.text = "Пицца 4 сыра относится к так называемому типу белых пицц («pizza Bianca»), т.е. в неё не кладётся традиционный для большинства пицц томатный соус и помидоры. Самое главное тут сыры, а точнее их сочетание. Здесь важно, чтобы у вас присутствовали четыре разных типа сыров: мягкий, твердый, ароматный (пряный) и голубой сыры. "
+        mealDescription.text = "Meal description"
         addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
         //________//
         

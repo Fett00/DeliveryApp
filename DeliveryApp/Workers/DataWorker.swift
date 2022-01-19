@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol DataWorkerProtocol: AnyObject{
+protocol DataWorkerForMainMenueProtocol: AnyObject{
     
     var delegate: DataWorkerDelegate? { get set }
     
@@ -16,6 +16,15 @@ protocol DataWorkerProtocol: AnyObject{
     func requestMeals(for category: String)
     
     func requestImageData(for mealUrl: String)
+    
+    func addMealToCart(meal: MealModel)
+}
+
+protocol DataWorkerForCartProtocol: AnyObject{
+    
+    var delegate: DataWorkerDelegate? { get set }
+    
+    func requestCartContent()
 }
 
 protocol DataWorkerDelegate: AnyObject {
@@ -25,7 +34,8 @@ protocol DataWorkerDelegate: AnyObject {
     func getMeals(meals: [MealModel])
 }
 
-class DataWorker: DataWorkerProtocol{
+//SOLID???
+class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol{
     
     weak var delegate: DataWorkerDelegate?
     
@@ -33,6 +43,7 @@ class DataWorker: DataWorkerProtocol{
     //Как закрыть эти свойства от внешнего доступа
     var coreDataWorker: CoreDataWorkerProtocol!
     var jsonDecoderWorker: JSONDecoderWorkerProtocol!
+    var jsonEncoderWorker: JSONEncoderWorkerProtocol!
     var networkWorker: NetworkWorkerProtocol!
     
     //АПИ для получения категорий
@@ -43,7 +54,7 @@ class DataWorker: DataWorkerProtocol{
     
     func requestCategories() {
         
-        DispatchQueue.global(qos: .userInteractive).async { [ self ] //нужен ли weak/unowned
+        DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
             var rawData = Data()
             
@@ -73,7 +84,7 @@ class DataWorker: DataWorkerProtocol{
     
     func requestMeals(for category: String) {
         
-        DispatchQueue.global(qos: .userInteractive).async { [ self ] //нужен ли weak/unowned
+        DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
             var rawData = Data()
             
@@ -101,7 +112,27 @@ class DataWorker: DataWorkerProtocol{
         }
     }
     
+    //Где вызывать?
     func requestImageData(for mealUrl: String) {
+        
+        
+    }
+    
+    func addMealToCart(meal: MealModel){
+        
+        
+        
+        coreDataWorker.add {
+            
+            let data = jsonEncoderWorker.encode(model: meal)
+            let content = CartContent(context: coreDataWorker.context)
+            
+            content.data = data
+            content.name = meal.strMeal
+        }
+    }
+    
+    func requestCartContent(){
         
         
     }

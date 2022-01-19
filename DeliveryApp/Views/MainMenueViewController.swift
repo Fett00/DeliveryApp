@@ -10,14 +10,14 @@ import UIKit
 class MainMenueViewController: UIViewController {
     
 
-    var categoryModels = [CategoryModel]()
-    var currentCategory = 0
-    var mealModels = [MealModel]()
+    var categoryModels = [CategoryModel]() //Массив с категориями
+    var currentCategory = 0 //Текущая категория
+    var mealModels = [MealModel]() // Массив для хранения блюд текущей категории
     
-    var categoryCollectionView: UICollectionView! //Категории
-    var mealsCollectionView: UICollectionView! //Меню с едой
+    var categoryCollectionView: UICollectionView! //Коллекция с категориями
+    var mealsCollectionView: UICollectionView! //Коллекция для меню с едой
     
-    var dataWorker: DataWorkerProtocol!
+    var dataWorker: DataWorkerForMainMenueProtocol! //Объект для запроса данных
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -106,7 +106,7 @@ class MainMenueViewController: UIViewController {
         let insets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
         let spacing = 20.0
         let deviceWidth = view.frame.width
-        let itemSize = (deviceWidth - insets.left - insets.right - spacing) / 2
+        let itemSize = (deviceWidth - insets.left - insets.right - spacing ) / 2
         layout.minimumInteritemSpacing = spacing
         layout.minimumLineSpacing = spacing
         layout.sectionInset = insets
@@ -118,6 +118,11 @@ class MainMenueViewController: UIViewController {
     
     @objc func openCart(){
         
+    }
+    
+    @objc func addToCart(indexPath: Int){
+        
+        print("CART!")
     }
 }
 
