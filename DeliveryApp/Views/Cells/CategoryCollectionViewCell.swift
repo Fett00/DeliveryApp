@@ -11,7 +11,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     static let id = "CategoryCellID" //идентификатор ячейки
     
-    let categoryLable = UILabel() //Название категории
+    private let categoryLable = UILabel() //Название категории
     
     override init(frame: CGRect) {
         super.init(frame: frame)

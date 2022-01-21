@@ -11,9 +11,9 @@ class MealCollectionViewCell: UICollectionViewCell {
     
     static let id = "MealCellID" //идентификатор ячейки
     
-    let mealImage = UIImageView()
-    let mealName = UILabel()
-    let addToCartButton = UIButton()
+    private let mealImage = UIImageView()
+    private let mealName = UILabel()
+    private let addToCartButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,5 +100,10 @@ class MealCollectionViewCell: UICollectionViewCell {
         mealName.text = meal.strMeal
         mealImage.image = Images.emptyMeal
         addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
+    }
+    
+    func setUpImage(with image: UIImage){
+        
+        mealImage.image = image
     }
 }
