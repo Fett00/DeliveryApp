@@ -70,7 +70,7 @@ class MealCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 20
         
         mealImage.tintColor = .systemGray3
-        mealImage.contentMode = .scaleAspectFit//.scaleAspectFill
+        mealImage.contentMode = .scaleAspectFill//.scaleAspectFit//.scaleAspectFill
         mealImage.clipsToBounds = true
         mealImage.layer.cornerCurve = .continuous
         mealImage.layer.cornerRadius = 20
@@ -98,12 +98,18 @@ class MealCollectionViewCell: UICollectionViewCell {
     func setUpCell(with meal: MealModel){
         
         mealName.text = meal.strMeal
-        mealImage.image = Images.emptyMeal
         addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
     }
     
     func setUpImage(with image: UIImage){
         
         mealImage.image = image
+    }
+    
+    func defaultState(){
+        
+        mealImage.image = Images.emptyMeal
+        mealName.text = ""
+        addToCartButton.setTitle("", for: .normal)
     }
 }

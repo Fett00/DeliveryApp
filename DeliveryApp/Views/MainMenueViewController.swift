@@ -184,6 +184,12 @@ extension MainMenueViewController: UICollectionViewDelegate{
                 dataWorker.requestMeals(for: categoryModels[currentCategory].strCategory)
                 
                 mealsCollectionView.scrollToItem(at: topRow, at: .top, animated: false)
+                guard let cells = mealsCollectionView.visibleCells as? [MealCollectionViewCell] else { return }
+                
+                for cell in cells{
+                    
+                    cell.defaultState()
+                }
             }
             
             else{

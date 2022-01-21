@@ -1,16 +1,34 @@
 {
   "images" : [
     {
+      "alignment-insets" : {
+        "bottom" : 20,
+        "left" : 20,
+        "right" : 20,
+        "top" : 20
+      },
       "filename" : "food-delivery.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "alignment-insets" : {
+        "bottom" : 20,
+        "left" : 20,
+        "right" : 20,
+        "top" : 20
+      },
       "filename" : "food-delivery-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "alignment-insets" : {
+        "bottom" : 20,
+        "left" : 20,
+        "right" : 20,
+        "top" : 20
+      },
       "filename" : "food-delivery-2.png",
       "idiom" : "universal",
       "scale" : "3x"
