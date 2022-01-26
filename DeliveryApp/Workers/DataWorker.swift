@@ -29,11 +29,18 @@ protocol DataWorkerForCartProtocol: AnyObject{
     func requestCartContent()
 }
 
+protocol DataWorkerCollectedDataProtocol: AnyObject{
+    
+    var categoryModels: [CategoryModel] { get } //Массив с категориями
+    
+    var mealModels: [MealModel] { get } //Массив для хранения блюд текущей категории
+}
+
 protocol DataWorkerDelegate: AnyObject {
     
-    func getCategories(categories: [CategoryModel])
+    func updateCategories()
     
-    func getMeals(meals: [MealModel])
+    func updateMeals()
 }
 
 protocol DataWorkerForImageDelegate: AnyObject{
@@ -42,7 +49,7 @@ protocol DataWorkerForImageDelegate: AnyObject{
 }
 
 //SOLID???
-class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol{
+class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol{
     
     weak var delegate: DataWorkerDelegate?
     weak var imageDelegate: DataWorkerForImageDelegate?
@@ -60,32 +67,31 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol{
     //АПИ для получения блюд для категории
     private let mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
     
+    //Массив с категориями
+    var categoryModels: [CategoryModel] = []
+    
+    //Массив для хранения блюд текущей категории
+    var mealModels: [MealModel] = []
+    
     func requestCategories() {
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
-            var rawData = Data()
-            
-            let group = DispatchGroup()
-            
-            group.enter()
             self.networkWorker.getData(from: self.categoriesURL) { result in
                 
                 switch result {
                 case .failure(let error):
                     print(error.localizedDescription)
                 case .success(let data):
+
+                    guard let categories = self.jsonDecoderWorker.decodeC(data: data)?.categories else { return }
                     
-                    rawData = data
+                    self.categoryModels = categories
+                    
+                    DispatchQueue.main.async {  
+                        self.delegate?.updateCategories()
+                    }
                 }
-                group.leave()
-            }
-            
-            group.wait()
-            guard let categoriesToReturn = self.jsonDecoderWorker.decodeC(data: rawData) else { return }
-            
-            DispatchQueue.main.async {
-                self.delegate?.getCategories(categories: categoriesToReturn.categories)
             }
         }
     }
@@ -94,11 +100,6 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol{
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
-            var rawData = Data()
-            
-            let group = DispatchGroup()
-            
-            group.enter()
             self.networkWorker.getData(from: self.mealsURL + category) { result in
                 
                 switch result {
@@ -106,16 +107,14 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol{
                     print(error.localizedDescription)
                 case .success(let data):
                     
-                    rawData = data
+                    guard let meals = self.jsonDecoderWorker.decodeM(data: data)?.meals else { return }
+                    
+                    self.mealModels = meals
+                    
+                    DispatchQueue.main.async {
+                        self.delegate?.updateMeals()
+                    }
                 }
-                group.leave()
-            }
-            
-            group.wait()
-            guard let mealsToReturn = self.jsonDecoderWorker.decodeM(data: rawData) else { return }
-            
-            DispatchQueue.main.async {
-                self.delegate?.getMeals(meals: mealsToReturn.meals)
             }
         }
     }

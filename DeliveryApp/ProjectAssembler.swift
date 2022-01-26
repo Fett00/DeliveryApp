@@ -15,6 +15,8 @@ class ProjectAssembler{
     
     private let dataWorker = DataWorker()
     private let networkWorker = NetworkWorker()
+    private let imageWorker = ImageWorker()
+    private let fileWorker = FileWorker()
     private let jsonDecoderWorker = JSONDecoderWorker()
     private let jsonEncoderWorker = JSONEncoderWorker()
     private let coreDataWorker = CoreDataWorker()
@@ -28,9 +30,14 @@ class ProjectAssembler{
         dataWorker.jsonEncoderWorker = jsonEncoderWorker
         dataWorker.networkWorker = networkWorker
         
+        imageWorker.fileWorker = fileWorker
+        imageWorker.networkWorker = networkWorker
+        
         let mainViewController = MainMenueViewController()
         
         mainViewController.dataWorker = dataWorker
+        mainViewController.data = dataWorker
+        mainViewController.imageWorker = imageWorker
         
         cartVC.dataWorker = dataWorker
         

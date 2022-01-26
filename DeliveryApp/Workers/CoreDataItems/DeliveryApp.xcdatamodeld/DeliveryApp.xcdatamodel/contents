@@ -4,7 +4,13 @@
         <attribute name="data" attributeType="Binary"/>
         <attribute name="name" attributeType="String" minValueString="1"/>
     </entity>
+    <entity name="CDMeal" representedClassName="CDMeal" syncable="YES" codeGenerationType="class">
+        <attribute name="mealID" optional="YES"/>
+        <attribute name="mealImageURL" optional="YES" attributeType="URI"/>
+        <attribute name="mealName" optional="YES"/>
+    </entity>
     <elements>
         <element name="CartContent" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="CDMeal" positionX="-63" positionY="0" width="128" height="74"/>
     </elements>
 </model>

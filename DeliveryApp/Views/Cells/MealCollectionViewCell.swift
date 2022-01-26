@@ -30,11 +30,6 @@ class MealCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        confSubviews()
-    }
-    
-    func confSubviews(){
-        
         let cellFrame = self.bounds
         let buttonHeight = 50.0
         let lableHeight = mealName.font.lineHeight * 3
@@ -106,7 +101,7 @@ class MealCollectionViewCell: UICollectionViewCell {
         mealImage.image = image
     }
     
-    func defaultState(){
+    override func prepareForReuse() {
         
         mealImage.image = Images.emptyMeal
         mealName.text = ""

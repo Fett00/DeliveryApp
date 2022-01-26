@@ -10,6 +10,8 @@
 		5A00484027663BDC00C02952 /* CoreDataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A00483F27663BDC00C02952 /* CoreDataWorker.swift */; };
 		5A00484227663C2300C02952 /* DataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A00484127663C2300C02952 /* DataWorker.swift */; };
 		5A004844276643E400C02952 /* ProjectAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A004843276643E400C02952 /* ProjectAssembler.swift */; };
+		5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E634E27A04E5000A79E3E /* ImageWorker.swift */; };
+		5A1E635127A04E6A00A79E3E /* FileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E635027A04E6A00A79E3E /* FileWorker.swift */; };
 		5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA740275CC819003CFAA0 /* AppDelegate.swift */; };
 		5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA742275CC819003CFAA0 /* SceneDelegate.swift */; };
 		5A5CA745275CC819003CFAA0 /* MainMenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */; };
@@ -35,6 +37,8 @@
 		5A00483F27663BDC00C02952 /* CoreDataWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWorker.swift; sourceTree = "<group>"; };
 		5A00484127663C2300C02952 /* DataWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataWorker.swift; sourceTree = "<group>"; };
 		5A004843276643E400C02952 /* ProjectAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAssembler.swift; sourceTree = "<group>"; };
+		5A1E634E27A04E5000A79E3E /* ImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWorker.swift; sourceTree = "<group>"; };
+		5A1E635027A04E6A00A79E3E /* FileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWorker.swift; sourceTree = "<group>"; };
 		5A5CA73D275CC818003CFAA0 /* DeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A5CA740275CC819003CFAA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A5CA742275CC819003CFAA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A4F9CFC279D456F00551C5B /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				5A5CA759275CE18F003CFAA0 /* MealModel.swift */,
+				5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		5A5CA734275CC818003CFAA0 = {
 			isa = PBXGroup;
 			children = (
@@ -106,8 +119,7 @@
 		5A5CA75F275CE51C003CFAA0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5A5CA759275CE18F003CFAA0 /* MealModel.swift */,
-				5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */,
+				5A4F9CFC279D456F00551C5B /* DataModel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -145,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				5A00484127663C2300C02952 /* DataWorker.swift */,
+				5A1E634E27A04E5000A79E3E /* ImageWorker.swift */,
+				5A1E635027A04E6A00A79E3E /* FileWorker.swift */,
 				5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */,
 				5ACB230B276E9FFB00782216 /* JSONWorker.swift */,
 				5A00483F27663BDC00C02952 /* CoreDataWorker.swift */,
@@ -244,6 +258,7 @@
 				5AE3AFB72798449800C33980 /* CartContent+CoreDataClass.swift in Sources */,
 				5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */,
 				5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */,
+				5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */,
 				5A004844276643E400C02952 /* ProjectAssembler.swift in Sources */,
 				5A00484027663BDC00C02952 /* CoreDataWorker.swift in Sources */,
 				5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */,
@@ -253,6 +268,7 @@
 				5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */,
 				5A5CA758275CE14B003CFAA0 /* PresentItemViewController.swift in Sources */,
 				5AE3AFB82798449800C33980 /* CartContent+CoreDataProperties.swift in Sources */,
+				5A1E635127A04E6A00A79E3E /* FileWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
