@@ -14,12 +14,13 @@ protocol CoreDataWorkerProtocol{
     
     func add(createObject: ()->())
     
-    func delete(withCondition condition: String?)
+    func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?)
     
     func refresh()
     
-    func get<Entity: NSManagedObject>(withCondition condition: String?, withLimit limit: Int?) -> [Entity]
+    func get<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> [Entity]
     
+    func count<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> Int
 }
 
 class CoreDataWorker: CoreDataWorkerProtocol{
@@ -28,14 +29,21 @@ class CoreDataWorker: CoreDataWorkerProtocol{
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
 
     //Сохранение Данных в БД
-    private func save(){
-        do {
-            try self.context.save()
+    private func save () {
+        
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
         }
-        catch  { fatalError("Can not save in CoreData!") }
     }
 
     //Добавление записи в CoreData
+    //TODO: ПЕРЕДЕЛАТЬ
     func add(createObject: ()->()) {
 
         createObject()
@@ -43,8 +51,34 @@ class CoreDataWorker: CoreDataWorkerProtocol{
     }
 
     //Удаление записей из CoreData
-    func delete(withCondition condition: String?){
+    func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?){
+       
+        var predicate:NSPredicate?
+
+        if let condition = condition{
+            let splitedCondition = condition.split(separator: "=")
+            predicate = NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
+        }
         
+        do {
+
+            let request = Entity.fetchRequest()
+            request.predicate = predicate
+            
+            let objectsToDelete = try context.fetch(request)as! [Entity]
+            
+            for object in objectsToDelete{
+                
+                context.delete(object)
+            }
+            
+            save()
+            print("ПРОИЗОШЛО УДОЛЕНИЕ")
+            print(count(type: CDMeal.self, withCondition: nil, withLimit: nil, offset: nil))
+        }
+        catch {
+            print(error.localizedDescription)
+        }
     }
 
     //Обновление записей в CoreData
@@ -59,7 +93,31 @@ class CoreDataWorker: CoreDataWorkerProtocol{
     //condition: First String - argument, second - condition.
     //Exm: ("name","Ivan") -> "rows where name = Ivan"
 
-    func get<Entity: NSManagedObject>(withCondition condition: String?, withLimit limit: Int?) -> [Entity] {
+    func get<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> [Entity] {
+
+        var predicate:NSPredicate?
+
+        if let condition = condition{
+            let splitedCondition = condition.split(separator: "=")
+            predicate = NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
+        }
+
+        do {
+
+            let request = Entity.fetchRequest()
+            request.predicate = predicate
+            request.fetchOffset = offset ?? 0
+            request.fetchLimit = limit ?? 0
+
+            let result:[Entity] = try context.fetch(request) as! [Entity]
+            return result
+        }
+        catch {
+            return []
+        }
+    }
+    
+    func count<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> Int {
 
         var predicate:NSPredicate?
 
@@ -71,13 +129,14 @@ class CoreDataWorker: CoreDataWorkerProtocol{
 
             let request = Entity.fetchRequest()
             request.predicate = predicate
+            request.fetchOffset = offset ?? 0
             request.fetchLimit = limit ?? 0
 
-            let result:[Entity] = try context.fetch(request) as! [Entity]
+            let result = try context.count(for: request)
             return result
         }
         catch {
-            return []
+            return 0
         }
     }
 }

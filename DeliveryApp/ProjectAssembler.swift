@@ -13,13 +13,13 @@ class ProjectAssembler{
     public static let shared = ProjectAssembler()
     private init(){}
     
-    private let dataWorker = DataWorker()
-    private let networkWorker = NetworkWorker()
-    private let imageWorker = ImageWorker()
-    private let fileWorker = FileWorker()
-    private let jsonDecoderWorker = JSONDecoderWorker()
-    private let jsonEncoderWorker = JSONEncoderWorker()
-    private let coreDataWorker = CoreDataWorker()
+    private let dataWorker = DataWorker() //Координация все отсальних воркеров. Работа с данными
+    private let networkWorker = NetworkWorker() //Работа с сетью
+    private let imageWorker = ImageWorker() // Работа с изображениями
+    private let fileWorker = FileWorker() // Работа с файлами
+    private let jsonDecoderWorker = JSONDecoderWorker() // Декодер JSON
+    private let jsonEncoderWorker = JSONEncoderWorker() // Энкодер JSON
+    private let coreDataWorker = CoreDataWorker() // Работа с core data
     
     let cartVC = CartViewController()
     

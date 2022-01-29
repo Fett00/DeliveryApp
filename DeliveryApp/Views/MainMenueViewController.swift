@@ -36,7 +36,6 @@ class MainMenueViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         dataWorker.delegate = self
-        dataWorker.imageDelegate = self
 
         configureMainMenue()
         configureCategoryCollectionView()
@@ -164,7 +163,6 @@ extension MainMenueViewController: UICollectionViewDataSource{
                 
                 cell.setUpImage(with: image)
             }
-            //dataWorker.requestImageData(on: data.mealModels[indexPath.row].strMealThumb, for: indexPath)
             
             return cell
         }
@@ -191,7 +189,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
             }
             
             else{
-                mealsCollectionView.scrollToItem(at: topRow, at: .top, animated: true)
+                mealsCollectionView.scrollToItem(at: topRow, at: .centeredVertically, animated: true)
             }
             
         }
@@ -220,13 +218,5 @@ extension MainMenueViewController: DataWorkerDelegate{
     }
 }
 
-extension MainMenueViewController: DataWorkerForImageDelegate{
-    
-    func getImage(image: UIImage, for item: IndexPath) {
-        
-        guard let cell = mealsCollectionView.cellForItem(at: item) as? MealCollectionViewCell else { return }
-        
-        cell.setUpImage(with: image)
-    }
-}
+
 

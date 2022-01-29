@@ -9,7 +9,7 @@ import UIKit
 
 protocol ImageWorkerProtocol{
     
-    func requestImage(on mealUrl: String, handler: @escaping (UIImage) -> ())
+    func requestImage(on imageUrl: String, handler: @escaping (UIImage) -> ())
     
     func saveImage(image: UIImage, with url: String)
 }
@@ -19,26 +19,28 @@ class ImageWorker: ImageWorkerProtocol{
     var fileWorker: FileWorkerProtocol!
     var networkWorker: NetworkWorkerProtocol!
     
-    func requestImage(on mealUrl: String, handler: @escaping (UIImage) -> ()) {
+    func requestImage(on imageUrl: String, handler: @escaping (UIImage) -> ()) {
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
-            let name = self.createImageNameFromImageURL(url: mealUrl)
+            let name = self.createImageNameFromImageURL(url: imageUrl)
             
-            if self.fileWorker.didFileExsist(with: mealUrl) {
+            if self.fileWorker.didFileExsist(with: name) {
                 
-                self.fileWorker.requestFile(with: mealUrl) { data in
+                self.fileWorker.requestFile(with: name) { data in
                     
-                    guard let data = data, let image = UIImage(data: data) else { return }
-                    
-                    DispatchQueue.main.async {
-                        handler(image)
+                    if let data = data, let image = UIImage(data: data){
+                        
+                        DispatchQueue.main.async {
+                            handler(image)
+                        }
                     }
+                    //guard let data = data, let image = UIImage(data: data) else { return }
                 }
             }
             else {
                 
-                self.networkWorker.getData(from: mealUrl) { result in
+                self.networkWorker.getData(from: imageUrl) { result in
                     
                     switch result {
                     case .failure(let error):

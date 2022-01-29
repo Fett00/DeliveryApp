@@ -6,18 +6,15 @@
 //
 
 import UIKit
+import CoreData
 
 protocol DataWorkerForMainMenueProtocol: AnyObject{
     
     var delegate: DataWorkerDelegate? { get set }
     
-    var imageDelegate: DataWorkerForImageDelegate? { get set }
-    
     func requestCategories()
     
     func requestMeals(for category: String)
-    
-    func requestImageData(on mealUrl: String, for item: IndexPath)
     
     func addMealToCart(meal: MealModel)
 }
@@ -43,16 +40,11 @@ protocol DataWorkerDelegate: AnyObject {
     func updateMeals()
 }
 
-protocol DataWorkerForImageDelegate: AnyObject{
-    
-    func getImage(image: UIImage, for item: IndexPath)
-}
 
 //SOLID???
 class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol{
     
     weak var delegate: DataWorkerDelegate?
-    weak var imageDelegate: DataWorkerForImageDelegate?
     
     //Нужен ли инит
     //Как закрыть эти свойства от внешнего доступа
@@ -68,27 +60,45 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
     private let mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
     
     //Массив с категориями
-    var categoryModels: [CategoryModel] = []
+    var categoryModels: [CategoryModel] = [CategoryModel]()
     
     //Массив для хранения блюд текущей категории
-    var mealModels: [MealModel] = []
+    var mealModels: [MealModel] = [MealModel]()
     
+    //TODO: Объединить requestCategories и requestMeals в одну общую функцию
     func requestCategories() {
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
+            self.categoryModels = self.coreDataWorker.get(type: CDCategory.self, withCondition: nil, withLimit: nil, offset: nil).map{ CategoryModel(idCategory: $0.categoryID ?? "", strCategory: $0.categoryName ?? "") }
+            
+            //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В CD, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
+            
+            if !self.categoryModels.isEmpty{
+                DispatchQueue.main.async {
+                    self.delegate?.updateCategories()
+                }
+            }
+            //
+            
+            //После извлечения данных из КД, в более глубоком бэкграунде начинают отправляться запросы в сеть
+            // Реализовать DispatchQueue.global(qos: .default).async {
             self.networkWorker.getData(from: self.categoriesURL) { result in
                 
                 switch result {
                 case .failure(let error):
                     print(error.localizedDescription)
                 case .success(let data):
-
-                    guard let categories = self.jsonDecoderWorker.decodeC(data: data)?.categories else { return }
+                    
+                    guard let categories = self.jsonDecoderWorker.decode(type: CategoriesModel.self, data: data)?.categories else { return }
+                    
+                    
+                    //Сделать здесь что-то
+                    //Сравнить например данные
                     
                     self.categoryModels = categories
                     
-                    DispatchQueue.main.async {  
+                    DispatchQueue.main.async {
                         self.delegate?.updateCategories()
                     }
                 }
@@ -100,52 +110,67 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
+            let condition = "mealName = \(category)"
+
+            //self.mealModels =
+            let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: $0.mealID ?? "") }
+
+            //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В КД, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
+
+            if !mealsFromCD.isEmpty{
+                
+                self.mealModels = mealsFromCD
+                DispatchQueue.main.async {
+                    print("Meals from CORE DATA")
+                    self.delegate?.updateMeals()
+                }
+            }
+            //
+
             self.networkWorker.getData(from: self.mealsURL + category) { result in
                 
                 switch result {
                 case .failure(let error):
+
                     print(error.localizedDescription)
                 case .success(let data):
+
+                    guard let meals = self.jsonDecoderWorker.decode(type: MealsModel.self, data: data)?.meals else { return }
                     
-                    guard let meals = self.jsonDecoderWorker.decodeM(data: data)?.meals else { return }
+                    //Сделать здесь что-то
+                    //Сравнить например данные
                     
-                    self.mealModels = meals
-                    
-                    DispatchQueue.main.async {
-                        self.delegate?.updateMeals()
+                    //TEMP
+                    var coreDataNeedToUpdate = false
+                    if meals.count != self.mealModels.count{
+                        
+                        coreDataNeedToUpdate = true
+                        self.mealModels = meals
+                        
+                        DispatchQueue.main.async {
+                            self.delegate?.updateMeals()
+                        }
                     }
-                }
-            }
-        }
-    }
-    
-    //Где вызывать?
-    func requestImageData(on mealUrl: String, for item: IndexPath) {
-        
-        DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
-            
-            var rawData = Data()
-            
-            let group = DispatchGroup()
-            
-            group.enter()
-            self.networkWorker.getData(from: mealUrl) { result in
-                
-                switch result {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                case .success(let data):
                     
-                    rawData = data
+                    if coreDataNeedToUpdate{
+                        
+                        self.coreDataWorker.delete(type: CDMeal.self, withCondition: condition)
+                        
+                        self.coreDataWorker.add {
+                            for meal in meals {
+                                
+                                let cdMeal = CDMeal(context: self.coreDataWorker.context)
+                                
+                                cdMeal.mealID = meal.idMeal
+                                cdMeal.mealImageURL = meal.strMealThumb
+                                cdMeal.mealName = meal.strMeal
+                                cdMeal.categoryName = category
+                                
+                            }
+                        }
+                    }
+                    //
                 }
-                group.leave()
-            }
-            
-            group.wait()
-            guard let image = UIImage(data: rawData) else { return }
-            
-            DispatchQueue.main.async {
-                self.imageDelegate?.getImage(image: image, for: item)
             }
         }
     }

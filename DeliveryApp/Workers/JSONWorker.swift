@@ -9,12 +9,8 @@ import Foundation
 
 protocol JSONDecoderWorkerProtocol{
     
-    func decode<T: Decodable>(data: Data) -> T?
+    func decode<T: Decodable>(type: T.Type, data: Data) -> T?
     
-    //TEMP
-    func decodeC(data: Data) -> CategoriesModel?
-    func decodeM(data: Data) -> MealsModel?
-    //
 }
 
 protocol JSONEncoderWorkerProtocol{
@@ -32,7 +28,7 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
         return dec
     }()
     
-    func decode<T: Decodable>(data: Data) -> T?{
+    func decode<T: Decodable>(type: T.Type, data: Data) -> T?{
         
         do {
             return try decoder.decode(T.self, from: data)
@@ -42,33 +38,10 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
             return nil
         }
     }
-    
-    //TEMP
-    func decodeC(data: Data) -> CategoriesModel?{
-        
-        do {
-            return try decoder.decode(CategoriesModel.self, from: data)
-        } catch {
-            
-            print(error.localizedDescription)
-            return nil
-        }
-    }
-    
-    func decodeM(data: Data) -> MealsModel?{
-        
-        do {
-            return try decoder.decode(MealsModel.self, from: data)
-        } catch {
-            
-            print(error.localizedDescription)
-            return nil
-        }
-    }
 }
 
 class JSONEncoderWorker: JSONEncoderWorkerProtocol{
-    
+    //Не создаем инстанс энкодера, т.к. encode происходит не часто, смысла в памяти держать нет
     func encode<T: Encodable>(model: T) -> Data? {
         
         return try? JSONEncoder().encode(model)
