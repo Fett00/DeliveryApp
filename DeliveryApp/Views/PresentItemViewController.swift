@@ -9,24 +9,21 @@ import UIKit
 
 class PresentMealViewController: UIViewController{
     
-    let meal: MealModel
-    
     let mealImage = UIImageView()
     let mealName = UILabel()
     let addToCartButton = UIButton()
     let mealDescription = UILabel()
     let bar = UINavigationBar()
     
-    init(meal: MealModel) {
+    init(mealName: String, mealImage: UIImage?) {
         
-        self.meal = meal
+        self.mealName.text = mealName
+        self.mealImage.image = mealImage ?? Images.emptyMeal
         
         super.init(nibName: nil, bundle: nil)
     }
     
     init(){ //TEMP INIT
-        
-        self.meal = .init(strMeal: "", strMealThumb: "", idMeal: "")
        
         super.init(nibName: nil, bundle: nil)
     }
@@ -68,8 +65,11 @@ class PresentMealViewController: UIViewController{
         addToCartButton.topAnchor.constraint(greaterThanOrEqualTo: mealDescription.bottomAnchor, constant: 20).isActive = true
         
         mealImage.tintColor = .systemGray3
-        mealImage.contentMode = .scaleAspectFit
-        mealImage.image = Images.emptyMeal //placeholder
+        mealImage.contentMode = .scaleToFill
+        mealImage.clipsToBounds = true
+        mealImage.layer.cornerCurve = .continuous
+        mealImage.layer.cornerRadius = 20
+        //mealImage.image = Images.emptyMeal //placeholder
         
         mealName.setContentHuggingPriority(.defaultHigh, for: .vertical)
         mealName.font = UIFont.preferredFont(forTextStyle: .title1)
@@ -82,9 +82,6 @@ class PresentMealViewController: UIViewController{
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20
         //addToCartButton.showsTouchWhenHighlighted = true
-        
-        mealName.text = meal.strMeal
-        
         
         //TEMP DATA//
         mealDescription.text = "Meal description"

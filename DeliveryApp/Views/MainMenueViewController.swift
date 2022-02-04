@@ -195,7 +195,13 @@ extension MainMenueViewController: UICollectionViewDelegate{
         }
         else if collectionView == mealsCollectionView {
             
-            self.present(PresentMealViewController(meal: data.mealModels[indexPath.row]), animated: true, completion: nil)
+            let mealName = data.mealModels[indexPath.row].strMeal
+            var mealImage = UIImage()
+            imageWorker.requestImage(on: data.mealModels[indexPath.row].strMealThumb) { image in
+                
+                mealImage = image
+                self.present(PresentMealViewController(mealName: mealName, mealImage: mealImage), animated: true, completion: nil)
+            }
         }
     }
 }
