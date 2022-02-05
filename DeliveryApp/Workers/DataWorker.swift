@@ -70,11 +70,15 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
-            self.categoryModels = self.coreDataWorker.get(type: CDCategory.self, withCondition: nil, withLimit: nil, offset: nil).map{ CategoryModel(idCategory: $0.categoryID ?? "", strCategory: $0.categoryName ?? "") }
+            
+            let categoriesFormCD = self.coreDataWorker.get(type: CDCategory.self, withCondition: nil, withLimit: nil, offset: nil).map{ CategoryModel(idCategory: $0.categoryID ?? "", strCategory: $0.categoryName ?? "") }
             
             //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В CD, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
             
             if !self.categoryModels.isEmpty{
+                
+                self.categoryModels = categoriesFormCD
+                
                 DispatchQueue.main.async {
                     self.delegate?.updateCategories()
                 }
@@ -95,12 +99,33 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                     
                     //Сделать здесь что-то
                     //Сравнить например данные
-                    
-                    self.categoryModels = categories
-                    
-                    DispatchQueue.main.async {
-                        self.delegate?.updateCategories()
+                    var coreDataNeedToUpdate = false
+                    if categories.count != self.categoryModels.count{
+                        
+                        coreDataNeedToUpdate = true
+                        self.categoryModels = categories
+                        
+                        DispatchQueue.main.async {
+                            self.delegate?.updateCategories()
+                        }
                     }
+                    
+                    if coreDataNeedToUpdate{
+                        
+                        self.coreDataWorker.delete(type: CDCategory.self, withCondition: nil)
+                        
+                        self.coreDataWorker.add {
+                            
+                            for category in categories {
+                                
+                                let cdCategory = CDCategory(context: self.coreDataWorker.context)
+                                
+                                cdCategory.categoryName = category.strCategory
+                                cdCategory.categoryID = category.idCategory
+                            }
+                        }
+                    }
+                    //
                 }
             }
         }
@@ -112,6 +137,7 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
             
             let condition = "mealName = \(category)"
 
+            //Если присваивать прямо, появляется ошибка
             //self.mealModels =
             let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: $0.mealID ?? "") }
 
