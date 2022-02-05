@@ -25,35 +25,34 @@ class ImageWorker: ImageWorkerProtocol{
             
             let name = self.createImageNameFromImageURL(url: imageUrl)
             
-            if self.fileWorker.didFileExsist(with: name) {
+            self.fileWorker.requestFile(with: name) { data in
                 
-                self.fileWorker.requestFile(with: name) { data in
+                if let data = data, let image = UIImage(data: data){
                     
-                    if let data = data, let image = UIImage(data: data){
-                        
-                        DispatchQueue.main.async {
-                            handler(image)
-                        }
+                    DispatchQueue.main.async {
+                        //print("Картинка из хранилища")
+                        handler(image)
                     }
-                    //guard let data = data, let image = UIImage(data: data) else { return }
                 }
-            }
-            else {
                 
-                self.networkWorker.getData(from: imageUrl) { result in
+                else if data == nil{
                     
-                    switch result {
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    case .success(let data):
+                    self.networkWorker.getData(from: imageUrl) { result in
                         
-                        guard let image = UIImage(data: data) else { return }
-                        
-                        DispatchQueue.main.async {
-                            handler(image)
+                        switch result {
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        case .success(let data):
+                            
+                            guard let compresdImage = UIImage(data: data)?.jpegData(compressionQuality: 0.5), let image = UIImage(data: compresdImage) else { return } // Есть ли вариант лучше?
+                            
+                            DispatchQueue.main.async {
+                                //print("Картинка из сети")
+                                handler(image)
+                            }
+                            
+                            self.saveImage(image: image, with: name)
                         }
-                        
-                        self.saveImage(image: image, with: name)
                     }
                 }
             }
