@@ -52,7 +52,9 @@ class FileWorker: FileWorkerProtocol{
     
     func requestFile(with name: String, handler: @escaping (Data?) -> ()) {
         
-        let data = fileManager.contents(atPath: cachesPath.appendingPathComponent(name).path)
+        let path = cachesPath.appendingPathComponent(name)
+        
+        let data = fileManager.contents(atPath: path.path)
         
         handler(data)
     }
