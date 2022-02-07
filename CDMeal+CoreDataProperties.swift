@@ -2,7 +2,7 @@
 //  CDMeal+CoreDataProperties.swift
 //  DeliveryApp
 //
-//  Created by Садык Мусаев on 28.01.2022.
+//  Created by Садык Мусаев on 07.02.2022.
 //
 //
 
@@ -16,10 +16,10 @@ extension CDMeal {
         return NSFetchRequest<CDMeal>(entityName: "CDMeal")
     }
 
-    @NSManaged public var mealID: String?
+    @NSManaged public var categoryName: String?
+    @NSManaged public var mealID: Int32
     @NSManaged public var mealImageURL: String?
     @NSManaged public var mealName: String?
-    @NSManaged public var categoryName: String?
 
 }
 

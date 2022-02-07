@@ -2,7 +2,7 @@
 //  CDCategory+CoreDataProperties.swift
 //  DeliveryApp
 //
-//  Created by Садык Мусаев on 28.01.2022.
+//  Created by Садык Мусаев on 07.02.2022.
 //
 //
 
@@ -16,7 +16,7 @@ extension CDCategory {
         return NSFetchRequest<CDCategory>(entityName: "CDCategory")
     }
 
-    @NSManaged public var categoryID: String?
+    @NSManaged public var categoryID: Int32
     @NSManaged public var categoryName: String?
 
 }

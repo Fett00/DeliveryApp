@@ -70,16 +70,20 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
+            let sortingBy = ["categoryID"]
             
-            let categoriesFormCD = self.coreDataWorker.get(type: CDCategory.self, withCondition: nil, withLimit: nil, offset: nil).map{ CategoryModel(idCategory: $0.categoryID ?? "", strCategory: $0.categoryName ?? "") }
+            let categoriesFormCD = self.coreDataWorker.get(type: CDCategory.self, sortingBy: sortingBy, withCondition: nil, withLimit: nil, offset: nil).map{ CategoryModel(idCategory: String($0.categoryID), strCategory: $0.categoryName ?? "") }
             
             //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В CD, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
             
-            if !self.categoryModels.isEmpty{
+            if !categoriesFormCD.isEmpty{
                 
                 self.categoryModels = categoriesFormCD
                 
                 DispatchQueue.main.async {
+                    
+                    categoriesFormCD.map{ print($0)}
+                    print("Categ from CD")
                     self.delegate?.updateCategories()
                 }
             }
@@ -121,7 +125,7 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                                 let cdCategory = CDCategory(context: self.coreDataWorker.context)
                                 
                                 cdCategory.categoryName = category.strCategory
-                                cdCategory.categoryID = category.idCategory
+                                cdCategory.categoryID = Int32(category.idCategory) ?? -1
                             }
                         }
                     }
@@ -130,23 +134,25 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
             }
         }
     }
-    
+    //MARK: В текущей реализации метода нельзя добавить обновление данных из сети через activity indicator
     func requestMeals(for category: String) {
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
-            let condition = "mealName = \(category)"
+            let condition = "categoryName LIKE \(category)"
 
             //Если присваивать прямо, появляется ошибка
             //self.mealModels =
-            let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: $0.mealID ?? "") }
+            let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, sortingBy: nil, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: String($0.mealID)) }
 
             //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В КД, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
 
             if !mealsFromCD.isEmpty{
                 
                 self.mealModels = mealsFromCD
+                
                 DispatchQueue.main.async {
+                    
                     print("Meals from CORE DATA")
                     self.delegate?.updateMeals()
                 }
@@ -187,11 +193,10 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                                 
                                 let cdMeal = CDMeal(context: self.coreDataWorker.context)
                                 
-                                cdMeal.mealID = meal.idMeal
+                                cdMeal.mealID = Int32(meal.idMeal) ?? -1
                                 cdMeal.mealImageURL = meal.strMealThumb
                                 cdMeal.mealName = meal.strMeal
                                 cdMeal.categoryName = category
-                                
                             }
                         }
                     }

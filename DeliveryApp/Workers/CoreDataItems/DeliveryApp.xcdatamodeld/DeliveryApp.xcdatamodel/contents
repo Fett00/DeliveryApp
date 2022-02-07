@@ -5,12 +5,12 @@
         <attribute name="name" attributeType="String" minValueString="1"/>
     </entity>
     <entity name="CDCategory" representedClassName="CDCategory" syncable="YES">
-        <attribute name="categoryID" attributeType="String"/>
+        <attribute name="categoryID" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="categoryName" attributeType="String" minValueString="1"/>
     </entity>
     <entity name="CDMeal" representedClassName="CDMeal" syncable="YES">
         <attribute name="categoryName" optional="YES" attributeType="String"/>
-        <attribute name="mealID" attributeType="String" minValueString="1"/>
+        <attribute name="mealID" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="mealImageURL" attributeType="String" minValueString="1"/>
         <attribute name="mealName" attributeType="String" minValueString="1"/>
     </entity>

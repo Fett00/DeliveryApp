@@ -18,7 +18,7 @@ protocol CoreDataWorkerProtocol{
     
     func refresh()
     
-    func get<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> [Entity]
+    func get<Entity: NSManagedObject>(type: Entity.Type, sortingBy: [String]?, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> [Entity]
     
     func count<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> Int
 }
@@ -56,8 +56,8 @@ class CoreDataWorker: CoreDataWorkerProtocol{
         var predicate:NSPredicate?
 
         if let condition = condition{
-            let splitedCondition = condition.split(separator: "=")
-            predicate = NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
+            //let splitedCondition = condition.split(separator: "=")
+            predicate = NSPredicate(format: condition)//"\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
         }
         
         do {
@@ -93,13 +93,20 @@ class CoreDataWorker: CoreDataWorkerProtocol{
     //condition: First String - argument, second - condition.
     //Exm: ("name","Ivan") -> "rows where name = Ivan"
 
-    func get<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> [Entity] {
+    func get<Entity: NSManagedObject>(type: Entity.Type, sortingBy: [String]?, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> [Entity] {
 
-        var predicate:NSPredicate?
+        var predicate: NSPredicate?
 
         if let condition = condition{
-            let splitedCondition = condition.split(separator: "=")
-            predicate = NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
+            //let splitedCondition = condition.split(separator: "LIKE")
+            predicate = NSPredicate(format: "categoryName LIKE %@", "Beef")//NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
+        }
+        
+        var sortDescriptors: [NSSortDescriptor]?
+        
+        if let sortingBy = sortingBy {
+            
+            sortDescriptors = sortingBy.map { NSSortDescriptor(key: $0, ascending: true) }
         }
 
         do {
@@ -108,6 +115,7 @@ class CoreDataWorker: CoreDataWorkerProtocol{
             request.predicate = predicate
             request.fetchOffset = offset ?? 0
             request.fetchLimit = limit ?? 0
+            request.sortDescriptors = sortDescriptors
 
             let result:[Entity] = try context.fetch(request) as! [Entity]
             return result
