@@ -27,7 +27,10 @@ class CoreDataWorker: CoreDataWorkerProtocol{
 
     //Создание контекста для работы с CoreData
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
-
+    
+    //Модель для получения fetch request'ов
+    let managedObjectModel = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.managedObjectModel
+    
     //Сохранение Данных в БД
     private func save () {
         
@@ -74,7 +77,6 @@ class CoreDataWorker: CoreDataWorkerProtocol{
             
             save()
             print("ПРОИЗОШЛО УДОЛЕНИЕ")
-            print(count(type: CDMeal.self, withCondition: nil, withLimit: nil, offset: nil))
         }
         catch {
             print(error.localizedDescription)
@@ -98,8 +100,8 @@ class CoreDataWorker: CoreDataWorkerProtocol{
         var predicate: NSPredicate?
 
         if let condition = condition{
-            //let splitedCondition = condition.split(separator: "LIKE")
-            predicate = NSPredicate(format: "categoryName LIKE %@", "Beef")//NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
+            let splitedCondition = condition.split(separator: "=")
+            predicate = NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
         }
         
         var sortDescriptors: [NSSortDescriptor]?

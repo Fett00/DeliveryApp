@@ -82,7 +82,6 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                 
                 DispatchQueue.main.async {
                     
-                    categoriesFormCD.map{ print($0)}
                     print("Categ from CD")
                     self.delegate?.updateCategories()
                 }
@@ -139,11 +138,12 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         
         DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
             
-            let condition = "categoryName LIKE \(category)"
+            let condition = "categoryName=\(category)"
+            let sortedBy = ["mealName", "mealID"]
 
             //Если присваивать прямо, появляется ошибка
             //self.mealModels =
-            let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, sortingBy: nil, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: String($0.mealID)) }
+            let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, sortingBy: sortedBy, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: String($0.mealID)) }
 
             //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В КД, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
 
@@ -180,13 +180,14 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                         self.mealModels = meals
                         
                         DispatchQueue.main.async {
+                            print("Meal from net")
                             self.delegate?.updateMeals()
                         }
                     }
                     
                     if coreDataNeedToUpdate{
-                        
-                        self.coreDataWorker.delete(type: CDMeal.self, withCondition: condition)
+                        print("Create cache in CD")
+                        //self.coreDataWorker.delete(type: CDMeal.self, withCondition: nil)
                         
                         self.coreDataWorker.add {
                             for meal in meals {
