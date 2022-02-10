@@ -22,4 +22,17 @@ struct CategoryModel: Decodable{
     var meals: [MealModel]? //Почему не работает var meals: [MealModel] = []
 }
 
+extension CategoryModel: Comparable{
+    
+    static func < (lhs: CategoryModel, rhs: CategoryModel) -> Bool {
+        
+        lhs.idCategory < rhs.idCategory || lhs.strCategory < rhs.strCategory
+    }
+    
+    static func == (lhs: CategoryModel, rhs: CategoryModel) -> Bool {
+        
+        lhs.idCategory == rhs.idCategory && lhs.strCategory == rhs.strCategory
+    }
+}
+
 

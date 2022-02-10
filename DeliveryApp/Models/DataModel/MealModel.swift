@@ -20,3 +20,16 @@ struct MealModel: Codable{
     let strMealThumb: String
     let idMeal: String
 }
+
+extension MealModel: Comparable{
+    
+    static func < (lhs: MealModel, rhs: MealModel) -> Bool {
+        
+        lhs.idMeal < rhs.idMeal || lhs.strMealThumb < rhs.strMealThumb || lhs.strMeal < rhs.strMeal
+    }
+    
+    static func == (lhs: MealModel, rhs: MealModel) -> Bool {
+        
+        lhs.idMeal == rhs.idMeal && lhs.strMealThumb == rhs.strMealThumb && lhs.strMeal == rhs.strMeal
+    }
+}
