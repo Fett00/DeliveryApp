@@ -12,6 +12,8 @@
 		5A004844276643E400C02952 /* ProjectAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A004843276643E400C02952 /* ProjectAssembler.swift */; };
 		5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E634E27A04E5000A79E3E /* ImageWorker.swift */; };
 		5A1E635127A04E6A00A79E3E /* FileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E635027A04E6A00A79E3E /* FileWorker.swift */; };
+		5A3CB6FB27B95D65008A4401 /* CDMeal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3CB6F927B95D65008A4401 /* CDMeal+CoreDataClass.swift */; };
+		5A3CB6FC27B95D65008A4401 /* CDMeal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3CB6FA27B95D65008A4401 /* CDMeal+CoreDataProperties.swift */; };
 		5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA740275CC819003CFAA0 /* AppDelegate.swift */; };
 		5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA742275CC819003CFAA0 /* SceneDelegate.swift */; };
 		5A5CA745275CC819003CFAA0 /* MainMenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */; };
@@ -26,7 +28,6 @@
 		5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */; };
 		5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */; };
 		5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76C275E307C003CFAA0 /* Enums.swift */; };
-		5ABB07AD27A48BCF00A295FA /* CDMeal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB07A927A48BCF00A295FA /* CDMeal+CoreDataClass.swift */; };
 		5ABB07AF27A48BCF00A295FA /* CDCategory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB07AB27A48BCF00A295FA /* CDCategory+CoreDataClass.swift */; };
 		5ABB07BA27A490B000A295FA /* ModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB07B927A490B000A295FA /* ModelConverter.swift */; };
 		5ABEF9D92773F09E00352FF9 /* CollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */; };
@@ -35,7 +36,6 @@
 		5AE3AFB72798449800C33980 /* CartContent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB52798449800C33980 /* CartContent+CoreDataClass.swift */; };
 		5AE3AFB82798449800C33980 /* CartContent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB62798449800C33980 /* CartContent+CoreDataProperties.swift */; };
 		5AFDF9D227B08E280030AEC0 /* CDCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDF9CE27B08E280030AEC0 /* CDCategory+CoreDataProperties.swift */; };
-		5AFDF9D427B08E650030AEC0 /* CDMeal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDF9D327B08E650030AEC0 /* CDMeal+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +44,8 @@
 		5A004843276643E400C02952 /* ProjectAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAssembler.swift; sourceTree = "<group>"; };
 		5A1E634E27A04E5000A79E3E /* ImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWorker.swift; sourceTree = "<group>"; };
 		5A1E635027A04E6A00A79E3E /* FileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWorker.swift; sourceTree = "<group>"; };
+		5A3CB6F927B95D65008A4401 /* CDMeal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMeal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5A3CB6FA27B95D65008A4401 /* CDMeal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMeal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5A5CA73D275CC818003CFAA0 /* DeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A5CA740275CC819003CFAA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A5CA742275CC819003CFAA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +62,6 @@
 		5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
 		5A5CA76C275E307C003CFAA0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		5ABB07A927A48BCF00A295FA /* CDMeal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMeal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5ABB07AB27A48BCF00A295FA /* CDCategory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCategory+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5ABB07B927A490B000A295FA /* ModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConverter.swift; sourceTree = "<group>"; };
 		5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionManager.swift; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		5AE3AFB52798449800C33980 /* CartContent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartContent+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5AE3AFB62798449800C33980 /* CartContent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartContent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5AFDF9CE27B08E280030AEC0 /* CDCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5AFDF9D327B08E650030AEC0 /* CDMeal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDMeal+CoreDataProperties.swift"; path = "../../../../../CDMeal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,8 +200,8 @@
 		5ABB07A727A48B6C00A295FA /* CDMeal */ = {
 			isa = PBXGroup;
 			children = (
-				5AFDF9D327B08E650030AEC0 /* CDMeal+CoreDataProperties.swift */,
-				5ABB07A927A48BCF00A295FA /* CDMeal+CoreDataClass.swift */,
+				5A3CB6F927B95D65008A4401 /* CDMeal+CoreDataClass.swift */,
+				5A3CB6FA27B95D65008A4401 /* CDMeal+CoreDataProperties.swift */,
 			);
 			path = CDMeal;
 			sourceTree = "<group>";
@@ -299,6 +299,7 @@
 				5ABB07AF27A48BCF00A295FA /* CDCategory+CoreDataClass.swift in Sources */,
 				5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell.swift in Sources */,
 				5A5CA75A275CE18F003CFAA0 /* MealModel.swift in Sources */,
+				5A3CB6FB27B95D65008A4401 /* CDMeal+CoreDataClass.swift in Sources */,
 				5A5CA745275CC819003CFAA0 /* MainMenueViewController.swift in Sources */,
 				5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */,
 				5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */,
@@ -310,15 +311,14 @@
 				5A004844276643E400C02952 /* ProjectAssembler.swift in Sources */,
 				5A00484027663BDC00C02952 /* CoreDataWorker.swift in Sources */,
 				5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */,
+				5A3CB6FC27B95D65008A4401 /* CDMeal+CoreDataProperties.swift in Sources */,
 				5ACB230C276E9FFB00782216 /* JSONWorker.swift in Sources */,
-				5AFDF9D427B08E650030AEC0 /* CDMeal+CoreDataProperties.swift in Sources */,
 				5A00484227663C2300C02952 /* DataWorker.swift in Sources */,
 				5ABB07BA27A490B000A295FA /* ModelConverter.swift in Sources */,
 				5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */,
 				5AFDF9D227B08E280030AEC0 /* CDCategory+CoreDataProperties.swift in Sources */,
 				5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */,
 				5A5CA758275CE14B003CFAA0 /* PresentMealViewController.swift in Sources */,
-				5ABB07AD27A48BCF00A295FA /* CDMeal+CoreDataClass.swift in Sources */,
 				5AE3AFB82798449800C33980 /* CartContent+CoreDataProperties.swift in Sources */,
 				5A1E635127A04E6A00A79E3E /* FileWorker.swift in Sources */,
 			);

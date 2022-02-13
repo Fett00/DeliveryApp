@@ -140,13 +140,13 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
             
             let condition = "categoryName=\(category)"
             let sortedBy = ["mealName", "mealID"]
-
+            
             //Если присваивать прямо, появляется ошибка
             //self.mealModels = []
-            let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, sortingBy: sortedBy, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: String($0.mealID)) }
-
+            let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, sortingBy: sortedBy, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: String($0.mealID), price: Int($0.price)) }
+            
             //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В КД, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
-
+            
             if !mealsFromCD.isEmpty{
                 
                 self.mealModels = mealsFromCD
@@ -158,17 +158,20 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                 }
             }
             //
-
+            
             self.networkWorker.getData(from: self.mealsURL + category) { result in
                 
                 switch result {
                 case .failure(let error):
-
+                    
                     print(error.localizedDescription)
                 case .success(let data):
-
-                    guard let meals = self.jsonDecoderWorker.decode(type: MealsModel.self, data: data)?.meals else { return }
                     
+                    guard var meals = self.jsonDecoderWorker.decode(type: MealsModel.self, data: data)?.meals else { return }
+                    
+                    for i in 0..<meals.count{
+                        meals[i].price = (Int.random(in: 100...4000))
+                    }
                     //Сделать здесь что-то
                     //Сравнить например данные
                     
@@ -201,6 +204,7 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                                 cdMeal.mealImageURL = meal.strMealThumb
                                 cdMeal.mealName = meal.strMeal
                                 cdMeal.categoryName = category
+                                cdMeal.price = Int32(meal.price)
                             }
                         }
                     }

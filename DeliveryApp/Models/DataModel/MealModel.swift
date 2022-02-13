@@ -19,6 +19,14 @@ struct MealModel: Codable{
     let strMeal: String
     let strMealThumb: String
     let idMeal: String
+    var price: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+    
+        case strMeal
+        case strMealThumb
+        case idMeal
+    }
 }
 
 extension MealModel: Comparable{

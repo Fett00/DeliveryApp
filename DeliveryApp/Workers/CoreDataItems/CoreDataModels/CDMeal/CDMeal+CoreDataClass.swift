@@ -2,7 +2,7 @@
 //  CDMeal+CoreDataClass.swift
 //  DeliveryApp
 //
-//  Created by Садык Мусаев on 28.01.2022.
+//  Created by Садык Мусаев on 13.02.2022.
 //
 //
 

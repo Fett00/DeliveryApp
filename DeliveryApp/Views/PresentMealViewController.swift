@@ -54,6 +54,7 @@ class PresentMealViewController: UIViewController{
         }
         
         mealName.text = meal.strMeal
+        addToCartButton.setTitle("\(meal.price) ₽", for: .normal)
     }
     
     func configureView(){
@@ -100,8 +101,7 @@ class PresentMealViewController: UIViewController{
         //addToCartButton.showsTouchWhenHighlighted = true
         
         //TEMP DATA//
-        mealDescription.text = "Meal description"
-        addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
+        mealDescription.text = "Cook the quinoa following the pack instructions, then rinse in cold water and drain thoroughly. Meanwhile, mix the butter, chilli and garlic into a paste. Toss the chicken fillets in 2 tsp of the olive oil with some seasoning."
         //________//
         
     }

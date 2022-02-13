@@ -93,7 +93,7 @@ class MealCollectionViewCell: UICollectionViewCell {
     func setUpCell(with meal: MealModel){
         
         mealName.text = meal.strMeal
-        addToCartButton.setTitle("\(Int.random(in: 100...4000))₽", for: .normal)
+        addToCartButton.setTitle("\(meal.price) ₽", for: .normal)
     }
     
     func setUpImage(with image: UIImage){
