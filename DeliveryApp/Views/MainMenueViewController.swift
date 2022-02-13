@@ -14,16 +14,19 @@ class MainMenueViewController: UIViewController {
     var categoryCollectionView: UICollectionView! //Коллекция с категориями
     var mealsCollectionView: UICollectionView! //Коллекция для меню с едой
     
-    var dataWorker: DataWorkerForMainMenueProtocol! //Объект для запроса данных
-    var imageWorker: ImageWorkerProtocol! //Объект для работы с изображениями
-    var data: DataWorkerCollectedDataProtocol! //Объект для получения данных
+    let dataWorker: DataWorkerForMainMenueProtocol //Объект для запроса данных
+    let imageWorker: ImageWorkerProtocol //Объект для работы с изображениями
+    let data: DataWorkerCollectedDataProtocol //Объект для получения данных
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(dataWorker: DataWorkerForMainMenueProtocol, imageWorker: ImageWorkerProtocol, data: DataWorkerCollectedDataProtocol){
         
-//        configureMainMenue()
-//        configureCategoryCollectionView()
-//        configureMealsCollectionView()
+        self.dataWorker = dataWorker
+        self.imageWorker = imageWorker
+        self.data = data
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        self.dataWorker.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -34,8 +37,6 @@ class MainMenueViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        
-        dataWorker.delegate = self
 
         configureMainMenue()
         configureCategoryCollectionView()
@@ -78,7 +79,6 @@ class MainMenueViewController: UIViewController {
         
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
-        //TODO: - Исправить проблему с высотой Collection View
         layout.scrollDirection = .horizontal
         layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         //layout.content
@@ -116,11 +116,14 @@ class MainMenueViewController: UIViewController {
     
     @objc func openCart(){
         
+        let cartVC = ProjectAssembler.shared.createCartViewController()
+        
+        self.navigationController?.pushViewController(cartVC, animated: true)
     }
     
     @objc func addToCart(indexPath: Int){
         
-        print("CART!")
+
     }
 }
 
@@ -157,9 +160,11 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             cell.setUpCell(with: data.mealModels[indexPath.row])//mealModels[indexPath.row])
             
-            imageWorker.requestImage(on: data.mealModels[indexPath.row].strMealThumb) { [indexPath] image in
+            imageWorker.requestImage(on: data.mealModels[indexPath.row].strMealThumb) { [indexPath, weak self] image in
                 
-                guard let cell = self.mealsCollectionView.cellForItem(at: indexPath) as? MealCollectionViewCell else { return }
+                guard let strongSelf = self else { return }
+                
+                guard let cell = strongSelf.mealsCollectionView.cellForItem(at: indexPath) as? MealCollectionViewCell else { return }
                 
                 cell.setUpImage(with: image)
             }
@@ -195,13 +200,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
         }
         else if collectionView == mealsCollectionView {
             
-            let mealName = data.mealModels[indexPath.row].strMeal
-            var mealImage = UIImage()
-            imageWorker.requestImage(on: data.mealModels[indexPath.row].strMealThumb) { image in
-                
-                mealImage = image
-                self.present(PresentMealViewController(mealName: mealName, mealImage: mealImage), animated: true, completion: nil)
-            }
+            self.present(PresentMealViewController(meal: data.mealModels[indexPath.row], imageWorker: self.imageWorker), animated: true, completion: nil)
         }
     }
 }

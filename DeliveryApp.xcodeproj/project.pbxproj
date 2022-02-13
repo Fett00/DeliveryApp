@@ -18,7 +18,7 @@
 		5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA749275CC819003CFAA0 /* DeliveryApp.xcdatamodeld */; };
 		5A5CA74D275CC81C003CFAA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A5CA74C275CC81C003CFAA0 /* Assets.xcassets */; };
 		5A5CA750275CC81C003CFAA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A5CA74E275CC81C003CFAA0 /* LaunchScreen.storyboard */; };
-		5A5CA758275CE14B003CFAA0 /* PresentItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA757275CE14B003CFAA0 /* PresentItemViewController.swift */; };
+		5A5CA758275CE14B003CFAA0 /* PresentMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA757275CE14B003CFAA0 /* PresentMealViewController.swift */; };
 		5A5CA75A275CE18F003CFAA0 /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA759275CE18F003CFAA0 /* MealModel.swift */; };
 		5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */; };
 		5A5CA762275CE9B0003CFAA0 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */; };
@@ -52,7 +52,7 @@
 		5A5CA74C275CC81C003CFAA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A5CA74F275CC81C003CFAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A5CA751275CC81C003CFAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A5CA757275CE14B003CFAA0 /* PresentItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentItemViewController.swift; sourceTree = "<group>"; };
+		5A5CA757275CE14B003CFAA0 /* PresentMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentMealViewController.swift; sourceTree = "<group>"; };
 		5A5CA759275CE18F003CFAA0 /* MealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealModel.swift; sourceTree = "<group>"; };
 		5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */,
-				5A5CA757275CE14B003CFAA0 /* PresentItemViewController.swift */,
+				5A5CA757275CE14B003CFAA0 /* PresentMealViewController.swift */,
 				5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */,
 				5AE3AFB227983DE400C33980 /* CartViewController.swift */,
 				5A5CA764275CEFF8003CFAA0 /* Cells */,
@@ -317,7 +317,7 @@
 				5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */,
 				5AFDF9D227B08E280030AEC0 /* CDCategory+CoreDataProperties.swift in Sources */,
 				5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */,
-				5A5CA758275CE14B003CFAA0 /* PresentItemViewController.swift in Sources */,
+				5A5CA758275CE14B003CFAA0 /* PresentMealViewController.swift in Sources */,
 				5ABB07AD27A48BCF00A295FA /* CDMeal+CoreDataClass.swift in Sources */,
 				5AE3AFB82798449800C33980 /* CartContent+CoreDataProperties.swift in Sources */,
 				5A1E635127A04E6A00A79E3E /* FileWorker.swift in Sources */,

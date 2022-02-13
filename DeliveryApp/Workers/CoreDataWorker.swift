@@ -56,11 +56,11 @@ class CoreDataWorker: CoreDataWorkerProtocol{
     //Удаление записей из CoreData
     func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?){
        
-        var predicate:NSPredicate?
+        var predicate: NSPredicate?
 
         if let condition = condition{
-            //let splitedCondition = condition.split(separator: "=")
-            predicate = NSPredicate(format: condition)//"\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
+            let splitedCondition = condition.split(separator: "=")
+            predicate = NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
         }
         
         do {
@@ -68,7 +68,7 @@ class CoreDataWorker: CoreDataWorkerProtocol{
             let request = Entity.fetchRequest()
             request.predicate = predicate
             
-            let objectsToDelete = try context.fetch(request)as! [Entity]
+            let objectsToDelete = try context.fetch(request) as! [Entity]
             
             for object in objectsToDelete{
                 

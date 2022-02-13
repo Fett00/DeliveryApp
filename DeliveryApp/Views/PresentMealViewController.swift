@@ -15,17 +15,21 @@ class PresentMealViewController: UIViewController{
     let mealDescription = UILabel()
     let bar = UINavigationBar()
     
-    init(mealName: String, mealImage: UIImage?) {
-        
-        self.mealName.text = mealName
-        self.mealImage.image = mealImage ?? Images.emptyMeal
-        
-        super.init(nibName: nil, bundle: nil)
-    }
+    //МодельБлюда
+    let meal: MealModel
+    //Загрузка изображений
+    let imageWorker: ImageWorkerProtocol
+    //Запры в БД
+    //let coreDataWorker: CoreDataWorkerProtocol
     
-    init(){ //TEMP INIT
-       
+    init(meal: MealModel, imageWorker: ImageWorkerProtocol){
+        
+        self.imageWorker = imageWorker
+        self.meal = meal
+        
         super.init(nibName: nil, bundle: nil)
+        
+        loadData()
     }
     
     required init?(coder: NSCoder) {
@@ -38,6 +42,18 @@ class PresentMealViewController: UIViewController{
         view.backgroundColor = .systemBackground
         
         configureView()
+    }
+    
+    func loadData(){
+        
+        imageWorker.requestImage(on: meal.strMealThumb) { [weak self] image in
+            
+            guard let strongSelf = self else { return }
+            
+            strongSelf.mealImage.image = image
+        }
+        
+        mealName.text = meal.strMeal
     }
     
     func configureView(){

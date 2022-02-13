@@ -21,9 +21,7 @@ class ProjectAssembler{
     private let jsonEncoderWorker = JSONEncoderWorker() // Энкодер JSON
     private let coreDataWorker = CoreDataWorker() // Работа с core data
     
-    let cartVC = CartViewController()
-    
-    func assemble() -> UIViewController{
+    func createMainViewController() -> UIViewController{
         
         dataWorker.coreDataWorker = coreDataWorker
         dataWorker.jsonDecoderWorker = jsonDecoderWorker
@@ -33,15 +31,13 @@ class ProjectAssembler{
         imageWorker.fileWorker = fileWorker
         imageWorker.networkWorker = networkWorker
         
-        let mainViewController = MainMenueViewController()
-        
-        mainViewController.dataWorker = dataWorker
-        mainViewController.data = dataWorker
-        mainViewController.imageWorker = imageWorker
-        
-        cartVC.dataWorker = dataWorker
+        let mainViewController = MainMenueViewController(dataWorker: dataWorker, imageWorker: imageWorker, data: dataWorker)
         
         return UINavigationController(rootViewController: mainViewController)
+    }
+    
+    func createCartViewController() -> UIViewController{
+        CartViewController()
     }
 }
 

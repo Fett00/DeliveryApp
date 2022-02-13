@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowsScene.coordinateSpace.bounds)
         window?.windowScene = windowsScene
-        window?.rootViewController = ProjectAssembler.shared.assemble()
+        window?.rootViewController = ProjectAssembler.shared.createMainViewController()
         window?.makeKeyAndVisible()
     }
 
