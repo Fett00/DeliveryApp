@@ -118,12 +118,14 @@ class MainMenueViewController: UIViewController {
         
         let cartVC = ProjectAssembler.shared.createCartViewController()
         
-        self.navigationController?.pushViewController(cartVC, animated: true)
+        self.present(cartVC, animated: true, completion: nil)
     }
     
-    @objc func addToCart(indexPath: Int){
+    @objc func addToCart(_ sender: Any){
         
-
+        guard let cell = (sender as? UIView)?.superview as? MealCollectionViewCell else { return }
+        let index = mealsCollectionView.indexPath(for: cell)?.row ?? 0
+        dataWorker.addMealToCart(byIndex: index)
     }
 }
 
@@ -160,14 +162,12 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             cell.setUpCell(with: data.mealModels[indexPath.row])//mealModels[indexPath.row])
             
-            imageWorker.requestImage(on: data.mealModels[indexPath.row].strMealThumb) { [indexPath, weak self] image in
-                
-                guard let strongSelf = self else { return }
-                
-                guard let cell = strongSelf.mealsCollectionView.cellForItem(at: indexPath) as? MealCollectionViewCell else { return }
+            imageWorker.requestImage(on: data.mealModels[indexPath.row].strMealThumb) { image in
                 
                 cell.setUpImage(with: image)
             }
+            
+            cell.addToCartButton.addTarget(self, action: #selector(addToCart(_:)), for: .touchUpInside)
             
             return cell
         }
@@ -220,6 +220,7 @@ extension MainMenueViewController: DataWorkerDelegate{
     func updateMeals() {
         
         mealsCollectionView.reloadData()
+        self.navigationItem.title = self.data.categoryModels[self.currentCategory].strCategory
     }
 }
 

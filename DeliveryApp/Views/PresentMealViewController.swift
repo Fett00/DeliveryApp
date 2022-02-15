@@ -61,7 +61,7 @@ class PresentMealViewController: UIViewController{
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissView))
         let navigationItem = UINavigationItem()
-        navigationItem.rightBarButtonItem = doneButton
+        navigationItem.leftBarButtonItem = doneButton
         
         bar.items = [navigationItem]
 
@@ -77,7 +77,7 @@ class PresentMealViewController: UIViewController{
         
         mealDescription.constraints(top: mealName.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
-        addToCartButton.constraints(top: nil, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 20, paddingleft: 20, paddingRight: 20, width: 0, height: 40)
+        addToCartButton.constraints(top: nil, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 20, paddingleft: 20, paddingRight: 20, width: 0, height: 50)
         
         addToCartButton.topAnchor.constraint(greaterThanOrEqualTo: mealDescription.bottomAnchor, constant: 20).isActive = true
         
@@ -98,7 +98,6 @@ class PresentMealViewController: UIViewController{
         addToCartButton.layer.borderWidth = 0.2
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20
-        //addToCartButton.showsTouchWhenHighlighted = true
         
         //TEMP DATA//
         mealDescription.text = "Cook the quinoa following the pack instructions, then rinse in cold water and drain thoroughly. Meanwhile, mix the butter, chilli and garlic into a paste. Toss the chicken fillets in 2 tsp of the olive oil with some seasoning."

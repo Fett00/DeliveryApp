@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDCartContent" representedClassName="CDCartContent" syncable="YES">
-        <attribute name="data" attributeType="Binary"/>
+        <attribute name="count" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageURL" attributeType="String" minValueString="1"/>
         <attribute name="name" attributeType="String" minValueString="1"/>
+        <attribute name="price" attributeType="Integer 32" minValueString="1" defaultValueString="1" usesScalarValueType="YES"/>
     </entity>
     <entity name="CDCategory" representedClassName="CDCategory" syncable="YES">
         <attribute name="categoryID" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
@@ -16,7 +18,7 @@
         <attribute name="price" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="CDCartContent" positionX="-16.2957763671875" positionY="-64.96502685546875" width="128" height="73"/>
+        <element name="CDCartContent" positionX="-16.2957763671875" positionY="-64.96502685546875" width="128" height="89"/>
         <element name="CDCategory" positionX="-85.10028076171875" positionY="51.36322021484375" width="150.7467651367188" height="59"/>
         <element name="CDMeal" positionX="230.6369018554688" positionY="41.98892211914062" width="128" height="118"/>
     </elements>

@@ -9,10 +9,6 @@ import UIKit
 
 class ProjectAssembler{
     
-    //singleton
-    public static let shared = ProjectAssembler()
-    private init(){}
-    
     private let dataWorker = DataWorker() //Координация все отсальних воркеров. Работа с данными
     private let networkWorker = NetworkWorker() //Работа с сетью
     private let imageWorker = ImageWorker() // Работа с изображениями
@@ -21,7 +17,9 @@ class ProjectAssembler{
     private let jsonEncoderWorker = JSONEncoderWorker() // Энкодер JSON
     private let coreDataWorker = CoreDataWorker() // Работа с core data
     
-    func createMainViewController() -> UIViewController{
+    //singleton
+    public static let shared = ProjectAssembler()
+    private init(){
         
         dataWorker.coreDataWorker = coreDataWorker
         dataWorker.jsonDecoderWorker = jsonDecoderWorker
@@ -30,14 +28,38 @@ class ProjectAssembler{
         
         imageWorker.fileWorker = fileWorker
         imageWorker.networkWorker = networkWorker
-        
-        let mainViewController = MainMenueViewController(dataWorker: dataWorker, imageWorker: imageWorker, data: dataWorker)
-        
-        return UINavigationController(rootViewController: mainViewController)
     }
     
+    ///Создание входной точки для приложения
+    func createEnteryPointOfProject() -> UIViewController{
+        
+        UINavigationBar.appearance().tintColor = .black
+        
+        let tabBar = UITabBarController()
+        tabBar.tabBar.backgroundColor = Colors.mainColor
+        tabBar.tabBar.tintColor = .black
+        tabBar.tabBar.unselectedItemTintColor = .gray
+        
+        //Настройка вкладки с меню
+        let mainTab = UINavigationController(rootViewController: MainMenueViewController(dataWorker: dataWorker, imageWorker: imageWorker, data: dataWorker))
+        
+        mainTab.tabBarItem = UITabBarItem(title: "Menue", image: Images.menue, tag: 0)
+        //
+        
+        //Настройка вкладки с профилем пользователя
+        let profileTab = UINavigationController(rootViewController: ProfileViewController())
+        
+        profileTab.tabBarItem = UITabBarItem(title: "Profile", image: Images.profile, tag: 1)
+        //
+        
+        tabBar.viewControllers = [mainTab, profileTab]
+        
+        return tabBar
+    }
+    
+    ///Создание контроллера корзины
     func createCartViewController() -> UIViewController{
-        CartViewController()
+        UINavigationController(rootViewController: CartViewController(dataWorker: dataWorker, data: dataWorker, imageWorker: imageWorker)) 
     }
 }
 

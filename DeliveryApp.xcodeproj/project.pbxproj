@@ -28,13 +28,16 @@
 		5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */; };
 		5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */; };
 		5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA76C275E307C003CFAA0 /* Enums.swift */; };
+		5A5E369F27BBB82C00C84CE8 /* CartContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E369E27BBB82C00C84CE8 /* CartContentTableViewCell.swift */; };
+		5A5E36A227BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E36A027BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift */; };
+		5A5E36A327BBBF6200C84CE8 /* CDCartContent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E36A127BBBF6200C84CE8 /* CDCartContent+CoreDataProperties.swift */; };
+		5A5E36A527BBD9BD00C84CE8 /* CartContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E36A427BBD9BD00C84CE8 /* CartContentModel.swift */; };
 		5ABB07AF27A48BCF00A295FA /* CDCategory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB07AB27A48BCF00A295FA /* CDCategory+CoreDataClass.swift */; };
 		5ABB07BA27A490B000A295FA /* ModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB07B927A490B000A295FA /* ModelConverter.swift */; };
 		5ABEF9D92773F09E00352FF9 /* CollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */; };
 		5ACB230C276E9FFB00782216 /* JSONWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACB230B276E9FFB00782216 /* JSONWorker.swift */; };
 		5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB227983DE400C33980 /* CartViewController.swift */; };
-		5AE3AFB72798449800C33980 /* CartContent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB52798449800C33980 /* CartContent+CoreDataClass.swift */; };
-		5AE3AFB82798449800C33980 /* CartContent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB62798449800C33980 /* CartContent+CoreDataProperties.swift */; };
+		5AF58C0A27BA55E700FC186B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF58C0927BA55E700FC186B /* ProfileViewController.swift */; };
 		5AFDF9D227B08E280030AEC0 /* CDCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDF9CE27B08E280030AEC0 /* CDCategory+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,13 +65,16 @@
 		5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
 		5A5CA76C275E307C003CFAA0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		5A5E369E27BBB82C00C84CE8 /* CartContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartContentTableViewCell.swift; sourceTree = "<group>"; };
+		5A5E36A027BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCartContent+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5A5E36A127BBBF6200C84CE8 /* CDCartContent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCartContent+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5A5E36A427BBD9BD00C84CE8 /* CartContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartContentModel.swift; sourceTree = "<group>"; };
 		5ABB07AB27A48BCF00A295FA /* CDCategory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCategory+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5ABB07B927A490B000A295FA /* ModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConverter.swift; sourceTree = "<group>"; };
 		5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionManager.swift; sourceTree = "<group>"; };
 		5ACB230B276E9FFB00782216 /* JSONWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWorker.swift; sourceTree = "<group>"; };
 		5AE3AFB227983DE400C33980 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
-		5AE3AFB52798449800C33980 /* CartContent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartContent+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5AE3AFB62798449800C33980 /* CartContent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartContent+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5AF58C0927BA55E700FC186B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5AFDF9CE27B08E280030AEC0 /* CDCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				5A5CA759275CE18F003CFAA0 /* MealModel.swift */,
+				5A5E36A427BBD9BD00C84CE8 /* CartContentModel.swift */,
 				5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */,
 			);
 			path = DataModel;
@@ -147,8 +154,9 @@
 			children = (
 				5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */,
 				5A5CA757275CE14B003CFAA0 /* PresentMealViewController.swift */,
-				5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */,
 				5AE3AFB227983DE400C33980 /* CartViewController.swift */,
+				5AF58C0927BA55E700FC186B /* ProfileViewController.swift */,
+				5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */,
 				5A5CA764275CEFF8003CFAA0 /* Cells */,
 			);
 			path = Views;
@@ -159,6 +167,7 @@
 			children = (
 				5A5CA765275CF017003CFAA0 /* CategoryCollectionViewCell.swift */,
 				5A5CA767275CF01C003CFAA0 /* MealCollectionViewCell.swift */,
+				5A5E369E27BBB82C00C84CE8 /* CartContentTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -191,8 +200,8 @@
 		5ABB07A627A48B6300A295FA /* CDCartContent */ = {
 			isa = PBXGroup;
 			children = (
-				5AE3AFB62798449800C33980 /* CartContent+CoreDataProperties.swift */,
-				5AE3AFB52798449800C33980 /* CartContent+CoreDataClass.swift */,
+				5A5E36A027BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift */,
+				5A5E36A127BBBF6200C84CE8 /* CDCartContent+CoreDataProperties.swift */,
 			);
 			path = CDCartContent;
 			sourceTree = "<group>";
@@ -304,22 +313,25 @@
 				5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */,
 				5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */,
 				5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */,
-				5AE3AFB72798449800C33980 /* CartContent+CoreDataClass.swift in Sources */,
 				5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */,
 				5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */,
 				5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */,
 				5A004844276643E400C02952 /* ProjectAssembler.swift in Sources */,
 				5A00484027663BDC00C02952 /* CoreDataWorker.swift in Sources */,
 				5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */,
+				5A5E36A327BBBF6200C84CE8 /* CDCartContent+CoreDataProperties.swift in Sources */,
 				5A3CB6FC27B95D65008A4401 /* CDMeal+CoreDataProperties.swift in Sources */,
+				5A5E369F27BBB82C00C84CE8 /* CartContentTableViewCell.swift in Sources */,
+				5AF58C0A27BA55E700FC186B /* ProfileViewController.swift in Sources */,
 				5ACB230C276E9FFB00782216 /* JSONWorker.swift in Sources */,
+				5A5E36A227BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift in Sources */,
 				5A00484227663C2300C02952 /* DataWorker.swift in Sources */,
 				5ABB07BA27A490B000A295FA /* ModelConverter.swift in Sources */,
 				5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */,
 				5AFDF9D227B08E280030AEC0 /* CDCategory+CoreDataProperties.swift in Sources */,
+				5A5E36A527BBD9BD00C84CE8 /* CartContentModel.swift in Sources */,
 				5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */,
 				5A5CA758275CE14B003CFAA0 /* PresentMealViewController.swift in Sources */,
-				5AE3AFB82798449800C33980 /* CartContent+CoreDataProperties.swift in Sources */,
 				5A1E635127A04E6A00A79E3E /* FileWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +480,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,7 +508,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

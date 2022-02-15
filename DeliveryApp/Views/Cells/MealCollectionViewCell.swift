@@ -9,11 +9,11 @@ import UIKit
 
 class MealCollectionViewCell: UICollectionViewCell {
     
-    static let id = "MealCellID" //идентификатор ячейки
+    static let id = MealCollectionViewCell.description() //идентификатор ячейки
     
     private let mealImage = UIImageView()
-    private let mealName = UILabel()
-    private let addToCartButton = UIButton()
+     let mealName = UILabel()
+    let addToCartButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,7 +65,7 @@ class MealCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 20
         
         mealImage.tintColor = .systemGray3
-        mealImage.contentMode = .scaleAspectFill//.scaleAspectFit//.scaleAspectFill
+        mealImage.contentMode = .scaleAspectFill
         mealImage.clipsToBounds = true
         mealImage.layer.cornerCurve = .continuous
         mealImage.layer.cornerRadius = 20
@@ -84,7 +84,6 @@ class MealCollectionViewCell: UICollectionViewCell {
         addToCartButton.layer.borderWidth = 0.2
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20
-        //addToCartButton.showsTouchWhenHighlighted = true
         
         mealImage.translatesAutoresizingMaskIntoConstraints = false
         mealName.translatesAutoresizingMaskIntoConstraints = false

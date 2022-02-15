@@ -16,14 +16,19 @@ protocol DataWorkerForMainMenueProtocol: AnyObject{
     
     func requestMeals(for category: String)
     
-    func addMealToCart(meal: MealModel)
+    func addMealToCart(byIndex: Int)
 }
 
 protocol DataWorkerForCartProtocol: AnyObject{
     
-    var delegate: DataWorkerDelegate? { get set }
+    func requestCartContent(handler: @escaping () -> ())
     
-    func requestCartContent()
+    func requestClearCart(handler: @escaping () -> ())
+}
+
+protocol DataWorkerCollectedDataForCartProtocol: AnyObject{
+    
+    var cartContent: [CartContentModel] { get }
 }
 
 protocol DataWorkerCollectedDataProtocol: AnyObject{
@@ -42,7 +47,7 @@ protocol DataWorkerDelegate: AnyObject {
 
 
 //SOLID???
-class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol{
+class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol, DataWorkerCollectedDataForCartProtocol{
     
     weak var delegate: DataWorkerDelegate? //Заменить на множественное делегирование
     
@@ -64,6 +69,9 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
     
     //Массив для хранения блюд текущей категории
     var mealModels: [MealModel] = [MealModel]()
+    
+    // Массив с содержимым корзины
+    var cartContent: [CartContentModel] = [CartContentModel]()
     
     //TODO: Объединить requestCategories и requestMeals в одну общую функцию
     func requestCategories() {
@@ -214,21 +222,34 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         }
     }
     
-    func addMealToCart(meal: MealModel){
+    func addMealToCart(byIndex: Int){
+        
+        let meal = mealModels[byIndex]
         
         coreDataWorker.add {
             
-            let data = jsonEncoderWorker.encode(model: meal)
-            let content = CartContent(context: coreDataWorker.context)
+            let cdModel = CDCartContent(context: coreDataWorker.context)
             
-            content.data = data
-            content.name = meal.strMeal
+            cdModel.imageURL = meal.strMealThumb
+            cdModel.price = Int32(meal.price)
+            cdModel.name = meal.strMeal
+            cdModel.count = 1
         }
+        print("Add to cart")
     }
     
-    func requestCartContent(){
+    func requestCartContent(handler: @escaping () -> ()) {
         
+        cartContent = coreDataWorker.get(type: CDCartContent.self, sortingBy: nil, withCondition: nil, withLimit: nil, offset: nil).map{ CartContentModel(name: $0.name ?? "", price: Int($0.price), count: Int($0.count), imageURL: $0.imageURL ?? "") }
         
+        handler()
+    }
+    
+    func requestClearCart(handler: @escaping () -> ()) {
+        
+        coreDataWorker.delete(type: CDCartContent.self, withCondition: nil)
+        
+        handler()
     }
 }
 

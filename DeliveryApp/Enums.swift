@@ -11,6 +11,10 @@ enum Images{
     
     static let emptyMeal = UIImage(named: "food-delivery")!
     static let cart = UIImage(systemName: "cart")!
+    static let menue = UIImage(systemName: "bag")!
+    static let profile = UIImage(systemName: "person")!
+    static let backArrow = UIImage(systemName: "arrow.backward")!
+    static let trash = UIImage(systemName: "trash")!
 }
 
 enum URLs: String{
@@ -20,4 +24,9 @@ enum URLs: String{
     
     //АПИ для получения блюд для категории
     case mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
+}
+
+enum Colors{
+    
+    static let mainColor = UIColor(named: "MainColor")!
 }
