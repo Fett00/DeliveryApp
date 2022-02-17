@@ -58,6 +58,7 @@ class CartViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = clearCartButton
     }
     
+    //Конфигурация таблицы с выбранными блюдами
     func configureCartContentTableView(){
         
         view.addSubview(cartContentTableView)
@@ -71,6 +72,7 @@ class CartViewController: UIViewController {
         cartContentTableView.constraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
     }
     
+    //Конфигурация нижнего поля с итоговой суммой заказа
     func configureTotalAmount(){
         
         view.addSubview(totalAmountView)
@@ -86,16 +88,18 @@ class CartViewController: UIViewController {
         totalAmountView.backgroundColor = Colors.mainColor
         
         totalAmountButton.setTitle("Buy", for: .normal)
-        totalAmountButton.setTitleColor(.black, for: .normal)
+        totalAmountButton.setTitleColor(.label, for: .normal)
         totalAmountButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
-        totalAmountButton.backgroundColor = .secondarySystemBackground
+        totalAmountButton.backgroundColor = .systemBackground
         totalAmountButton.layer.borderWidth = 0.2
         totalAmountButton.layer.cornerCurve = .continuous
         totalAmountButton.layer.cornerRadius = 20
+        totalAmountButton.addTarget(self, action: #selector(goToEnterPersonalInformation), for: .touchUpInside)
         
-        totalAmountLable.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
+        totalAmountLable.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none).pointSize) 
     }
     
+    //Загрузка блюд
     func loadMeals(){
         
         //Почему не происходит retain cycle
@@ -107,7 +111,7 @@ class CartViewController: UIViewController {
             })) + " ₽"
         }
     }
-    
+    //Вызов удаления содержимого корзины
     @objc func requestClearCart(){
         
         dataWorker.requestClearCart {
@@ -116,10 +120,16 @@ class CartViewController: UIViewController {
             print("try reload cart")
         }
     }
-    
+    //Вызов закрытия окна
     @objc func closeView(){
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    //Переход к окну ввода адреса, ФИО итл
+    @objc func goToEnterPersonalInformation(){
+        
+        self.navigationController?.pushViewController(EnterPersonalInformationViewController(), animated: true)
     }
     
     deinit {

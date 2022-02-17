@@ -33,7 +33,7 @@ class ProjectAssembler{
     ///Создание входной точки для приложения
     func createEnteryPointOfProject() -> UIViewController{
         
-        UINavigationBar.appearance().tintColor = .black
+        UINavigationBar.appearance().tintColor = .label
         
         let tabBar = UITabBarController()
         tabBar.tabBar.backgroundColor = Colors.mainColor

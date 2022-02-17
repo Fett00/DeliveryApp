@@ -38,7 +38,8 @@ class CartContentTableViewCell: UITableViewCell {
         
         mealName.constraints(top: self.contentView.topAnchor, bottom: nil, leading: mealImage.trailingAnchor, trailing: nil, paddingTop: 10, paddingBottom: 0, paddingleft: 20, paddingRight: 0, width: 0, height: 0)
         
-        mealPrice.constraints(top: self.contentView.topAnchor, bottom: nil, leading: mealName.trailingAnchor, trailing: self.contentView.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 10, paddingRight: 20, width: 0, height: 0)
+        mealPrice.constraints(top: self.contentView.topAnchor, bottom: nil, leading: nil, trailing: self.contentView.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 10, paddingRight: 20, width: 0, height: 0)
+        mealPrice.leadingAnchor.constraint(greaterThanOrEqualTo: mealName.trailingAnchor, constant: 10).isActive = true
         
         decreaseButton.constraints(top: mealImage.centerYAnchor, bottom: self.contentView.bottomAnchor, leading: mealImage.trailingAnchor, trailing: nil, paddingTop: 15, paddingBottom: 10, paddingleft: 20, paddingRight: 0, width: 0, height: 0)
         decreaseButton.widthAnchor.constraint(equalTo: increaseButton.heightAnchor, multiplier: 1/1).isActive = true
@@ -54,6 +55,7 @@ class CartContentTableViewCell: UITableViewCell {
         mealName.numberOfLines = 2
         mealName.font = UIFont.preferredFont(forTextStyle: .title3, compatibleWith: .none)
         mealName.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        //mealName.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
         mealImage.image = Images.emptyMeal
         mealImage.tintColor = .systemGray3
@@ -62,10 +64,10 @@ class CartContentTableViewCell: UITableViewCell {
         mealImage.layer.cornerCurve = .continuous
         mealImage.layer.cornerRadius = 10
         
-        mealPrice.text = "2313 ₽"
         mealPrice.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
+        mealPrice.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        //mealPrice.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
-        mealCount.text = "12"
         mealCount.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
         
         increaseButton.setTitle("+", for: .normal)
@@ -88,8 +90,8 @@ class CartContentTableViewCell: UITableViewCell {
     func setUpCell(meal: CartContentModel){
         
         mealName.text = meal.name
-        mealCount.text = "1"
-        mealPrice.text = String(meal.price)
+        mealCount.text = String(meal.count)
+        mealPrice.text = String(meal.price) + " ₽"
     }
     
     func setUpCellImage(image: UIImage){
