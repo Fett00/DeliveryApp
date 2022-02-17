@@ -8,7 +8,12 @@
 import UIKit
 import CoreData
 
-protocol DataWorkerForMainMenueProtocol: AnyObject{
+protocol DataWorkerForAddToCartProtocol: AnyObject{
+    
+    func addMealToCart(byIndex: Int)
+}
+
+protocol DataWorkerForMainMenueProtocol: AnyObject, DataWorkerForAddToCartProtocol{
     
     var delegate: DataWorkerDelegate? { get set }
     

@@ -7,7 +7,10 @@
 
 import UIKit
 
-class MealCollectionViewCell: UICollectionViewCell {
+class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
+    
+    //indexpath для связи с данными
+    var indexPath: IndexPath
     
     static let id = MealCollectionViewCell.description() //идентификатор ячейки
     
@@ -16,6 +19,9 @@ class MealCollectionViewCell: UICollectionViewCell {
     let addToCartButton = UIButton()
     
     override init(frame: CGRect) {
+        
+        self.indexPath = IndexPath()
+        
         super.init(frame: frame)
         
         self.backgroundColor = .secondarySystemBackground
@@ -84,15 +90,17 @@ class MealCollectionViewCell: UICollectionViewCell {
         addToCartButton.layer.borderWidth = 0.2
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20
+        addToCartButton.addTarget(nil, action: Selector(("addToCart:")), for: .touchUpInside)
         
         mealImage.translatesAutoresizingMaskIntoConstraints = false
         mealName.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func setUpCell(with meal: MealModel){
+    func setUpCell(with meal: MealModel, indexPath: IndexPath){
         
-        mealName.text = meal.strMeal
-        addToCartButton.setTitle("\(meal.price) ₽", for: .normal)
+        self.indexPath = indexPath
+        self.mealName.text = meal.strMeal
+        self.addToCartButton.setTitle("\(meal.price) ₽", for: .normal)
     }
     
     func setUpImage(with image: UIImage){

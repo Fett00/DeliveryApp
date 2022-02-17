@@ -121,11 +121,17 @@ class MainMenueViewController: UIViewController {
         self.present(cartVC, animated: true, completion: nil)
     }
     
+//    @objc func addToCart(_ sender: Any){
+//
+//        guard let cell = (sender as? UIView)?.superview as? MealCollectionViewCell else { return }
+//        let index = mealsCollectionView.indexPath(for: cell)?.row ?? 0
+//        dataWorker.addMealToCart(byIndex: index)
+//    }
+    
     @objc func addToCart(_ sender: Any){
         
-        guard let cell = (sender as? UIView)?.superview as? MealCollectionViewCell else { return }
-        let index = mealsCollectionView.indexPath(for: cell)?.row ?? 0
-        dataWorker.addMealToCart(byIndex: index)
+        guard let sendedView = (sender as? UIView)?.superview as? IndexPathCollector else { return }
+        dataWorker.addMealToCart(byIndex: sendedView.indexPath.row)
     }
 }
 
@@ -160,14 +166,14 @@ extension MainMenueViewController: UICollectionViewDataSource{
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MealCollectionViewCell.id, for: indexPath) as? MealCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.setUpCell(with: data.mealModels[indexPath.row])//mealModels[indexPath.row])
+            cell.setUpCell(with: data.mealModels[indexPath.row], indexPath: indexPath)//mealModels[indexPath.row])
             
             imageWorker.requestImage(on: data.mealModels[indexPath.row].strMealThumb) { image in
                 
                 cell.setUpImage(with: image)
             }
             
-            cell.addToCartButton.addTarget(self, action: #selector(addToCart(_:)), for: .touchUpInside)
+            //cell.addToCartButton.addTarget(self, action: #selector(addToCart(_:)), for: .touchUpInside)
             
             return cell
         }
@@ -200,7 +206,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
         }
         else if collectionView == mealsCollectionView {
             
-            self.present(PresentMealViewController(meal: data.mealModels[indexPath.row], imageWorker: self.imageWorker), animated: true, completion: nil)
+            self.present(PresentMealViewController(meal: data.mealModels[indexPath.row], imageWorker: self.imageWorker, dataWorker: dataWorker, indexPath: indexPath), animated: true, completion: nil)
         }
     }
 }

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class PresentMealViewController: UIViewController{
+class PresentMealViewController: UIViewController, IndexPathCollector{
+    
+    var indexPath: IndexPath
     
     let mealImage = UIImageView()
     let mealName = UILabel()
@@ -20,12 +22,14 @@ class PresentMealViewController: UIViewController{
     //Загрузка изображений
     let imageWorker: ImageWorkerProtocol
     //Запры в БД
-    //let coreDataWorker: CoreDataWorkerProtocol
+    let dataWorker: DataWorkerForAddToCartProtocol
     
-    init(meal: MealModel, imageWorker: ImageWorkerProtocol){
+    init(meal: MealModel, imageWorker: ImageWorkerProtocol, dataWorker: DataWorkerForAddToCartProtocol, indexPath: IndexPath){
         
         self.imageWorker = imageWorker
         self.meal = meal
+        self.dataWorker = dataWorker
+        self.indexPath = indexPath
         
         super.init(nibName: nil, bundle: nil)
         
@@ -59,7 +63,8 @@ class PresentMealViewController: UIViewController{
     
     func configureView(){
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissView))
+        //Стрелку вниз или стрелку назад?
+        let doneButton = UIBarButtonItem(image: Images.downArrow, style: .done, target: self, action: #selector(dismissView))
         let navigationItem = UINavigationItem()
         navigationItem.leftBarButtonItem = doneButton
         
@@ -98,11 +103,17 @@ class PresentMealViewController: UIViewController{
         addToCartButton.layer.borderWidth = 0.2
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20
+        addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
         
         //TEMP DATA//
         mealDescription.text = "Cook the quinoa following the pack instructions, then rinse in cold water and drain thoroughly. Meanwhile, mix the butter, chilli and garlic into a paste. Toss the chicken fillets in 2 tsp of the olive oil with some seasoning."
         //________//
         
+    }
+    
+    @objc func addToCart(){
+        
+        dataWorker.addMealToCart(byIndex: indexPath.row)
     }
     
     @objc func dismissView(){

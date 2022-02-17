@@ -14,6 +14,7 @@ enum Images{
     static let menue = UIImage(systemName: "bag")!
     static let profile = UIImage(systemName: "person")!
     static let backArrow = UIImage(systemName: "arrow.backward")!
+    static let downArrow = UIImage(systemName: "arrow.down")!
     static let trash = UIImage(systemName: "trash")!
 }
 
