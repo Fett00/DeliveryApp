@@ -37,6 +37,7 @@
 		5ABB07BA27A490B000A295FA /* ModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB07B927A490B000A295FA /* ModelConverter.swift */; };
 		5ABEF9D92773F09E00352FF9 /* CollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */; };
 		5AC1CCC127BE6ED7000A1BEA /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC1CCC027BE6ED7000A1BEA /* Protocols.swift */; };
+		5AC1CCC327BEB854000A1BEA /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC1CCC227BEB854000A1BEA /* UIViewController+Ext.swift */; };
 		5ACB230C276E9FFB00782216 /* JSONWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACB230B276E9FFB00782216 /* JSONWorker.swift */; };
 		5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB227983DE400C33980 /* CartViewController.swift */; };
 		5AF58C0A27BA55E700FC186B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF58C0927BA55E700FC186B /* ProfileViewController.swift */; };
@@ -76,6 +77,7 @@
 		5ABB07B927A490B000A295FA /* ModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConverter.swift; sourceTree = "<group>"; };
 		5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionManager.swift; sourceTree = "<group>"; };
 		5AC1CCC027BE6ED7000A1BEA /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		5AC1CCC227BEB854000A1BEA /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		5ACB230B276E9FFB00782216 /* JSONWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWorker.swift; sourceTree = "<group>"; };
 		5AE3AFB227983DE400C33980 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		5AF58C0927BA55E700FC186B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				5A5CA761275CE9B0003CFAA0 /* UIView+Ext.swift */,
+				5AC1CCC227BEB854000A1BEA /* UIViewController+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				5AA0069127BD5FFF003DF264 /* EnterPersonalInformationViewController.swift in Sources */,
 				5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */,
 				5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */,
+				5AC1CCC327BEB854000A1BEA /* UIViewController+Ext.swift in Sources */,
 				5A004844276643E400C02952 /* ProjectAssembler.swift in Sources */,
 				5AC1CCC127BE6ED7000A1BEA /* Protocols.swift in Sources */,
 				5A00484027663BDC00C02952 /* CoreDataWorker.swift in Sources */,
