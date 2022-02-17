@@ -127,6 +127,8 @@ class CoreDataWorker: CoreDataWorkerProtocol{
         }
     }
     
+    /// Функция возвращает кол-во элементов по заданым параметрам
+    /// - Returns: Возвращаемое кол-во найденых объектов
     func count<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> Int {
 
         var predicate:NSPredicate?

@@ -67,6 +67,7 @@ class CartContentTableViewCell: UITableViewCell {
         mealPrice.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
         mealPrice.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         //mealPrice.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        //mealPrice.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         mealCount.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
         
@@ -97,5 +98,13 @@ class CartContentTableViewCell: UITableViewCell {
     func setUpCellImage(image: UIImage){
         
         mealImage.image = image
+    }
+    
+    override func prepareForReuse() {
+        
+        mealImage.image = Images.emptyMeal
+        mealName.text = ""
+        mealPrice.text = ""
+        mealCount.text = "1"
     }
 }

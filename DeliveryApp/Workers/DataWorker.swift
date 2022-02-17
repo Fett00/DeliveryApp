@@ -229,32 +229,45 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
     
     func addMealToCart(byIndex: Int){
         
-        let meal = mealModels[byIndex]
-        
-        coreDataWorker.add {
+        DispatchQueue.global(qos: .userInteractive).async {
             
-            let cdModel = CDCartContent(context: coreDataWorker.context)
+            let meal = self.mealModels[byIndex]
             
-            cdModel.imageURL = meal.strMealThumb
-            cdModel.price = Int32(meal.price)
-            cdModel.name = meal.strMeal
-            cdModel.count = 1
+            self.coreDataWorker.add {
+                
+                let cdModel = CDCartContent(context: self.coreDataWorker.context)
+                
+                cdModel.imageURL = meal.strMealThumb
+                cdModel.price = Int32(meal.price)
+                cdModel.name = meal.strMeal
+                cdModel.count = 1
+            }
+            print("Add to cart")
         }
-        print("Add to cart")
     }
     
     func requestCartContent(handler: @escaping () -> ()) {
         
-        cartContent = coreDataWorker.get(type: CDCartContent.self, sortingBy: nil, withCondition: nil, withLimit: nil, offset: nil).map{ CartContentModel(name: $0.name ?? "", price: Int($0.price), count: Int($0.count), imageURL: $0.imageURL ?? "") }
-        
-        handler()
+        DispatchQueue.global(qos: .userInteractive).async {
+            
+            self.cartContent = self.coreDataWorker.get(type: CDCartContent.self, sortingBy: nil, withCondition: nil, withLimit: nil, offset: nil).map{ CartContentModel(name: $0.name ?? "", price: Int($0.price), count: Int($0.count), imageURL: $0.imageURL ?? "") }
+            
+            DispatchQueue.main.async {
+                handler()
+            }
+        }
     }
     
     func requestClearCart(handler: @escaping () -> ()) {
         
-        coreDataWorker.delete(type: CDCartContent.self, withCondition: nil)
-        
-        handler()
+        DispatchQueue.global(qos: .userInteractive).async {
+            
+            self.coreDataWorker.delete(type: CDCartContent.self, withCondition: nil)
+            
+            DispatchQueue.main.async {
+                handler()
+            }
+        }
     }
 }
 
