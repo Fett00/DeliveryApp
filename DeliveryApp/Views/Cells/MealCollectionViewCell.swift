@@ -10,7 +10,7 @@ import UIKit
 class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
     
     //indexpath для связи с данными
-    var indexPath: IndexPath
+    var indexPath: IndexPath = IndexPath()
     
     static let id = MealCollectionViewCell.description() //идентификатор ячейки
     
@@ -19,8 +19,6 @@ class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
     let addToCartButton = UIButton()
     
     override init(frame: CGRect) {
-        
-        self.indexPath = IndexPath()
         
         super.init(frame: frame)
         
