@@ -116,8 +116,15 @@ class CartViewController: UIViewController {
         
         dataWorker.requestClearCart(withCondition: nil) {
             
-            self.cartContentTableView.reloadData()
-            print("try reload cart")
+            self.dataWorker.requestCartContent(withCondition: nil) {
+                
+                self.cartContentTableView.reloadData()
+                self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
+                    partialResult += cartContent.price
+                })) + " ₽"
+                
+                print("try reload cart")
+            }
         }
     }
     //Вызов закрытия окна

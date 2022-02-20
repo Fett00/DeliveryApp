@@ -336,4 +336,52 @@ class CoreDataWorker: CoreDataWorkerProtocol{
             handler()
         }
     }
+    
+    func changeIntegerValue<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, key: String, increaseOrDecrease: Bool, handler: @escaping () -> ()){
+        
+        var predicate: NSPredicate?
+
+        if let condition = condition{
+            
+            let splitedCondition = condition.split(separator: "=")
+            predicate = NSPredicate(format: "\(splitedCondition[0]) = %@", "\(splitedCondition[1])")
+        }
+        
+        var results: [Entity] = []
+        
+        do {
+            let request = Entity.fetchRequest()
+            request.predicate = predicate
+
+            results = try context.fetch(request) as! [Entity]
+            
+        } catch {
+            
+            print("Update ERROR: ", error.localizedDescription)
+        }
+        
+        for result in results{
+            
+            if let oldValue = result.value(forKey: key) as? Int32{
+                
+                if increaseOrDecrease == false && oldValue == 1{
+                    
+                    context.delete(result)
+                }
+                else if increaseOrDecrease == true{
+                    
+                    result.setValue(oldValue + 1, forKey: key)
+                }
+                else if increaseOrDecrease == false{
+                    
+                    result.setValue(oldValue - 1, forKey: key)
+                }
+            }
+        }
+        
+        save {
+            
+            handler()
+        }
+    }
 }
