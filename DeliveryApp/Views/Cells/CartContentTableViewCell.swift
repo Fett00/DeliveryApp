@@ -7,7 +7,9 @@
 
 import UIKit
 
-class CartContentTableViewCell: UITableViewCell {
+class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
+    
+    var indexPath: IndexPath = IndexPath()
 
     static let id = CartContentTableViewCell.description()
     
@@ -78,6 +80,7 @@ class CartContentTableViewCell: UITableViewCell {
         increaseButton.layer.cornerCurve = .continuous
         increaseButton.layer.cornerRadius = 10
         increaseButton.backgroundColor = .secondarySystemBackground
+        increaseButton.addTarget(nil, action: Selector(("increaseMealCount:")), for: .touchUpInside)
         
         decreaseButton.setTitle("-", for: .normal)
         decreaseButton.setTitleColor(.label, for: .normal)
@@ -86,13 +89,16 @@ class CartContentTableViewCell: UITableViewCell {
         decreaseButton.layer.cornerCurve = .continuous
         decreaseButton.layer.cornerRadius = 10
         decreaseButton.backgroundColor = .secondarySystemBackground
+        decreaseButton.addTarget(nil, action: Selector(("decreaseMealCount:")), for: .touchUpInside)
     }
     
-    func setUpCell(meal: CartContentModel){
+    func setUpCell(meal: CartContentModel, indexPath: IndexPath){
         
-        mealName.text = meal.name
-        mealCount.text = String(meal.count)
-        mealPrice.text = String(meal.price) + " ₽"
+        self.mealName.text = meal.name
+        self.mealCount.text = String(meal.count)
+        self.mealPrice.text = String(meal.price) + " ₽"
+        
+        self.indexPath = indexPath
     }
     
     func setUpCellImage(image: UIImage){

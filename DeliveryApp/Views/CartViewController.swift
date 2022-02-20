@@ -147,7 +147,9 @@ class CartViewController: UIViewController {
         
         dataWorker.changeMealValue(withCondition: condition, increaseOrDecrease: true) {
             
-            self.cartContentTableView.reloadRows(at: [sendedView.indexPath], with: .top)
+            self.dataWorker.requestCartContent(withCondition: nil) {
+                self.cartContentTableView.reloadData()
+            }
         }
     }
     
@@ -159,7 +161,9 @@ class CartViewController: UIViewController {
         
         dataWorker.changeMealValue(withCondition: condition, increaseOrDecrease: false) {
             
-            self.cartContentTableView.reloadRows(at: [sendedView.indexPath], with: .top)
+            self.dataWorker.requestCartContent(withCondition: nil) {
+                self.cartContentTableView.reloadData()
+            }
         }
     }
     

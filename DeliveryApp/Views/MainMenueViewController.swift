@@ -131,6 +131,7 @@ class MainMenueViewController: UIViewController {
     @objc func addToCart(_ sender: Any){
         
         guard let sendedView = (sender as? UIView)?.superview as? IndexPathCollector else { return }
+        
         dataWorker.addMealToCart(byIndex: sendedView.indexPath.row, handler: {})
     }
 }

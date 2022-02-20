@@ -29,6 +29,8 @@ protocol DataWorkerForCartProtocol: AnyObject{
     func requestCartContent(withCondition condition: String?, handler: @escaping () -> ())
     
     func requestClearCart(withCondition condition: String?, handler: @escaping () -> ())
+    
+    func changeMealValue(withCondition condition: String?, increaseOrDecrease: Bool, handler: @escaping () -> ())
 }
 
 protocol DataWorkerCollectedDataForCartProtocol: AnyObject{
@@ -233,22 +235,35 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         
         DispatchQueue.global(qos: .userInteractive).async {
             
-            let meal = self.mealModels[byIndex]
+            let condition = "mealID=\(self.mealModels[byIndex].idMeal)"
             
-            self.coreDataWorker.add {
-                let cdModel = CDCartContent(context: self.coreDataWorker.context)
+            if self.coreDataWorker.count(type: CDCartContent.self, withCondition: condition, withLimit: nil, offset: nil) != 0 {
                 
-                cdModel.imageURL = meal.strMealThumb
-                cdModel.price = Int32(meal.price)
-                cdModel.name = meal.strMeal
-                cdModel.count = 1
-                
-            } hanlder: {
-                
-                handler()
+                self.coreDataWorker.changeIntegerValue(type: CDCartContent.self, withCondition: condition, key: "count", increaseOrDecrease: true) {
+                    
+                    print("Add another meal to cart")
+                    handler()
+                }
             }
-
-            print("Add to cart")
+            
+            else{
+                
+                let meal = self.mealModels[byIndex]
+                
+                self.coreDataWorker.add {
+                    let cdModel = CDCartContent(context: self.coreDataWorker.context)
+                    
+                    cdModel.imageURL = meal.strMealThumb
+                    cdModel.price = Int32(meal.price)
+                    cdModel.name = meal.strMeal
+                    cdModel.count = 1
+                    cdModel.mealID = Int32(meal.idMeal) ?? -1
+                    
+                } hanlder: {
+                    print("Add to cart")
+                    handler()
+                }
+            }
         }
     }
     
@@ -256,7 +271,7 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         
         DispatchQueue.global(qos: .userInteractive).async {
             
-            self.cartContent = self.coreDataWorker.get(type: CDCartContent.self, sortingBy: nil, withCondition: condition, withLimit: nil, offset: nil).map{ CartContentModel(name: $0.name ?? "", price: Int($0.price), count: Int($0.count), imageURL: $0.imageURL ?? "") }
+            self.cartContent = self.coreDataWorker.get(type: CDCartContent.self, sortingBy: nil, withCondition: condition, withLimit: nil, offset: nil).map{ CartContentModel(name: $0.name ?? "", price: Int($0.price), count: Int($0.count), imageURL: $0.imageURL ?? "", mealID: Int($0.mealID)) }
             
             DispatchQueue.main.async {
                 handler()
@@ -273,6 +288,17 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                 DispatchQueue.main.async {
                     handler()
                 }
+            }
+        }
+    }
+    
+    func changeMealValue(withCondition condition: String?, increaseOrDecrease: Bool, handler: @escaping () -> ()){
+        
+        if self.coreDataWorker.count(type: CDCartContent.self, withCondition: condition, withLimit: nil, offset: nil) != 0 {
+            
+            self.coreDataWorker.changeIntegerValue(type: CDCartContent.self, withCondition: condition, key: "count", increaseOrDecrease: increaseOrDecrease) {
+                
+                handler()
             }
         }
     }

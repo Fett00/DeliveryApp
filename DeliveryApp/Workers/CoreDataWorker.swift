@@ -166,6 +166,8 @@ protocol CoreDataWorkerProtocol{
     func get<Entity: NSManagedObject>(type: Entity.Type, sortingBy: [String]?, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> [Entity]
 
     func update<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, key: String, newValue: Any, handler: @escaping () -> ())
+    
+    func changeIntegerValue<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, key: String, increaseOrDecrease: Bool, handler: @escaping () -> ())
 }
 
 class CoreDataWorker: CoreDataWorkerProtocol{
@@ -188,6 +190,9 @@ class CoreDataWorker: CoreDataWorkerProtocol{
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+        else{
+            hanlder()
         }
     }
 
@@ -337,6 +342,7 @@ class CoreDataWorker: CoreDataWorkerProtocol{
         }
     }
     
+    /// Функция изменяет целочисленный атрибут записи на одно значение
     func changeIntegerValue<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, key: String, increaseOrDecrease: Bool, handler: @escaping () -> ()){
         
         var predicate: NSPredicate?
