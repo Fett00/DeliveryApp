@@ -57,6 +57,8 @@ class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
         mealName.numberOfLines = 2
         mealName.font = UIFont.preferredFont(forTextStyle: .title3, compatibleWith: .none)
         mealName.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        mealName.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        mealName.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         //mealName.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
         mealImage.image = Images.emptyMeal
@@ -68,8 +70,8 @@ class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
         
         mealPrice.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
         mealPrice.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        //mealPrice.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        //mealPrice.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        mealPrice.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        mealPrice.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         mealCount.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
         

@@ -201,6 +201,9 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                         
                         self.mealModels = meals
                         
+                        //MARK: -Очистка корзины что бы не было странных цен
+                        //self.coreDataWorker.delete(type: CDCartContent.self, withCondition: nil, hanlder: {})
+                        
                         DispatchQueue.main.async {
                             print("Meal from net")
                             self.delegate?.updateMeals()

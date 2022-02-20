@@ -99,8 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				5A5CA759275CE18F003CFAA0 /* MealModel.swift */,
-				5A5E36A427BBD9BD00C84CE8 /* CartContentModel.swift */,
 				5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */,
+				5A5E36A427BBD9BD00C84CE8 /* CartContentModel.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
