@@ -196,6 +196,24 @@ extension CartViewController: UITableViewDataSource{
 
 extension CartViewController: UITableViewDelegate{
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .destructive, title: "Delete") { [weak self] action, view, completionHandler in
+            
+            guard let strongSelf = self else { return }
+            
+            let condition = "mealID=\(strongSelf.data.cartContent[indexPath.row].mealID)"
+            
+            strongSelf.dataWorker.requestClearCart(withCondition: condition) {
+                
+                strongSelf.dataWorker.requestCartContent(withCondition: nil) {
+                    strongSelf.cartContentTableView.reloadData()
+                }
+            }
+        }
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
 }
 
 
