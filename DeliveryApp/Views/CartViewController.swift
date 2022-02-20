@@ -107,7 +107,7 @@ class CartViewController: UIViewController {
             
             self.cartContentTableView.reloadData()
             self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
-                partialResult += cartContent.price
+                partialResult += (cartContent.price * cartContent.count)
             })) + " ₽"
         }
     }
@@ -120,7 +120,7 @@ class CartViewController: UIViewController {
                 
                 self.cartContentTableView.reloadData()
                 self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
-                    partialResult += cartContent.price
+                    partialResult += (cartContent.price * cartContent.count)
                 })) + " ₽"
                 
                 print("try reload cart")
@@ -139,6 +139,30 @@ class CartViewController: UIViewController {
         self.navigationController?.pushViewController(EnterPersonalInformationViewController(), animated: true)
     }
     
+    @objc func increaseMealCount(_ sender: Any?){
+        
+        guard let sendedView = (sender as? UIView)?.superview?.superview as? IndexPathCollector else { return }
+        
+        let condition = "mealID=\(data.cartContent[sendedView.indexPath.row].mealID)"
+        
+        dataWorker.changeMealValue(withCondition: condition, increaseOrDecrease: true) {
+            
+            self.cartContentTableView.reloadRows(at: [sendedView.indexPath], with: .top)
+        }
+    }
+    
+    @objc func decreaseMealCount(_ sender: Any?){
+        
+        guard let sendedView = (sender as? UIView)?.superview?.superview as? IndexPathCollector else { return }
+
+        let condition = "mealID=\(data.cartContent[sendedView.indexPath.row].mealID)"
+        
+        dataWorker.changeMealValue(withCondition: condition, increaseOrDecrease: false) {
+            
+            self.cartContentTableView.reloadRows(at: [sendedView.indexPath], with: .top)
+        }
+    }
+    
     deinit {
         print("Cart deinit")
     }
@@ -155,7 +179,7 @@ extension CartViewController: UITableViewDataSource{
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CartContentTableViewCell.id, for: indexPath) as? CartContentTableViewCell else { return UITableViewCell() }
         
-        cell.setUpCell(meal: data.cartContent[indexPath.row])
+        cell.setUpCell(meal: data.cartContent[indexPath.row], indexPath: indexPath)
         
         imageWorker.requestImage(on: data.cartContent[indexPath.row].imageURL) { image in
             
