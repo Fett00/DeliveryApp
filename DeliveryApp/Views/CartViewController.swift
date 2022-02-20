@@ -103,7 +103,7 @@ class CartViewController: UIViewController {
     func loadMeals(){
         
         //Почему не происходит retain cycle
-        self.dataWorker.requestCartContent {
+        self.dataWorker.requestCartContent(withCondition: nil) {
             
             self.cartContentTableView.reloadData()
             self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
@@ -114,7 +114,7 @@ class CartViewController: UIViewController {
     //Вызов удаления содержимого корзины
     @objc func requestClearCart(){
         
-        dataWorker.requestClearCart {
+        dataWorker.requestClearCart(withCondition: nil) {
             
             self.cartContentTableView.reloadData()
             print("try reload cart")

@@ -10,7 +10,7 @@ import CoreData
 
 protocol DataWorkerForAddToCartProtocol: AnyObject{
     
-    func addMealToCart(byIndex: Int)
+    func addMealToCart(byIndex: Int, handler: @escaping () -> ())
 }
 
 protocol DataWorkerForMainMenueProtocol: AnyObject, DataWorkerForAddToCartProtocol{
@@ -21,14 +21,14 @@ protocol DataWorkerForMainMenueProtocol: AnyObject, DataWorkerForAddToCartProtoc
     
     func requestMeals(for category: String)
     
-    func addMealToCart(byIndex: Int)
+    func addMealToCart(byIndex: Int, handler: @escaping () -> ())
 }
 
 protocol DataWorkerForCartProtocol: AnyObject{
     
-    func requestCartContent(handler: @escaping () -> ())
+    func requestCartContent(withCondition condition: String?, handler: @escaping () -> ())
     
-    func requestClearCart(handler: @escaping () -> ())
+    func requestClearCart(withCondition condition: String?, handler: @escaping () -> ())
 }
 
 protocol DataWorkerCollectedDataForCartProtocol: AnyObject{
@@ -128,17 +128,18 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                     
                     if coreDataNeedToUpdate{
                         
-                        self.coreDataWorker.delete(type: CDCategory.self, withCondition: nil)
-                        
-                        self.coreDataWorker.add {
+                        self.coreDataWorker.delete(type: CDCategory.self, withCondition: nil) {
                             
-                            for category in categories {
+                            self.coreDataWorker.add {
                                 
-                                let cdCategory = CDCategory(context: self.coreDataWorker.context)
-                                
-                                cdCategory.categoryName = category.strCategory
-                                cdCategory.categoryID = Int32(category.idCategory) ?? -1
-                            }
+                                for category in categories {
+                                    
+                                    let cdCategory = CDCategory(context: self.coreDataWorker.context)
+                                    
+                                    cdCategory.categoryName = category.strCategory
+                                    cdCategory.categoryID = Int32(category.idCategory) ?? -1
+                                }
+                            } hanlder: {}
                         }
                     }
                     //
@@ -206,19 +207,20 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                     
                     if coreDataNeedToUpdate{
                         print("Create cache in CD")
-                        self.coreDataWorker.delete(type: CDMeal.self, withCondition: condition)
-                        
-                        self.coreDataWorker.add {
-                            for meal in meals {
-                                
-                                let cdMeal = CDMeal(context: self.coreDataWorker.context)
-                                
-                                cdMeal.mealID = Int32(meal.idMeal) ?? -1
-                                cdMeal.mealImageURL = meal.strMealThumb
-                                cdMeal.mealName = meal.strMeal
-                                cdMeal.categoryName = category
-                                cdMeal.price = Int32(meal.price)
-                            }
+                        self.coreDataWorker.delete(type: CDMeal.self, withCondition: condition) {
+                            
+                            self.coreDataWorker.add {
+                                for meal in meals {
+                                    
+                                    let cdMeal = CDMeal(context: self.coreDataWorker.context)
+                                    
+                                    cdMeal.mealID = Int32(meal.idMeal) ?? -1
+                                    cdMeal.mealImageURL = meal.strMealThumb
+                                    cdMeal.mealName = meal.strMeal
+                                    cdMeal.categoryName = category
+                                    cdMeal.price = Int32(meal.price)
+                                }
+                            } hanlder: {}
                         }
                     }
                     //
@@ -227,30 +229,34 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         }
     }
     
-    func addMealToCart(byIndex: Int){
+    func addMealToCart(byIndex: Int, handler: @escaping () -> ()){
         
         DispatchQueue.global(qos: .userInteractive).async {
             
             let meal = self.mealModels[byIndex]
             
             self.coreDataWorker.add {
-                
                 let cdModel = CDCartContent(context: self.coreDataWorker.context)
                 
                 cdModel.imageURL = meal.strMealThumb
                 cdModel.price = Int32(meal.price)
                 cdModel.name = meal.strMeal
                 cdModel.count = 1
+                
+            } hanlder: {
+                
+                handler()
             }
+
             print("Add to cart")
         }
     }
     
-    func requestCartContent(handler: @escaping () -> ()) {
+    func requestCartContent(withCondition condition: String?, handler: @escaping () -> ()){
         
         DispatchQueue.global(qos: .userInteractive).async {
             
-            self.cartContent = self.coreDataWorker.get(type: CDCartContent.self, sortingBy: nil, withCondition: nil, withLimit: nil, offset: nil).map{ CartContentModel(name: $0.name ?? "", price: Int($0.price), count: Int($0.count), imageURL: $0.imageURL ?? "") }
+            self.cartContent = self.coreDataWorker.get(type: CDCartContent.self, sortingBy: nil, withCondition: condition, withLimit: nil, offset: nil).map{ CartContentModel(name: $0.name ?? "", price: Int($0.price), count: Int($0.count), imageURL: $0.imageURL ?? "") }
             
             DispatchQueue.main.async {
                 handler()
@@ -258,14 +264,15 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
         }
     }
     
-    func requestClearCart(handler: @escaping () -> ()) {
+    func requestClearCart(withCondition condition: String?, handler: @escaping () -> ()) {
         
         DispatchQueue.global(qos: .userInteractive).async {
             
-            self.coreDataWorker.delete(type: CDCartContent.self, withCondition: nil)
-            
-            DispatchQueue.main.async {
-                handler()
+            self.coreDataWorker.delete(type: CDCartContent.self, withCondition: condition) {
+                
+                DispatchQueue.main.async {
+                    handler()
+                }
             }
         }
     }

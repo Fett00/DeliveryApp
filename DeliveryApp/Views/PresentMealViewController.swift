@@ -113,7 +113,7 @@ class PresentMealViewController: UIViewController, IndexPathCollector{
     
     @objc func addToCart(){
         
-        dataWorker.addMealToCart(byIndex: indexPath.row)
+        dataWorker.addMealToCart(byIndex: indexPath.row, handler: {})
     }
     
     @objc func dismissView(){
