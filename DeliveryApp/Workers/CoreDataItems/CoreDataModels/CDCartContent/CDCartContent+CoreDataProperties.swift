@@ -20,6 +20,7 @@ extension CDCartContent {
     @NSManaged public var price: Int32
     @NSManaged public var count: Int32
     @NSManaged public var imageURL: String?
+    @NSManaged public var mealID: Int32
 
 }
 

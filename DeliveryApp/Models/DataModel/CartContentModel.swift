@@ -14,4 +14,5 @@ struct CartContentModel{
     let price: Int
     let count: Int
     let imageURL: String
+    let mealID: Int
 }
