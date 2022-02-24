@@ -109,7 +109,7 @@ class EnterPersonalInformationViewController: UIViewController {
         
         button.setTitle(" Buy", for: .normal)
         button.backgroundColor = .black
-        button.layer.borderWidth = 0.2
+        button.layer.borderWidth = 0.5
         button.layer.cornerCurve = .continuous
         button.layer.cornerRadius = 20
         button.addTarget(self, action: #selector(requestBuying), for: .touchUpInside)

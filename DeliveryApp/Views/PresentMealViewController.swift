@@ -76,7 +76,7 @@ class PresentMealViewController: UIViewController, IndexPathCollector{
         
         bar.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
         
-        mealImage.constraints(top: bar.bottomAnchor, bottom: safeArea.centerYAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 10, paddingRight: 10, width: 0, height: 0)
+        mealImage.constraints(top: bar.bottomAnchor, bottom: safeArea.centerYAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 30, paddingRight: 30, width: 0, height: 0)
         
         mealName.constraints(top: mealImage.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
@@ -100,7 +100,7 @@ class PresentMealViewController: UIViewController, IndexPathCollector{
         mealDescription.numberOfLines = 0
         
         addToCartButton.setTitleColor(.label, for: .normal)
-        addToCartButton.layer.borderWidth = 0.2
+        addToCartButton.layer.borderWidth = 0.5
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20
         addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)

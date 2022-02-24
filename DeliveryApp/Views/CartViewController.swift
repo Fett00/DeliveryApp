@@ -91,7 +91,7 @@ class CartViewController: UIViewController {
         totalAmountButton.setTitleColor(.label, for: .normal)
         totalAmountButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
         totalAmountButton.backgroundColor = .systemBackground
-        totalAmountButton.layer.borderWidth = 0.2
+        totalAmountButton.layer.borderWidth = 0.5
         totalAmountButton.layer.cornerCurve = .continuous
         totalAmountButton.layer.cornerRadius = 20
         totalAmountButton.addTarget(self, action: #selector(goToEnterPersonalInformation), for: .touchUpInside)
@@ -106,9 +106,7 @@ class CartViewController: UIViewController {
         self.dataWorker.requestCartContent(withCondition: nil) {
             
             self.cartContentTableView.reloadData()
-            self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
-                partialResult += (cartContent.price * cartContent.count)
-            })) + " ₽"
+            self.updateTotalAmount()
         }
     }
     //Вызов удаления содержимого корзины
@@ -119,9 +117,7 @@ class CartViewController: UIViewController {
             self.dataWorker.requestCartContent(withCondition: nil) {
                 
                 self.cartContentTableView.reloadData()
-                self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
-                    partialResult += (cartContent.price * cartContent.count)
-                })) + " ₽"
+                self.updateTotalAmount()
                 
                 print("try reload cart")
             }
@@ -149,6 +145,7 @@ class CartViewController: UIViewController {
             
             self.dataWorker.requestCartContent(withCondition: nil) {
                 self.cartContentTableView.reloadData()
+                self.updateTotalAmount()
             }
         }
     }
@@ -163,8 +160,16 @@ class CartViewController: UIViewController {
             
             self.dataWorker.requestCartContent(withCondition: nil) {
                 self.cartContentTableView.reloadData()
+                self.updateTotalAmount()
             }
         }
+    }
+    
+    func updateTotalAmount(){
+        
+        self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
+            partialResult += (cartContent.price * cartContent.count)
+        })) + " ₽"
     }
     
     deinit {
