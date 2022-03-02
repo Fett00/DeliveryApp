@@ -12,7 +12,7 @@ class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
     //indexpath для связи с данными
     var indexPath: IndexPath = IndexPath()
     
-    static let id = MealCollectionViewCell.description() //идентификатор ячейки
+    static var id: String { MealCollectionViewCell.description() }//идентификатор ячейки
     
     private let mealImage = UIImageView()
      let mealName = UILabel()

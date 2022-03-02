@@ -11,7 +11,7 @@ class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
     
     var indexPath: IndexPath = IndexPath()
 
-    static let id = CartContentTableViewCell.description()
+    static var id: String { CartContentTableViewCell.description() }
     
     private let mealImage = UIImageView() //картинка блюда в корзине
     private let mealName = UILabel() //названия блюда в корзине

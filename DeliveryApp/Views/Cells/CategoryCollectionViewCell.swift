@@ -9,7 +9,7 @@ import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
     
-    static let id = CategoryCollectionViewCell.description() //идентификатор ячейки
+    static var id: String { CategoryCollectionViewCell.description() }//идентификатор ячейки
     
     private let categoryLable = UILabel() //Название категории
     
