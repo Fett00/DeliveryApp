@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum KeyChainKeys: String{
+enum UserDefaultKeys: String{
     
     case home = "home"
     case street = "street"
@@ -16,7 +16,9 @@ enum KeyChainKeys: String{
     case apartament = "apartament"
 }
 
-class EnterPersonalInformationViewController: UIViewController {
+class PersonalInformationViewController: UIViewController {
+    
+    let userDefaultWorker: UserDefaultsWorkerProtocol //объект для работы с user defaults
     
     let nameTextField: UITextField = {  //Поле ввода имени
         
@@ -124,7 +126,9 @@ class EnterPersonalInformationViewController: UIViewController {
         confSubview()
     }
     
-    init(){
+    init(userDefaultsWorker: UserDefaultsWorkerProtocol){
+        
+        self.userDefaultWorker = userDefaultsWorker
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -194,7 +198,7 @@ class EnterPersonalInformationViewController: UIViewController {
                 alert.dismiss(animated: true)
             }))
             
-            self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)	
         }
         else{
             

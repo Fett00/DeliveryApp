@@ -32,7 +32,8 @@
 		5A5E36A227BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E36A027BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift */; };
 		5A5E36A327BBBF6200C84CE8 /* CDCartContent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E36A127BBBF6200C84CE8 /* CDCartContent+CoreDataProperties.swift */; };
 		5A5E36A527BBD9BD00C84CE8 /* CartContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E36A427BBD9BD00C84CE8 /* CartContentModel.swift */; };
-		5AA0069127BD5FFF003DF264 /* EnterPersonalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA0069027BD5FFF003DF264 /* EnterPersonalInformationViewController.swift */; };
+		5AA0069127BD5FFF003DF264 /* PersonalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA0069027BD5FFF003DF264 /* PersonalInformationViewController.swift */; };
+		5AA3FA6827CF813900324A60 /* UserDefaultsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3FA6727CF813900324A60 /* UserDefaultsWorker.swift */; };
 		5ABB07AF27A48BCF00A295FA /* CDCategory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB07AB27A48BCF00A295FA /* CDCategory+CoreDataClass.swift */; };
 		5ABB07BA27A490B000A295FA /* ModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB07B927A490B000A295FA /* ModelConverter.swift */; };
 		5ABEF9D92773F09E00352FF9 /* CollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */; };
@@ -72,7 +73,8 @@
 		5A5E36A027BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCartContent+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5A5E36A127BBBF6200C84CE8 /* CDCartContent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCartContent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5A5E36A427BBD9BD00C84CE8 /* CartContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartContentModel.swift; sourceTree = "<group>"; };
-		5AA0069027BD5FFF003DF264 /* EnterPersonalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPersonalInformationViewController.swift; sourceTree = "<group>"; };
+		5AA0069027BD5FFF003DF264 /* PersonalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationViewController.swift; sourceTree = "<group>"; };
+		5AA3FA6727CF813900324A60 /* UserDefaultsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWorker.swift; sourceTree = "<group>"; };
 		5ABB07AB27A48BCF00A295FA /* CDCategory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCategory+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5ABB07B927A490B000A295FA /* ModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConverter.swift; sourceTree = "<group>"; };
 		5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionManager.swift; sourceTree = "<group>"; };
@@ -163,7 +165,7 @@
 				5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */,
 				5A5CA757275CE14B003CFAA0 /* PresentMealViewController.swift */,
 				5AE3AFB227983DE400C33980 /* CartViewController.swift */,
-				5AA0069027BD5FFF003DF264 /* EnterPersonalInformationViewController.swift */,
+				5AA0069027BD5FFF003DF264 /* PersonalInformationViewController.swift */,
 				5AF58C0927BA55E700FC186B /* ProfileViewController.swift */,
 				5ABEF9D82773F09E00352FF9 /* CollectionManager.swift */,
 				5A5CA764275CEFF8003CFAA0 /* Cells */,
@@ -190,6 +192,7 @@
 				5A5CA76A275CF773003CFAA0 /* NetworkWorker.swift */,
 				5ACB230B276E9FFB00782216 /* JSONWorker.swift */,
 				5A00483F27663BDC00C02952 /* CoreDataWorker.swift */,
+				5AA3FA6727CF813900324A60 /* UserDefaultsWorker.swift */,
 				5ABB07B927A490B000A295FA /* ModelConverter.swift */,
 				5AE3AFB42798435E00C33980 /* CoreDataItems */,
 			);
@@ -316,6 +319,7 @@
 				5A5CA762275CE9B0003CFAA0 /* UIView+Ext.swift in Sources */,
 				5ABB07AF27A48BCF00A295FA /* CDCategory+CoreDataClass.swift in Sources */,
 				5A5CA768275CF01C003CFAA0 /* MealCollectionViewCell.swift in Sources */,
+				5AA3FA6827CF813900324A60 /* UserDefaultsWorker.swift in Sources */,
 				5A5CA75A275CE18F003CFAA0 /* MealModel.swift in Sources */,
 				5A3CB6FB27B95D65008A4401 /* CDMeal+CoreDataClass.swift in Sources */,
 				5A5CA745275CC819003CFAA0 /* MainMenueViewController.swift in Sources */,
@@ -323,7 +327,7 @@
 				5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */,
 				5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */,
 				5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */,
-				5AA0069127BD5FFF003DF264 /* EnterPersonalInformationViewController.swift in Sources */,
+				5AA0069127BD5FFF003DF264 /* PersonalInformationViewController.swift in Sources */,
 				5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */,
 				5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */,
 				5AC1CCC327BEB854000A1BEA /* UIViewController+Ext.swift in Sources */,

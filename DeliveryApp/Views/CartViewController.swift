@@ -132,7 +132,9 @@ class CartViewController: UIViewController {
     //Переход к окну ввода адреса, ФИО итл
     @objc func goToEnterPersonalInformation(){
         
-        self.navigationController?.pushViewController(EnterPersonalInformationViewController(), animated: true)
+        let personalVC = ProjectAssembler.shared.createPersonalInformationViewController()
+        
+        self.navigationController?.pushViewController(personalVC, animated: true)
     }
     
     @objc func increaseMealCount(_ sender: Any?){

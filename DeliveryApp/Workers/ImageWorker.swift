@@ -21,7 +21,7 @@ class ImageWorker: ImageWorkerProtocol{
     
     func requestImage(on imageUrl: String, handler: @escaping (UIImage) -> ()) {
         
-        DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
+        DispatchQueue.global(qos: .userInteractive).async {
             
             let name = self.createImageNameFromImageURL(url: imageUrl)
             

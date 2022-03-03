@@ -53,13 +53,13 @@ protocol DataWorkerDelegate: AnyObject {
 }
 
 
-//SOLID???
+
 class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol, DataWorkerCollectedDataForCartProtocol{
     
     weak var delegate: DataWorkerDelegate? //Заменить на множественное делегирование
     
-    //Нужен ли инит
-    //Как закрыть эти свойства от внешнего доступа
+    
+    
     var coreDataWorker: CoreDataWorkerProtocol!
     var jsonDecoderWorker: JSONDecoderWorkerProtocol!
     var jsonEncoderWorker: JSONEncoderWorkerProtocol!
@@ -80,16 +80,15 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
     // Массив с содержимым корзины
     var cartContent: [CartContentModel] = [CartContentModel]()
     
-    //TODO: Объединить requestCategories и requestMeals в одну общую функцию
+    
     func requestCategories() {
         
-        DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
+        DispatchQueue.global(qos: .userInteractive).async {
             
             let sortingBy = ["categoryID"]
             
             let categoriesFormCD = self.coreDataWorker.get(type: CDCategory.self, sortingBy: sortingBy, withCondition: nil, withLimit: nil, offset: nil).map{ CategoryModel(idCategory: String($0.categoryID), strCategory: $0.categoryName ?? "") }
             
-            //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В CD, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
             
             if !categoriesFormCD.isEmpty{
                 
@@ -103,8 +102,6 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
             }
             //
             
-            //После извлечения данных из КД, в более глубоком бэкграунде начинают отправляться запросы в сеть
-            // Реализовать DispatchQueue.global(qos: .default).async {
             self.networkWorker.getData(from: self.categoriesURL) { result in
                 
                 switch result {
@@ -115,8 +112,6 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                     guard let categories = self.jsonDecoderWorker.decode(type: CategoriesModel.self, data: data)?.categories else { return }
                     
                     
-                    //Сделать здесь что-то
-                    //Сравнить например данные
                     var coreDataNeedToUpdate = false
                     if categories.count != self.categoryModels.count{
                         
@@ -144,15 +139,15 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                             } hanlder: {}
                         }
                     }
-                    //
                 }
             }
         }
     }
-    //MARK: В текущей реализации метода нельзя добавить обновление данных из сети через activity indicator
+    
+    
     func requestMeals(for category: String) {
         
-        DispatchQueue.global(qos: .userInteractive).async { //[ self ] //нужен ли weak/unowned
+        DispatchQueue.global(qos: .userInteractive).async {
             
             let condition = "categoryName=\(category)"
             let sortedBy = ["mealName", "mealID"]
@@ -161,7 +156,6 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
             //self.mealModels = []
             let mealsFromCD = self.coreDataWorker.get(type: CDMeal.self, sortingBy: sortedBy, withCondition: condition, withLimit: nil, offset: nil).map{ MealModel(strMeal: $0.mealName ?? "", strMealThumb: $0.mealImageURL ?? "", idMeal: String($0.mealID), price: Int($0.price)) }
             
-            //MARK:  СНАЧАЛА ДЕЛАЕМ ЗАПРОС В КД, ПРИСВАЕВАЕМ ПОЛУЧЕННЫЕ ДАННЫЕ К МАССИВУ И ВЫЗЫВАЕМ ДЕЛЕГАТ ДЛЯ ОБНОВЛЕНИЯ ТАБЛИЦЫ. ДАЛЬШЕ ОТПРАВЛЯЕМ ЗАПРОС В СЕТЬ. И СРАВНИВАЕМ ПОЛУЧИВШИЕСЯ ДАННЫЕ С ТЕМИ ЧТО БЫЛИ В КД. ОБНОВЛЯЕМ КД
             
             if !mealsFromCD.isEmpty{
                 
@@ -188,10 +182,7 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                     for i in 0..<meals.count{
                         meals[i].price = (Int.random(in: 100...4000))
                     }
-                    //Сделать здесь что-то
-                    //Сравнить например данные
-                    
-                    //TEMP
+
                     var coreDataNeedToUpdate = false
                     if meals.count != self.mealModels.count{
                         
@@ -201,7 +192,6 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                         
                         self.mealModels = meals
                         
-                        //MARK: -Очистка корзины что бы не было странных цен
                         //self.coreDataWorker.delete(type: CDCartContent.self, withCondition: nil, hanlder: {})
                         
                         DispatchQueue.main.async {
@@ -228,7 +218,6 @@ class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, Dat
                             } hanlder: {}
                         }
                     }
-                    //
                 }
             }
         }

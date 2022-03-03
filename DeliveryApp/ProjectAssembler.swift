@@ -16,6 +16,7 @@ class ProjectAssembler{
     private let jsonDecoderWorker = JSONDecoderWorker() // Декодер JSON
     private let jsonEncoderWorker = JSONEncoderWorker() // Энкодер JSON
     private let coreDataWorker = CoreDataWorker() // Работа с core data
+    private let userDefaultsWorker = UserDefaultsWorker()//Работа с user defaults
     
     //singleton
     public static let shared = ProjectAssembler()
@@ -59,7 +60,19 @@ class ProjectAssembler{
     
     ///Создание контроллера корзины
     func createCartViewController() -> UIViewController{
-        UINavigationController(rootViewController: CartViewController(dataWorker: dataWorker, data: dataWorker, imageWorker: imageWorker)) 
+        UINavigationController(rootViewController: CartViewController(dataWorker: dataWorker, data: dataWorker, imageWorker: imageWorker))
+    }
+    
+    ///Создание контроллера для представления блюд
+    func createPresentMealViewController(meal: MealModel, indexPath: IndexPath) -> UIViewController{
+        
+        PresentMealViewController(meal: meal, imageWorker: self.imageWorker, dataWorker: self.dataWorker, indexPath: indexPath)
+    }
+    
+    ///Контроллер для ввода пользовательских данных
+    func createPersonalInformationViewController() -> UIViewController{
+        
+        PersonalInformationViewController(userDefaultsWorker: self.userDefaultsWorker)
     }
 }
 

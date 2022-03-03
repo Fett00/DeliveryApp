@@ -207,7 +207,9 @@ extension MainMenueViewController: UICollectionViewDelegate{
         }
         else if collectionView == mealsCollectionView {
             
-            self.present(PresentMealViewController(meal: data.mealModels[indexPath.row], imageWorker: self.imageWorker, dataWorker: dataWorker, indexPath: indexPath), animated: true, completion: nil)
+            let presentVC = ProjectAssembler.shared.createPresentMealViewController(meal: data.mealModels[indexPath.row], indexPath: indexPath)
+            
+            self.present(presentVC, animated: true, completion: nil)
         }
     }
 }
