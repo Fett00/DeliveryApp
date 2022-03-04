@@ -7,6 +7,16 @@
 
 import Foundation
 
+enum UserDefaultsKeys: String{
+    
+    case home = "home"
+    case street = "street"
+    case city = "city"
+    case name = "name"
+    case apartament = "apartament"
+    case phone = "phone"
+}
+
 protocol UserDefaultsWorkerProtocol{
     
     func getStringValue(withKey key: String, hanlder: @escaping (String?) -> ())

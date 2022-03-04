@@ -7,15 +7,6 @@
 
 import UIKit
 
-enum UserDefaultKeys: String{
-    
-    case home = "home"
-    case street = "street"
-    case city = "city"
-    case name = "name"
-    case apartament = "apartament"
-}
-
 class PersonalInformationViewController: UIViewController {
     
     let userDefaultWorker: UserDefaultsWorkerProtocol //объект для работы с user defaults
@@ -126,6 +117,10 @@ class PersonalInformationViewController: UIViewController {
         confSubview()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        loadDataFromUserDefaults()
+    }
+    
     init(userDefaultsWorker: UserDefaultsWorkerProtocol){
         
         self.userDefaultWorker = userDefaultsWorker
@@ -172,15 +167,43 @@ class PersonalInformationViewController: UIViewController {
         secStack.axis = .horizontal
         secStack.alignment = .fill
         secStack.distribution = .fillEqually
-        secStack.spacing = 20
+        secStack.spacing = 10
         thdStack.axis = .horizontal
         thdStack.alignment = .fill
         thdStack.distribution = .fillEqually
-        thdStack.spacing = 20
+        thdStack.spacing = 10
 
         globalStack.constraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: view.safeAreaLayoutGuide.centerYAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTop: 40, paddingBottom: 0, paddingleft: 40, paddingRight: 40, width: 0, height: 0)
         
         buyButton.constraints(top: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTop: 0, paddingBottom: 30, paddingleft: 40, paddingRight: 40, width: 0, height: 60)
+    }
+    
+    func loadDataFromUserDefaults(){
+        
+        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.name.rawValue) { name in
+            
+            self.nameTextField.text = name
+        }
+        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.phone.rawValue) { phone in
+            
+            self.phoneNumberTextField.text = phone
+        }
+        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.city.rawValue) { city in
+            
+            self.cityTextField.text = city
+        }
+        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.street.rawValue) { street in
+            
+            self.streetTextField.text = street
+        }
+        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.home.rawValue) { home in
+            
+            self.homeTextField.text = home
+        }
+        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.apartament.rawValue) { apartament in
+            
+            self.apartamentTextField.text = apartament
+        }
     }
     
     @objc func backToCart(){
@@ -192,16 +215,31 @@ class PersonalInformationViewController: UIViewController {
         
         if nameTextField.text!.isEmpty || phoneNumberTextField.text!.isEmpty || cityTextField.text!.isEmpty || streetTextField.text!.isEmpty || homeTextField.text!.isEmpty{
             
-            let alert = UIAlertController(title: "Fill all fields!", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            let failAlert = UIAlertController(title: "Fill all fields!", message: "", preferredStyle: .alert)
+            failAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 
-                alert.dismiss(animated: true)
+                failAlert.dismiss(animated: true)
             }))
             
-            self.present(alert, animated: true, completion: nil)	
+            self.present(failAlert, animated: true, completion: nil)
         }
         else{
             
+            let successAlert = UIAlertController(title: "Success", message: "", preferredStyle: .alert)
+            successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                
+                successAlert.dismiss(animated: true)
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(successAlert, animated: true, completion: nil)
+            
+            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.name.rawValue, value: nameTextField.text!) {}
+            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.phone.rawValue, value: phoneNumberTextField.text!) {}
+            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.city.rawValue, value: cityTextField.text!) {}
+            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.street.rawValue, value: streetTextField.text!) {}
+            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.home.rawValue, value: homeTextField.text!) {}
+            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.apartament.rawValue, value: apartamentTextField.text!) {}
         }
     }
 }

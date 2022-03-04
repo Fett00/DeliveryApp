@@ -48,7 +48,7 @@ class ProjectAssembler{
         //
         
         //Настройка вкладки с профилем пользователя
-        let profileTab = UINavigationController(rootViewController: ProfileViewController())
+        let profileTab = UINavigationController(rootViewController: ProfileViewController(userDefaultsWorker: userDefaultsWorker))
         
         profileTab.tabBarItem = UITabBarItem(title: "Profile", image: Images.profile, tag: 1)
         //
