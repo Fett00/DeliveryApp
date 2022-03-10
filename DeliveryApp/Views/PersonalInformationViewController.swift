@@ -7,9 +7,10 @@
 
 import UIKit
 
-class PersonalInformationViewController: UIViewController {
+final class PersonalInformationViewController: UIViewController {
     
     let userDefaultWorker: UserDefaultsWorkerProtocol //объект для работы с user defaults
+    let coreDataWorker: CoreDataWorkerProtocolForDeleteOnly //объект для работы с core data
     
     let nameTextField: UITextField = {  //Поле ввода имени
         
@@ -121,9 +122,10 @@ class PersonalInformationViewController: UIViewController {
         loadDataFromUserDefaults()
     }
     
-    init(userDefaultsWorker: UserDefaultsWorkerProtocol){
+    init(userDefaultsWorker: UserDefaultsWorkerProtocol, coreDataWorker: CoreDataWorkerProtocolForDeleteOnly){
         
         self.userDefaultWorker = userDefaultsWorker
+        self.coreDataWorker = coreDataWorker
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -240,6 +242,8 @@ class PersonalInformationViewController: UIViewController {
             userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.street.rawValue, value: streetTextField.text!) {}
             userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.home.rawValue, value: homeTextField.text!) {}
             userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.apartament.rawValue, value: apartamentTextField.text!) {}
+            
+            coreDataWorker.delete(type: CDCartContent.self, withCondition: nil) {} //Очистка корзины, после удачной покупки
         }
     }
 }

@@ -13,7 +13,7 @@ protocol NetworkWorkerProtocol{
 }
 
 
-class NetworkWorker: NetworkWorkerProtocol {
+final class NetworkWorker: NetworkWorkerProtocol {
     
     func getData(from url: String, networkHandler: @escaping (Result<Data, URLError>)->()){
         

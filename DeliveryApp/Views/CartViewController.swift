@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
+final class CartViewController: UIViewController {
     
     let dataWorker: DataWorkerForCartProtocol //Объект для запроса данных
     let imageWorker: ImageWorker
@@ -107,6 +107,8 @@ class CartViewController: UIViewController {
             
             self.cartContentTableView.reloadData()
             self.updateTotalAmount()
+            
+            self.checkCartFilling()
         }
     }
     //Вызов удаления содержимого корзины
@@ -119,6 +121,7 @@ class CartViewController: UIViewController {
                 self.cartContentTableView.reloadData()
                 self.updateTotalAmount()
                 
+                self.checkCartFilling()
                 print("try reload cart")
             }
         }
@@ -163,7 +166,25 @@ class CartViewController: UIViewController {
             self.dataWorker.requestCartContent(withCondition: nil) {
                 self.cartContentTableView.reloadData()
                 self.updateTotalAmount()
+                self.checkCartFilling()
             }
+        }
+    }
+    
+    //Проверка наполнения корзины и измененния активности кнопки покупки
+    func checkCartFilling(){
+        
+        if self.data.cartContent.isEmpty{
+            
+            totalAmountButton.isEnabled = false
+            totalAmountButton.setTitleColor(.lightGray, for: .normal)
+            totalAmountButton.backgroundColor = .darkGray
+        }
+        else{
+            
+            totalAmountButton.isEnabled = true
+            totalAmountButton.setTitleColor(.label, for: .normal)
+            totalAmountButton.backgroundColor = .systemBackground
         }
     }
     

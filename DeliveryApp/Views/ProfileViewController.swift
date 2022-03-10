@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     let userDefaultWorker: UserDefaultsWorkerProtocol //объект для работы с user defaults
     
@@ -18,7 +18,8 @@ class ProfileViewController: UIViewController {
         view.image = Images.avatar
         view.contentMode = .scaleAspectFill
         view.layer.cornerCurve = .continuous
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = 20
+        view.backgroundColor = .white
         
         return view
     }()
@@ -166,14 +167,18 @@ class ProfileViewController: UIViewController {
         homeTextField.constraints(top: streetTextField.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
         apartamentTextField.constraints(top: homeTextField.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
-        apartamentTextField.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: -20).isActive = true
         
-        nameTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        phoneNumberTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        cityTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        streetTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        homeTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        apartamentTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        let buttomAnchor = apartamentTextField.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: -20)
+        buttomAnchor.priority = .defaultHigh
+        //apartamentTextField.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: -20).isActive = true
+        
+        
+//        nameTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+//        phoneNumberTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+//        cityTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+//        streetTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+//        homeTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+//        apartamentTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     
     func loadDataFromUserDefaults(){
@@ -210,6 +215,8 @@ extension ProfileViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         print("Save changes")
+        
+        //ужос😱
         switch textField{
             
         case nameTextField:

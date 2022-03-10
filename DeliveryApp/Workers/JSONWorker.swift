@@ -19,7 +19,7 @@ protocol JSONEncoderWorkerProtocol{
 }
 
 //Класс для парсинга данных в json
-class JSONDecoderWorker: JSONDecoderWorkerProtocol{
+final class JSONDecoderWorker: JSONDecoderWorkerProtocol{
     
     let decoder: JSONDecoder = {
         
@@ -40,7 +40,7 @@ class JSONDecoderWorker: JSONDecoderWorkerProtocol{
     }
 }
 
-class JSONEncoderWorker: JSONEncoderWorkerProtocol{
+final class JSONEncoderWorker: JSONEncoderWorkerProtocol{
     //Не создаем инстанс энкодера, т.к. encode происходит не часто, смысла в памяти держать нет
     func encode<T: Encodable>(model: T) -> Data? {
         

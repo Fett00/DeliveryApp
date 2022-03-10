@@ -72,7 +72,7 @@ class ProjectAssembler{
     ///Контроллер для ввода пользовательских данных
     func createPersonalInformationViewController() -> UIViewController{
         
-        PersonalInformationViewController(userDefaultsWorker: self.userDefaultsWorker)
+        PersonalInformationViewController(userDefaultsWorker: self.userDefaultsWorker, coreDataWorker: coreDataWorker)
     }
 }
 

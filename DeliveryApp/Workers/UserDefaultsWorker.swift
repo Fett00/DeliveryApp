@@ -24,7 +24,7 @@ protocol UserDefaultsWorkerProtocol{
     func setStringValue(withKey key: String, value: String, hanlder: @escaping () -> ())
 }
 
-class UserDefaultsWorker: UserDefaultsWorkerProtocol{
+final class UserDefaultsWorker: UserDefaultsWorkerProtocol{
     
     let userDefaultsStorage = UserDefaults.standard
     

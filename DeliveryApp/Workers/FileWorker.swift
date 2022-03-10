@@ -17,7 +17,7 @@ protocol FileWorkerProtocol{
     func requestFile(with name: String, handler: @escaping (Data?) -> ())
 }
 
-class FileWorker: FileWorkerProtocol{
+final class FileWorker: FileWorkerProtocol{
     
     private let fileManager = FileManager.default
     

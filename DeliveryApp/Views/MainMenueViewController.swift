@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainMenueViewController: UIViewController {
+final class MainMenueViewController: UIViewController {
     
     var currentCategory:Int = 0 //Текущая категория
     

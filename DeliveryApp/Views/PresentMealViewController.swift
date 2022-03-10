@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PresentMealViewController: UIViewController, IndexPathCollector{
+final class PresentMealViewController: UIViewController, IndexPathCollector{
     
     var indexPath: IndexPath
     

@@ -54,7 +54,7 @@ protocol DataWorkerDelegate: AnyObject {
 
 
 
-class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol, DataWorkerCollectedDataForCartProtocol{
+final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol, DataWorkerCollectedDataForCartProtocol{
     
     weak var delegate: DataWorkerDelegate? //Заменить на множественное делегирование
     
