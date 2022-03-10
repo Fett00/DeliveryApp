@@ -9,10 +9,10 @@ import UIKit
 
 final class PersonalInformationViewController: UIViewController {
     
-    let userDefaultWorker: UserDefaultsWorkerProtocol //объект для работы с user defaults
-    let coreDataWorker: CoreDataWorkerProtocolForDeleteOnly //объект для работы с core data
+    private let userDefaultWorker: UserDefaultsWorkerProtocol //объект для работы с user defaults
+    private let coreDataWorker: CoreDataWorkerProtocolForDeleteOnly //объект для работы с core data
     
-    let nameTextField: UITextField = {  //Поле ввода имени
+    private let nameTextField: UITextField = {  //Поле ввода имени
         
         let textField = UITextField()
         
@@ -27,7 +27,7 @@ final class PersonalInformationViewController: UIViewController {
         return textField
     }()
     
-    let phoneNumberTextField: UITextField = { //Поле ввода телефона
+    private let phoneNumberTextField: UITextField = { //Поле ввода телефона
         
         let textField = UITextField()
         
@@ -41,7 +41,7 @@ final class PersonalInformationViewController: UIViewController {
         return textField
     }()
     
-    let cityTextField: UITextField = { //Поле ввода города
+    private let cityTextField: UITextField = { //Поле ввода города
         
         let textField = UITextField()
         
@@ -55,7 +55,7 @@ final class PersonalInformationViewController: UIViewController {
         return textField
     }()
     
-    let streetTextField: UITextField = { //Поле ввода улицы
+    private let streetTextField: UITextField = { //Поле ввода улицы
         
         let textField = UITextField()
         
@@ -69,7 +69,7 @@ final class PersonalInformationViewController: UIViewController {
         return textField
     }()
     
-    let homeTextField: UITextField = { //Поле ввода имени
+    private let homeTextField: UITextField = { //Поле ввода имени
         
         let textField = UITextField()
         
@@ -83,7 +83,7 @@ final class PersonalInformationViewController: UIViewController {
         return textField
     }()
     
-    let apartamentTextField: UITextField = { //Поле ввода номера квартиры
+    private let apartamentTextField: UITextField = { //Поле ввода номера квартиры
         
         let textField = UITextField()
         
@@ -97,7 +97,7 @@ final class PersonalInformationViewController: UIViewController {
         return textField
     }()
     
-    let buyButton: UIButton = { //Кнопка оплаты покупки
+    private let buyButton: UIButton = { //Кнопка оплаты покупки
         
         let button = UIButton()
         
@@ -134,7 +134,7 @@ final class PersonalInformationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func confView(){
+    private func confView(){
         
         view.backgroundColor = .systemBackground
         
@@ -146,7 +146,7 @@ final class PersonalInformationViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = doneButton
     }
     
-    func confSubview(){
+    private func confSubview(){
         
         let globalStack = UIStackView()
         let secStack = UIStackView()
@@ -180,7 +180,7 @@ final class PersonalInformationViewController: UIViewController {
         buyButton.constraints(top: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTop: 0, paddingBottom: 30, paddingleft: 40, paddingRight: 40, width: 0, height: 60)
     }
     
-    func loadDataFromUserDefaults(){
+    private func loadDataFromUserDefaults(){
         
         userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.name.rawValue) { name in
             
@@ -208,12 +208,12 @@ final class PersonalInformationViewController: UIViewController {
         }
     }
     
-    @objc func backToCart(){
+    @objc private func backToCart(){
         
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func requestBuying(){
+    @objc private func requestBuying(){
         
         if nameTextField.text!.isEmpty || phoneNumberTextField.text!.isEmpty || cityTextField.text!.isEmpty || streetTextField.text!.isEmpty || homeTextField.text!.isEmpty{
             

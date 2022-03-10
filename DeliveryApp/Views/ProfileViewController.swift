@@ -9,9 +9,9 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    let userDefaultWorker: UserDefaultsWorkerProtocol //объект для работы с user defaults
+    private let userDefaultWorker: UserDefaultsWorkerProtocol //объект для работы с user defaults
     
-    let avatarImageView: UIImageView = { //Аватар ↓
+    private let avatarImageView: UIImageView = { //Аватар ↓
         
         let view = UIImageView()
         
@@ -24,7 +24,7 @@ final class ProfileViewController: UIViewController {
         return view
     }()
     
-    let nameTextField: UITextField = {  //Поле ввода имени
+    private let nameTextField: UITextField = {  //Поле ввода имени
         
         let textField = UITextField()
         
@@ -38,7 +38,7 @@ final class ProfileViewController: UIViewController {
         return textField
     }()
     
-    let phoneNumberTextField: UITextField = { //Поле ввода телефона
+    private let phoneNumberTextField: UITextField = { //Поле ввода телефона
         
         let textField = UITextField()
         
@@ -52,7 +52,7 @@ final class ProfileViewController: UIViewController {
         return textField
     }()
     
-    let cityTextField: UITextField = { //Поле ввода города
+    private let cityTextField: UITextField = { //Поле ввода города
         
         let textField = UITextField()
         
@@ -66,7 +66,7 @@ final class ProfileViewController: UIViewController {
         return textField
     }()
     
-    let streetTextField: UITextField = { //Поле ввода улицы
+    private let streetTextField: UITextField = { //Поле ввода улицы
         
         let textField = UITextField()
         
@@ -80,7 +80,7 @@ final class ProfileViewController: UIViewController {
         return textField
     }()
     
-    let homeTextField: UITextField = { //Поле ввода дома
+    private let homeTextField: UITextField = { //Поле ввода дома
         
         let textField = UITextField()
         
@@ -94,7 +94,7 @@ final class ProfileViewController: UIViewController {
         return textField
     }()
     
-    let apartamentTextField: UITextField = { //Поле ввода номера квартиры
+    private let apartamentTextField: UITextField = { //Поле ввода номера квартиры
         
         let textField = UITextField()
         
@@ -130,7 +130,7 @@ final class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func confView(){
+    private func confView(){
         
         view.backgroundColor = .systemBackground
         
@@ -139,7 +139,7 @@ final class ProfileViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
     }
     
-    func confSubview(){
+    private func confSubview(){
         
         nameTextField.delegate = self
         phoneNumberTextField.delegate = self
@@ -168,20 +168,11 @@ final class ProfileViewController: UIViewController {
         
         apartamentTextField.constraints(top: homeTextField.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
-        let buttomAnchor = apartamentTextField.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: -20)
-        buttomAnchor.priority = .defaultHigh
-        //apartamentTextField.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: -20).isActive = true
-        
-        
-//        nameTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-//        phoneNumberTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-//        cityTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-//        streetTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-//        homeTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-//        apartamentTextField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        let apartamentBottomAnchor = apartamentTextField.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: -20)
+        apartamentBottomAnchor.priority = .defaultHigh
     }
     
-    func loadDataFromUserDefaults(){
+    private func loadDataFromUserDefaults(){
         
         userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.name.rawValue) { name in
             

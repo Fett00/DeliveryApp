@@ -9,14 +9,14 @@ import UIKit
 
 final class MainMenueViewController: UIViewController {
     
-    var currentCategory:Int = 0 //Текущая категория
+    private var currentCategory:Int = 0 //Текущая категория
     
-    var categoryCollectionView: UICollectionView! //Коллекция с категориями
-    var mealsCollectionView: UICollectionView! //Коллекция для меню с едой
+    private var categoryCollectionView: UICollectionView! //Коллекция с категориями
+    private var mealsCollectionView: UICollectionView! //Коллекция для меню с едой
     
-    let dataWorker: DataWorkerForMainMenueProtocol //Объект для запроса данных
-    let imageWorker: ImageWorkerProtocol //Объект для работы с изображениями
-    let data: DataWorkerCollectedDataProtocol //Объект для получения данных
+    private let dataWorker: DataWorkerForMainMenueProtocol //Объект для запроса данных
+    private let imageWorker: ImageWorkerProtocol //Объект для работы с изображениями
+    private let data: DataWorkerCollectedDataProtocol //Объект для получения данных
     
     init(dataWorker: DataWorkerForMainMenueProtocol, imageWorker: ImageWorkerProtocol, data: DataWorkerCollectedDataProtocol){
         
@@ -55,7 +55,7 @@ final class MainMenueViewController: UIViewController {
         //dataWorker.requsetMeals(for: "Beef") // Перенес в делегат после получения списка категорий
     }
     
-    func configureMainMenue(){
+    private func configureMainMenue(){
         
         let cartImage = Images.cart
         
@@ -65,7 +65,7 @@ final class MainMenueViewController: UIViewController {
                                                                 action: #selector(openCart))
     }
     
-    func configureCategoryCollectionView(){
+    private func configureCategoryCollectionView(){
         
         let layout = UICollectionViewFlowLayout()
         
@@ -89,7 +89,7 @@ final class MainMenueViewController: UIViewController {
         
     }
     
-    func configureMealsCollectionView(){
+    private func configureMealsCollectionView(){
         
         let layout = UICollectionViewFlowLayout()
         
@@ -114,7 +114,7 @@ final class MainMenueViewController: UIViewController {
         mealsCollectionView.constraints(top: categoryCollectionView.bottomAnchor, bottom: view.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
     }
     
-    @objc func openCart(){
+    @objc private func openCart(){
         
         let cartVC = ProjectAssembler.shared.createCartViewController()
         
@@ -128,7 +128,7 @@ final class MainMenueViewController: UIViewController {
 //        dataWorker.addMealToCart(byIndex: index)
 //    }
     
-    @objc func addToCart(_ sender: Any){
+    @objc private func addToCart(_ sender: Any){
         
         guard let sendedView = (sender as? UIView)?.superview as? IndexPathCollector else { return }
         

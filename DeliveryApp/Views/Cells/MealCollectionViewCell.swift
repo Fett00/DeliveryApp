@@ -84,7 +84,7 @@ class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
         
         
         addToCartButton.setTitleColor(.label, for: .normal)
-        addToCartButton.backgroundColor = .systemBackground
+        addToCartButton.backgroundColor = .secondarySystemFill
         addToCartButton.layer.borderWidth = 0.5
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20

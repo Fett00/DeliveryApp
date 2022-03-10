@@ -9,15 +9,15 @@ import UIKit
 
 final class CartViewController: UIViewController {
     
-    let dataWorker: DataWorkerForCartProtocol //Объект для запроса данных
-    let imageWorker: ImageWorker
-    let data: DataWorkerCollectedDataForCartProtocol //Данные для заполнения корзины
+    private let dataWorker: DataWorkerForCartProtocol //Объект для запроса данных
+    private let imageWorker: ImageWorker
+    private let data: DataWorkerCollectedDataForCartProtocol //Данные для заполнения корзины
+     
+    private let cartContentTableView = UITableView() //Таблица с содержимым корзины
     
-    let cartContentTableView = UITableView() //Таблица с содержимым корзины
-    
-    let totalAmountView = UIView() //Вью с итоговой суммой
-    let totalAmountLable = UILabel() // Лейбл на котором написана общая сумма
-    let totalAmountButton = UIButton() // Кнопка оплаты рядом с общей суммой
+    private let totalAmountView = UIView() //Вью с итоговой суммой
+    private let totalAmountLable = UILabel() // Лейбл на котором написана общая сумма
+    private let totalAmountButton = UIButton() // Кнопка оплаты рядом с общей суммой
     
     init(dataWorker: DataWorkerForCartProtocol, data: DataWorkerCollectedDataForCartProtocol, imageWorker: ImageWorker){
         
@@ -45,7 +45,7 @@ final class CartViewController: UIViewController {
         loadMeals()
     }
     
-    func configureCartViewController(){
+    private func configureCartViewController(){
         
         view.backgroundColor = .systemBackground
         self.navigationItem.title = "Cart"
@@ -59,7 +59,7 @@ final class CartViewController: UIViewController {
     }
     
     //Конфигурация таблицы с выбранными блюдами
-    func configureCartContentTableView(){
+    private func configureCartContentTableView(){
         
         view.addSubview(cartContentTableView)
         
@@ -73,7 +73,7 @@ final class CartViewController: UIViewController {
     }
     
     //Конфигурация нижнего поля с итоговой суммой заказа
-    func configureTotalAmount(){
+    private func configureTotalAmount(){
         
         view.addSubview(totalAmountView)
         totalAmountView.addSubview(totalAmountLable, totalAmountButton)
@@ -100,7 +100,7 @@ final class CartViewController: UIViewController {
     }
     
     //Загрузка блюд
-    func loadMeals(){
+    private func loadMeals(){
         
         //Почему не происходит retain cycle
         self.dataWorker.requestCartContent(withCondition: nil) {
@@ -112,7 +112,7 @@ final class CartViewController: UIViewController {
         }
     }
     //Вызов удаления содержимого корзины
-    @objc func requestClearCart(){
+    @objc private func requestClearCart(){
         
         dataWorker.requestClearCart(withCondition: nil) {
             
@@ -127,20 +127,20 @@ final class CartViewController: UIViewController {
         }
     }
     //Вызов закрытия окна
-    @objc func closeView(){
+    @objc private func closeView(){
         
         self.dismiss(animated: true, completion: nil)
     }
     
     //Переход к окну ввода адреса, ФИО итл
-    @objc func goToEnterPersonalInformation(){
+    @objc private func goToEnterPersonalInformation(){
         
         let personalVC = ProjectAssembler.shared.createPersonalInformationViewController()
         
         self.navigationController?.pushViewController(personalVC, animated: true)
     }
     
-    @objc func increaseMealCount(_ sender: Any?){
+    @objc private func increaseMealCount(_ sender: Any?){
         
         guard let sendedView = (sender as? UIView)?.superview?.superview as? IndexPathCollector else { return }
         
@@ -155,7 +155,7 @@ final class CartViewController: UIViewController {
         }
     }
     
-    @objc func decreaseMealCount(_ sender: Any?){
+    @objc private func decreaseMealCount(_ sender: Any?){
         
         guard let sendedView = (sender as? UIView)?.superview?.superview as? IndexPathCollector else { return }
 
@@ -172,7 +172,7 @@ final class CartViewController: UIViewController {
     }
     
     //Проверка наполнения корзины и измененния активности кнопки покупки
-    func checkCartFilling(){
+    private func checkCartFilling(){
         
         if self.data.cartContent.isEmpty{
             
@@ -188,7 +188,7 @@ final class CartViewController: UIViewController {
         }
     }
     
-    func updateTotalAmount(){
+    private func updateTotalAmount(){
         
         self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
             partialResult += (cartContent.price * cartContent.count)

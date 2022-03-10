@@ -11,18 +11,18 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
     
     var indexPath: IndexPath
     
-    let mealImage = UIImageView()
-    let mealName = UILabel()
-    let addToCartButton = UIButton()
-    let mealDescription = UILabel()
-    let bar = UINavigationBar()
+    private let mealImage = UIImageView()
+    private let mealName = UILabel()
+    private let addToCartButton = UIButton()
+    private let mealDescription = UILabel()
+    private let bar = UINavigationBar()
     
     //МодельБлюда
-    let meal: MealModel
+    private let meal: MealModel
     //Загрузка изображений
-    let imageWorker: ImageWorkerProtocol
+    private let imageWorker: ImageWorkerProtocol
     //Запры в БД
-    let dataWorker: DataWorkerForAddToCartProtocol
+    private let dataWorker: DataWorkerForAddToCartProtocol
     
     init(meal: MealModel, imageWorker: ImageWorkerProtocol, dataWorker: DataWorkerForAddToCartProtocol, indexPath: IndexPath){
         
@@ -48,7 +48,7 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         configureView()
     }
     
-    func loadData(){
+    private func loadData(){
         
         imageWorker.requestImage(on: meal.strMealThumb) { [weak self] image in
             
@@ -61,7 +61,7 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         addToCartButton.setTitle("\(meal.price) ₽", for: .normal)
     }
     
-    func configureView(){
+    private func configureView(){
         
         //Стрелку вниз или стрелку назад?
         let doneButton = UIBarButtonItem(image: Images.downArrow, style: .done, target: self, action: #selector(dismissView))
@@ -100,6 +100,7 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         mealDescription.numberOfLines = 0
         
         addToCartButton.setTitleColor(.label, for: .normal)
+        addToCartButton.backgroundColor = .secondarySystemFill
         addToCartButton.layer.borderWidth = 0.5
         addToCartButton.layer.cornerCurve = .continuous
         addToCartButton.layer.cornerRadius = 20
@@ -111,12 +112,12 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         
     }
     
-    @objc func addToCart(){
+    @objc private func addToCart(){
         
         dataWorker.addMealToCart(byIndex: indexPath.row, handler: {})
     }
     
-    @objc func dismissView(){
+    @objc private func dismissView(){
         
         self.dismiss(animated: true, completion: nil)
     }

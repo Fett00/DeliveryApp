@@ -68,7 +68,7 @@ class ImageWorker: ImageWorkerProtocol{
         fileWorker.saveFile(with: name, file: imageData)
     }
     
-    func createImageNameFromImageURL(url: String) -> String {
+    private func createImageNameFromImageURL(url: String) -> String {
         
         return String(url.split(separator: "/").last ?? "")
     }
