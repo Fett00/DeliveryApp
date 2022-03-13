@@ -110,7 +110,6 @@ class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
     
     override func prepareForReuse() {
         
-        mealImage.image = Images.emptyMeal
         mealName.text = ""
         mealPrice.text = ""
         mealCount.text = "1"
