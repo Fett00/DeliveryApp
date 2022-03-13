@@ -30,7 +30,7 @@ protocol DataWorkerForCartProtocol: AnyObject{
     
     func requestClearCart(withCondition condition: String?, handler: @escaping () -> ())
     
-    func changeMealValue(withCondition condition: String?, increaseOrDecrease: Bool, handler: @escaping () -> ())
+    func changeMealValue(mealID: String, increaseOrDecrease: Bool, handler: @escaping () -> ())
 }
 
 protocol DataWorkerCollectedDataForCartProtocol: AnyObject{
@@ -284,7 +284,9 @@ final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtoco
         }
     }
     
-    func changeMealValue(withCondition condition: String?, increaseOrDecrease: Bool, handler: @escaping () -> ()){
+    func changeMealValue(mealID: String, increaseOrDecrease: Bool, handler: @escaping () -> ()){
+        
+        let condition = "mealID=\(mealID)"
         
         if self.coreDataWorker.count(type: CDCartContent.self, withCondition: condition, withLimit: nil, offset: nil) != 0 {
             

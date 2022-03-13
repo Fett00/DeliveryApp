@@ -57,4 +57,29 @@ extension UIView {
         
         let _ = views.map { self.addSubview($0) }
     }
+    
+    func showTapAnimation(_ completionBlock: @escaping () -> ()) {
+        
+        isUserInteractionEnabled = false
+        
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: { [weak self] in
+            
+            guard let strongSelf = self else { return }
+            strongSelf.alpha = 0.7
+            completionBlock()
+            
+        }) { done in
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: { [weak self] in
+                
+                guard let strongSelf = self else { return }
+                strongSelf.alpha = 1.0
+                
+            }) { [weak self] (_) in
+                
+                guard let strongSelf = self else { return }
+                strongSelf.isUserInteractionEnabled = true
+            }
+        }
+    }
 }

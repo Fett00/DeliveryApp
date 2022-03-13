@@ -159,40 +159,49 @@ final class CartViewController: UIViewController {
     }
     
     //Переход к окну ввода адреса, ФИО итл
-    @objc private func goToEnterPersonalInformation(){
+    @objc private func goToEnterPersonalInformation(_ sender: UIButton){
         
-        let personalVC = ProjectAssembler.shared.createPersonalInformationViewController()
-        
-        self.navigationController?.pushViewController(personalVC, animated: true)
+        sender.showTapAnimation {
+            
+            let personalVC = ProjectAssembler.shared.createPersonalInformationViewController()
+            
+            self.navigationController?.pushViewController(personalVC, animated: true)
+        }
     }
     
-    @objc private func increaseMealCount(_ sender: Any?){
-        
-        guard let sendedView = (sender as? UIView)?.superview?.superview as? IndexPathCollector else { return }
-        
-        let condition = "mealID=\(data.cartContent[sendedView.indexPath.row].mealID)"
-        
-        dataWorker.changeMealValue(withCondition: condition, increaseOrDecrease: true) {
+    @objc private func increaseMealCount(_ sender: UIButton){
+                
+        sender.showTapAnimation {
             
-            self.dataWorker.requestCartContent(withCondition: nil) {
-                self.cartContentTableView.reloadData()
-                self.updateTotalAmount()
+            guard let sendedView = sender.superview?.superview as? IndexPathCollector else { return }
+            
+            let mealID = "\(self.data.cartContent[sendedView.indexPath.row].mealID)"
+            
+            self.dataWorker.changeMealValue(mealID: mealID, increaseOrDecrease: true) {
+                
+                self.dataWorker.requestCartContent(withCondition: nil) {
+                    self.cartContentTableView.reloadData()
+                    self.updateTotalAmount()
+                }
             }
         }
     }
     
-    @objc private func decreaseMealCount(_ sender: Any?){
+    @objc private func decreaseMealCount(_ sender: UIButton){
         
-        guard let sendedView = (sender as? UIView)?.superview?.superview as? IndexPathCollector else { return }
-
-        let condition = "mealID=\(data.cartContent[sendedView.indexPath.row].mealID)"
-        
-        dataWorker.changeMealValue(withCondition: condition, increaseOrDecrease: false) {
+        sender.showTapAnimation {
             
-            self.dataWorker.requestCartContent(withCondition: nil) {
-                self.cartContentTableView.reloadData()
-                self.updateTotalAmount()
-                self.checkCartFilling()
+            guard let sendedView = sender.superview?.superview as? IndexPathCollector else { return }
+
+            let mealID = "\(self.data.cartContent[sendedView.indexPath.row].mealID)"
+            
+            self.dataWorker.changeMealValue(mealID: mealID, increaseOrDecrease: false) {
+                
+                self.dataWorker.requestCartContent(withCondition: nil) {
+                    self.cartContentTableView.reloadData()
+                    self.updateTotalAmount()
+                    self.checkCartFilling()
+                }
             }
         }
     }

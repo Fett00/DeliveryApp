@@ -174,7 +174,7 @@ final class PersonalInformationViewController: UIViewController {
         thdStack.alignment = .fill
         thdStack.distribution = .fillEqually
         thdStack.spacing = 10
-
+        
         globalStack.constraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: view.safeAreaLayoutGuide.centerYAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTop: 40, paddingBottom: 0, paddingleft: 40, paddingRight: 40, width: 0, height: 0)
         
         buyButton.constraints(top: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTop: 0, paddingBottom: 30, paddingleft: 40, paddingRight: 40, width: 0, height: 60)
@@ -213,37 +213,40 @@ final class PersonalInformationViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc private func requestBuying(){
+    @objc private func requestBuying(_ sender: UIButton){
         
-        if nameTextField.text!.isEmpty || phoneNumberTextField.text!.isEmpty || cityTextField.text!.isEmpty || streetTextField.text!.isEmpty || homeTextField.text!.isEmpty{
+        sender.showTapAnimation {
             
-            let failAlert = UIAlertController(title: "Fill all fields!", message: "", preferredStyle: .alert)
-            failAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            if self.nameTextField.text!.isEmpty || self.phoneNumberTextField.text!.isEmpty || self.cityTextField.text!.isEmpty || self.streetTextField.text!.isEmpty || self.homeTextField.text!.isEmpty{
                 
-                failAlert.dismiss(animated: true)
-            }))
-            
-            self.present(failAlert, animated: true, completion: nil)
-        }
-        else{
-            
-            let successAlert = UIAlertController(title: "Success", message: "", preferredStyle: .alert)
-            successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                let failAlert = UIAlertController(title: "Fill all fields!", message: "", preferredStyle: .alert)
+                failAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    
+                    failAlert.dismiss(animated: true)
+                }))
                 
-                successAlert.dismiss(animated: true)
-                self.dismiss(animated: true, completion: nil)
-            }))
-            
-            self.present(successAlert, animated: true, completion: nil)
-            
-            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.name.rawValue, value: nameTextField.text!) {}
-            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.phone.rawValue, value: phoneNumberTextField.text!) {}
-            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.city.rawValue, value: cityTextField.text!) {}
-            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.street.rawValue, value: streetTextField.text!) {}
-            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.home.rawValue, value: homeTextField.text!) {}
-            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.apartament.rawValue, value: apartamentTextField.text!) {}
-            
-            coreDataWorker.delete(type: CDCartContent.self, withCondition: nil) {} //Очистка корзины, после удачной покупки
+                self.present(failAlert, animated: true, completion: nil)
+            }
+            else{
+                
+                let successAlert = UIAlertController(title: "Success", message: "", preferredStyle: .alert)
+                successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    
+                    successAlert.dismiss(animated: true)
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                
+                self.present(successAlert, animated: true, completion: nil)
+                
+                self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.name.rawValue, value: self.nameTextField.text!) {}
+                self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.phone.rawValue, value: self.phoneNumberTextField.text!) {}
+                self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.city.rawValue, value: self.cityTextField.text!) {}
+                self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.street.rawValue, value: self.streetTextField.text!) {}
+                self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.home.rawValue, value: self.homeTextField.text!) {}
+                self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.apartament.rawValue, value: self.apartamentTextField.text!) {}
+                
+                self.coreDataWorker.delete(type: CDCartContent.self, withCondition: nil) {} //Очистка корзины, после удачной покупки
+            }
         }
     }
 }

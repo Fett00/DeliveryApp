@@ -128,18 +128,14 @@ final class MainMenueViewController: UIViewController {
         self.present(cartVC, animated: true, completion: nil)
     }
     
-//    @objc func addToCart(_ sender: Any){
-//
-//        guard let cell = (sender as? UIView)?.superview as? MealCollectionViewCell else { return }
-//        let index = mealsCollectionView.indexPath(for: cell)?.row ?? 0
-//        dataWorker.addMealToCart(byIndex: index)
-//    }
-    
-    @objc private func addToCart(_ sender: Any){
+    @objc private func addToCart(_ sender: UIButton){
         
-        guard let sendedView = (sender as? UIView)?.superview as? IndexPathCollector else { return }
-        
-        dataWorker.addMealToCart(byIndex: sendedView.indexPath.row, handler: {})
+        sender.showTapAnimation {
+            
+            guard let sendedView = sender.superview as? IndexPathCollector else { return }
+            
+            self.dataWorker.addMealToCart(byIndex: sendedView.indexPath.row, handler: {})
+        }
     }
 }
 

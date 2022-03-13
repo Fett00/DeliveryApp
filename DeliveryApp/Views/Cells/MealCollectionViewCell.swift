@@ -15,7 +15,7 @@ class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
     static var id: String { MealCollectionViewCell.description() }//идентификатор ячейки
     
     private let mealImage = UIImageView()
-     let mealName = UILabel()
+    let mealName = UILabel()
     let addToCartButton = UIButton()
     
     override init(frame: CGRect) {

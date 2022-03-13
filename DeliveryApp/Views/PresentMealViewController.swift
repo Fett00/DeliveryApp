@@ -145,9 +145,12 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         addToCartButton.topAnchor.constraint(greaterThanOrEqualTo: mealDescription.bottomAnchor, constant: 20).isActive = true
     }
     
-    @objc private func addToCart(){
+    @objc private func addToCart(_ sender: UIButton){
         
-        dataWorker.addMealToCart(byIndex: indexPath.row, handler: {})
+        sender.showTapAnimation {
+            
+            self.dataWorker.addMealToCart(byIndex: self.indexPath.row, handler: {})
+        }
     }
     
     @objc private func dismissView(){
