@@ -19,6 +19,8 @@ class ImageWorker: ImageWorkerProtocol{
     var fileWorker: FileWorkerProtocol!
     var networkWorker: NetworkWorkerProtocol!
     
+    let imageQuality: CGFloat = 1.0
+    
     func requestImage(on imageUrl: String, handler: @escaping (UIImage) -> ()) {
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -44,7 +46,7 @@ class ImageWorker: ImageWorkerProtocol{
                             print(error.localizedDescription)
                         case .success(let data):
                             
-                            guard let compresdImage = UIImage(data: data)?.jpegData(compressionQuality: 0.7), let image = UIImage(data: compresdImage) else { return } // Есть ли вариант лучше?
+                            guard let compresdImage = UIImage(data: data)?.jpegData(compressionQuality: self.imageQuality), let image = UIImage(data: compresdImage) else { return } // Есть ли вариант лучше?
                             
                             DispatchQueue.main.async {
                                 //print("Картинка из сети")
