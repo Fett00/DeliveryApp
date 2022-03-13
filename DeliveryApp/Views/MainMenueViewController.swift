@@ -11,8 +11,29 @@ final class MainMenueViewController: UIViewController {
     
     private var currentCategory:Int = 0 //Текущая категория
     
-    private var categoryCollectionView: UICollectionView! //Коллекция с категориями
-    private var mealsCollectionView: UICollectionView! //Коллекция для меню с едой
+    private let categoryCollectionView: UICollectionView = {
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        return collectionView
+    }()
+    
+    private let mealsCollectionView: UICollectionView = {
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        
+        return collectionView
+    }()
     
     private let dataWorker: DataWorkerForMainMenueProtocol //Объект для запроса данных
     private let imageWorker: ImageWorkerProtocol //Объект для работы с изображениями
@@ -59,30 +80,18 @@ final class MainMenueViewController: UIViewController {
         
         let cartImage = Images.cart
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: cartImage,
-                                                                style: .plain,
-                                                                target: self,
-                                                                action: #selector(openCart))
+        let cartButton = UIBarButtonItem(image: cartImage, style: .plain, target: self, action: #selector(openCart))
+        
+        self.navigationItem.rightBarButtonItem = cartButton
     }
     
     private func configureCategoryCollectionView(){
-        
-        let layout = UICollectionViewFlowLayout()
-        
-        categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         view.addSubview(categoryCollectionView)
         
         categoryCollectionView.dataSource = self
         categoryCollectionView.delegate = self
         categoryCollectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.id)
-        
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        
-        layout.scrollDirection = .horizontal
-        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
-        //layout.content
-        categoryCollectionView.showsHorizontalScrollIndicator = false
         
         let safeArea = view.safeAreaLayoutGuide
         categoryCollectionView.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 50)
@@ -91,24 +100,22 @@ final class MainMenueViewController: UIViewController {
     
     private func configureMealsCollectionView(){
         
-        let layout = UICollectionViewFlowLayout()
-        
-        mealsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
         view.addSubview(mealsCollectionView)
         
         mealsCollectionView.delegate = self
         mealsCollectionView.dataSource = self
         mealsCollectionView.register(MealCollectionViewCell.self, forCellWithReuseIdentifier: MealCollectionViewCell.id)
         
+        guard let flowLayout = mealsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        
         let insets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
         let spacing = 20.0
         let deviceWidth = view.frame.width
         let itemSize = (deviceWidth - insets.left - insets.right - spacing ) / 2
-        layout.minimumInteritemSpacing = spacing
-        layout.minimumLineSpacing = spacing
-        layout.sectionInset = insets
-        layout.itemSize = CGSize(width: itemSize, height: itemSize * 2)
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
+        flowLayout.sectionInset = insets
+        flowLayout.itemSize = CGSize(width: itemSize, height: itemSize * 2)
         
         let safeArea = view.safeAreaLayoutGuide
         mealsCollectionView.constraints(top: categoryCollectionView.bottomAnchor, bottom: view.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
