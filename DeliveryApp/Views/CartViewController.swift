@@ -13,11 +13,52 @@ final class CartViewController: UIViewController {
     private let imageWorker: ImageWorker
     private let data: DataWorkerCollectedDataForCartProtocol //Данные для заполнения корзины
      
-    private let cartContentTableView = UITableView() //Таблица с содержимым корзины
+    //Таблица с содержимым корзины
+    private let cartContentTableView: UITableView = {
+       
+        let tableView = UITableView()
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        return tableView
+    }()
     
-    private let totalAmountView = UIView() //Вью с итоговой суммой
-    private let totalAmountLable = UILabel() // Лейбл на котором написана общая сумма
-    private let totalAmountButton = UIButton() // Кнопка оплаты рядом с общей суммой
+    //Вью с итоговой суммой
+    private let totalAmountView: UIView = {
+        
+        let view = UIView()
+        
+        view.backgroundColor = Colors.mainColor
+        
+        return view
+    }()
+    
+    // Лейбл на котором написана общая сумма
+    private let totalAmountLable: UILabel = {
+        
+        let label = UILabel()
+        
+        label.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none).pointSize)
+        
+        return label
+    }()
+    
+    // Кнопка оплаты рядом с общей суммой
+    private let totalAmountButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.setTitle("Buy", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
+        button.backgroundColor = .systemBackground
+        button.layer.borderWidth = 0.5
+        button.layer.cornerCurve = .continuous
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(goToEnterPersonalInformation), for: .touchUpInside)
+        
+        return button
+    }()
     
     init(dataWorker: DataWorkerForCartProtocol, data: DataWorkerCollectedDataForCartProtocol, imageWorker: ImageWorker){
         
@@ -67,8 +108,6 @@ final class CartViewController: UIViewController {
         cartContentTableView.delegate = self
         cartContentTableView.register(CartContentTableViewCell.self, forCellReuseIdentifier: CartContentTableViewCell.id)
         
-        cartContentTableView.rowHeight = UITableView.automaticDimension
-        
         cartContentTableView.constraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
     }
     
@@ -84,19 +123,6 @@ final class CartViewController: UIViewController {
         totalAmountLable.centerYAnchor.constraint(equalTo: totalAmountButton.centerYAnchor).isActive = true
         
         totalAmountButton.constraints(top: totalAmountView.topAnchor, bottom: totalAmountView.bottomAnchor, leading: totalAmountView.centerXAnchor, trailing: totalAmountView.trailingAnchor, paddingTop: 10, paddingBottom: 30, paddingleft: -40, paddingRight: 30, width: 0, height: 60)
-        
-        totalAmountView.backgroundColor = Colors.mainColor
-        
-        totalAmountButton.setTitle("Buy", for: .normal)
-        totalAmountButton.setTitleColor(.label, for: .normal)
-        totalAmountButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
-        totalAmountButton.backgroundColor = .systemBackground
-        totalAmountButton.layer.borderWidth = 0.5
-        totalAmountButton.layer.cornerCurve = .continuous
-        totalAmountButton.layer.cornerRadius = 20
-        totalAmountButton.addTarget(self, action: #selector(goToEnterPersonalInformation), for: .touchUpInside)
-        
-        totalAmountLable.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none).pointSize) 
     }
     
     //Загрузка блюд
