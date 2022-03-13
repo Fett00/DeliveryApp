@@ -11,11 +11,72 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
     
     var indexPath: IndexPath
     
-    private let mealImage = UIImageView()
-    private let mealName = UILabel()
-    private let addToCartButton = UIButton()
-    private let mealDescription = UILabel()
-    private let bar = UINavigationBar()
+    //Изображение блюда
+    private let mealImage: UIImageView = {
+        
+        let imageView = UIImageView()
+        
+        imageView.tintColor = .systemGray3
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerCurve = .continuous
+        imageView.layer.cornerRadius = 20
+        //imageView.image = Images.emptyMeal //placeholder
+        
+        return imageView
+    }()
+    
+    //Название блюда
+    private let mealName: UILabel = {
+        
+        let lable = UILabel()
+        
+        lable.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        lable.font = UIFont.preferredFont(forTextStyle: .title1)
+        lable.numberOfLines = 3
+        
+        return lable
+    }()
+    
+    //Кнопка добавления в корзину
+    private let addToCartButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.setTitleColor(.label, for: .normal)
+        button.backgroundColor = .secondarySystemFill
+        button.layer.borderWidth = 0.5
+        button.layer.cornerCurve = .continuous
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    //Описание блюда
+    private let mealDescription: UILabel = {
+        
+        let lable = UILabel()
+        
+        lable.numberOfLines = 0
+        
+        return lable
+    }()
+    
+    //Navigation Bar
+    private let bar: UINavigationBar = {
+        
+        let navigationBar = UINavigationBar()
+        
+        //Стрелку вниз или стрелку назад?
+        let doneButton = UIBarButtonItem(image: Images.downArrow, style: .done, target: self, action: #selector(dismissView))
+        let navigationItem = UINavigationItem()
+        navigationItem.leftBarButtonItem = doneButton
+        
+        navigationBar.items = [navigationItem]
+        
+        return navigationBar
+    }()
     
     //МодельБлюда
     private let meal: MealModel
@@ -59,17 +120,14 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         
         mealName.text = meal.strMeal
         addToCartButton.setTitle("\(meal.price) ₽", for: .normal)
+        
+        //TEMP DATA//
+        mealDescription.text = "Cook the quinoa following the pack instructions, then rinse in cold water and drain thoroughly. Meanwhile, mix the butter, chilli and garlic into a paste. Toss the chicken fillets in 2 tsp of the olive oil with some seasoning."
+        //________//
     }
     
     private func configureView(){
         
-        //Стрелку вниз или стрелку назад?
-        let doneButton = UIBarButtonItem(image: Images.downArrow, style: .done, target: self, action: #selector(dismissView))
-        let navigationItem = UINavigationItem()
-        navigationItem.leftBarButtonItem = doneButton
-        
-        bar.items = [navigationItem]
-
         view.addSubview(mealImage, mealName, mealDescription, addToCartButton, bar)
         
         let safeArea = view.safeAreaLayoutGuide
@@ -85,31 +143,6 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         addToCartButton.constraints(top: nil, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 20, paddingleft: 20, paddingRight: 20, width: 0, height: 50)
         
         addToCartButton.topAnchor.constraint(greaterThanOrEqualTo: mealDescription.bottomAnchor, constant: 20).isActive = true
-        
-        mealImage.tintColor = .systemGray3
-        mealImage.contentMode = .scaleToFill
-        mealImage.clipsToBounds = true
-        mealImage.layer.cornerCurve = .continuous
-        mealImage.layer.cornerRadius = 20
-        //mealImage.image = Images.emptyMeal //placeholder
-        
-        mealName.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        mealName.font = UIFont.preferredFont(forTextStyle: .title1)
-        mealName.numberOfLines = 3
-        
-        mealDescription.numberOfLines = 0
-        
-        addToCartButton.setTitleColor(.label, for: .normal)
-        addToCartButton.backgroundColor = .secondarySystemFill
-        addToCartButton.layer.borderWidth = 0.5
-        addToCartButton.layer.cornerCurve = .continuous
-        addToCartButton.layer.cornerRadius = 20
-        addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
-        
-        //TEMP DATA//
-        mealDescription.text = "Cook the quinoa following the pack instructions, then rinse in cold water and drain thoroughly. Meanwhile, mix the butter, chilli and garlic into a paste. Toss the chicken fillets in 2 tsp of the olive oil with some seasoning."
-        //________//
-        
     }
     
     @objc private func addToCart(){
