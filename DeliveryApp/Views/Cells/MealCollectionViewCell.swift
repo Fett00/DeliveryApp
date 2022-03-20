@@ -14,9 +14,47 @@ class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
     
     static var id: String { MealCollectionViewCell.description() }//идентификатор ячейки
     
-    private let mealImage = UIImageView()
-    let mealName = UILabel()
-    let addToCartButton = UIButton()
+    private let mealImage: UIImageView = {
+        
+        let imageView = UIImageView()
+        
+        imageView.tintColor = .systemGray3
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerCurve = .continuous
+        imageView.layer.cornerRadius = 20
+        imageView.image = Images.emptyMeal //placeholder
+        
+        return imageView
+    }()
+    
+    private let mealName: UILabel = {
+        
+        let label = UILabel()
+        
+        label.textAlignment = .left
+        label.numberOfLines = 3
+        label.setContentCompressionResistancePriority( .defaultHigh, for: .vertical)
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.setContentCompressionResistancePriority( .defaultHigh, for: .horizontal)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
+        return label
+    }()
+    
+    private let addToCartButton: UIButton = {
+       
+        let button = UIButton()
+        
+        button.setTitleColor(.label, for: .normal)
+        button.backgroundColor = .secondarySystemFill
+        button.layer.borderWidth = 0.5
+        button.layer.cornerCurve = .continuous
+        button.layer.cornerRadius = 20
+        button.addTarget(nil, action: Selector(("addToCart:")), for: .touchUpInside)
+        
+        return button
+    }()
     
     override init(frame: CGRect) {
         
@@ -68,28 +106,6 @@ class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
         self.layer.cornerCurve = .continuous
         self.layer.cornerRadius = 20
         
-        mealImage.tintColor = .systemGray3
-        mealImage.contentMode = .scaleAspectFill
-        mealImage.clipsToBounds = true
-        mealImage.layer.cornerCurve = .continuous
-        mealImage.layer.cornerRadius = 20
-        mealImage.image = Images.emptyMeal //placeholder
-        
-        mealName.textAlignment = .left
-        mealName.numberOfLines = 3
-        mealName.setContentCompressionResistancePriority( .defaultHigh, for: .vertical)
-        mealName.setContentHuggingPriority(.defaultLow, for: .vertical)
-        mealName.setContentCompressionResistancePriority( .defaultHigh, for: .horizontal)
-        mealName.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        
-        
-        addToCartButton.setTitleColor(.label, for: .normal)
-        addToCartButton.backgroundColor = .secondarySystemFill
-        addToCartButton.layer.borderWidth = 0.5
-        addToCartButton.layer.cornerCurve = .continuous
-        addToCartButton.layer.cornerRadius = 20
-        addToCartButton.addTarget(nil, action: Selector(("addToCart:")), for: .touchUpInside)
-        
         mealImage.translatesAutoresizingMaskIntoConstraints = false
         mealName.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -108,7 +124,7 @@ class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
     
     override func prepareForReuse() {
         
-        mealImage.image = Images.emptyMeal
+        mealImage.image = nil//Images.emptyMeal
         mealName.text = ""
         addToCartButton.setTitle("", for: .normal)
     }
