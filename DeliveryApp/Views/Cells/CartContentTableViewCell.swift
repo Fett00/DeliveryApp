@@ -13,12 +13,94 @@ class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
 
     static var id: String { CartContentTableViewCell.description() }
     
-    private let mealImage = UIImageView() //картинка блюда в корзине
-    private let mealName = UILabel() //названия блюда в корзине
-    private let mealCount = UILabel() //Показывает кол-во штук для одного блюда
-    private let mealPrice = UILabel() //Ценник блюда
-    private let increaseButton = UIButton() //Кнопка увеличения кол-ва блюд
-    private let decreaseButton = UIButton() //Кнопка уменьшения кол-ва блюд
+    //картинка блюда в корзине
+    private let mealImage: UIImageView = {
+        
+        let imageView = UIImageView()
+        
+        imageView.image = Images.emptyMeal
+        imageView.tintColor = .systemGray3
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerCurve = .continuous
+        imageView.layer.cornerRadius = 10
+        
+        return imageView
+    }()
+    
+    //названия блюда в корзине
+    private let mealName: UILabel = {
+        
+        let label = UILabel()
+        
+        label.text = "Chiken & mushroom hotpot"
+        label.numberOfLines = 2
+        label.font = UIFont.preferredFont(forTextStyle: .title3, compatibleWith: .none)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        //label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
+        return label
+    }()
+    
+    //Показывает кол-во штук для одного блюда
+    private let mealCount: UILabel = {
+        
+        let label = UILabel()
+        
+        label.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    //Ценник блюда
+    private let mealPrice: UILabel = {
+        
+        let label = UILabel()
+        
+        label.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        
+        return label
+    }()
+    
+    //Кнопка увеличения кол-ва блюд
+    private let increaseButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.setTitle("+", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.cornerCurve = .continuous
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .secondarySystemBackground
+        button.addTarget(nil, action: Selector(("increaseMealCount:")), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    //Кнопка уменьшения кол-ва блюд
+    private let decreaseButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.setTitle("-", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.cornerCurve = .continuous
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .secondarySystemBackground
+        button.addTarget(nil, action: Selector(("decreaseMealCount:")), for: .touchUpInside)
+        
+        return button
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,6 +110,16 @@ class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configurateCell2(){
+        
+        self.contentView.addSubview(mealName, mealImage, mealCount, mealPrice, increaseButton, decreaseButton)
+        self.contentView.clipsToBounds = true
+        self.selectionStyle = .none
+        
+        //let cellWidth = self.frame.width
+        //let paddingX = 20
     }
     
     private func configurateCell(){
@@ -47,51 +139,11 @@ class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
         decreaseButton.widthAnchor.constraint(equalTo: increaseButton.heightAnchor, multiplier: 1/1).isActive = true
         decreaseButton.topAnchor.constraint(greaterThanOrEqualTo: mealName.bottomAnchor, constant: 10).isActive = true
         
-        mealCount.constraints(top: nil, bottom: nil, leading: decreaseButton.trailingAnchor, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingleft: 15, paddingRight: 0, width: 0, height: 0)
+        mealCount.constraints(top: nil, bottom: nil, leading: decreaseButton.trailingAnchor, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingleft: 15, paddingRight: 0, width: 40, height: 0)
         mealCount.centerYAnchor.constraint(equalTo: decreaseButton.centerYAnchor).isActive = true
         
         increaseButton.constraints(top: mealImage.centerYAnchor, bottom: self.contentView.bottomAnchor, leading: mealCount.trailingAnchor, trailing: nil, paddingTop: 15, paddingBottom: 10, paddingleft: 15, paddingRight: 0, width: 0, height: 0)
         increaseButton.widthAnchor.constraint(equalTo: decreaseButton.heightAnchor, multiplier: 1/1).isActive = true
-        
-        mealName.text = "Chiken & mushroom hotpot"
-        mealName.numberOfLines = 2
-        mealName.font = UIFont.preferredFont(forTextStyle: .title3, compatibleWith: .none)
-        mealName.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        mealName.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        mealName.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        //mealName.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        
-        mealImage.image = Images.emptyMeal
-        mealImage.tintColor = .systemGray3
-        mealImage.contentMode = .scaleAspectFill
-        mealImage.clipsToBounds = true
-        mealImage.layer.cornerCurve = .continuous
-        mealImage.layer.cornerRadius = 10
-        
-        mealPrice.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
-        mealPrice.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        mealPrice.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        mealPrice.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        
-        mealCount.font = UIFont.preferredFont(forTextStyle: .title2, compatibleWith: .none)
-        
-        increaseButton.setTitle("+", for: .normal)
-        increaseButton.setTitleColor(.label, for: .normal)
-        increaseButton.layer.borderWidth = 0.5
-        increaseButton.layer.borderColor = UIColor.black.cgColor
-        increaseButton.layer.cornerCurve = .continuous
-        increaseButton.layer.cornerRadius = 10
-        increaseButton.backgroundColor = .secondarySystemBackground
-        increaseButton.addTarget(nil, action: Selector(("increaseMealCount:")), for: .touchUpInside)
-        
-        decreaseButton.setTitle("-", for: .normal)
-        decreaseButton.setTitleColor(.label, for: .normal)
-        decreaseButton.layer.borderWidth = 0.5
-        decreaseButton.layer.borderColor = UIColor.black.cgColor
-        decreaseButton.layer.cornerCurve = .continuous
-        decreaseButton.layer.cornerRadius = 10
-        decreaseButton.backgroundColor = .secondarySystemBackground
-        decreaseButton.addTarget(nil, action: Selector(("decreaseMealCount:")), for: .touchUpInside)
     }
     
     func setUpCell(meal: CartContentModel, indexPath: IndexPath){
@@ -110,6 +162,7 @@ class CartContentTableViewCell: UITableViewCell, IndexPathCollector {
     
     override func prepareForReuse() {
         
+        mealImage.image = nil
         mealName.text = ""
         mealPrice.text = ""
         mealCount.text = "1"
