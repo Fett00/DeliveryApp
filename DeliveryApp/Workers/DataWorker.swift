@@ -127,11 +127,11 @@ final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtoco
                         
                         self.coreDataWorker.delete(type: CDCategory.self, withCondition: nil) {
                             
-                            self.coreDataWorker.add {
+                            self.coreDataWorker.add { context in
                                 
                                 for category in categories {
                                     
-                                    let cdCategory = CDCategory(context: self.coreDataWorker.context)
+                                    let cdCategory = CDCategory(context: context)
                                     
                                     cdCategory.categoryName = category.strCategory
                                     cdCategory.categoryID = Int32(category.idCategory) ?? -1
@@ -204,10 +204,10 @@ final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtoco
                         print("Create cache in CD")
                         self.coreDataWorker.delete(type: CDMeal.self, withCondition: condition) {
                             
-                            self.coreDataWorker.add {
+                            self.coreDataWorker.add { context in
                                 for meal in meals {
                                     
-                                    let cdMeal = CDMeal(context: self.coreDataWorker.context)
+                                    let cdMeal = CDMeal(context: context)
                                     
                                     cdMeal.mealID = Int32(meal.idMeal) ?? -1
                                     cdMeal.mealImageURL = meal.strMealThumb
@@ -242,8 +242,9 @@ final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtoco
                 
                 let meal = self.mealModels[byIndex]
                 
-                self.coreDataWorker.add {
-                    let cdModel = CDCartContent(context: self.coreDataWorker.context)
+                self.coreDataWorker.add { context in
+                    
+                    let cdModel = CDCartContent(context: context)
                     
                     cdModel.imageURL = meal.strMealThumb
                     cdModel.price = Int32(meal.price)

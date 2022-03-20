@@ -20,9 +20,7 @@ protocol CoreDataWorkerProtocolForGetOnly{
 
 protocol CoreDataWorkerProtocol{
 
-    var context: NSManagedObjectContext { get }
-
-    func add(createObject: ()->(), hanlder: @escaping () -> ())
+    func add(createObject: (NSManagedObjectContext)->(), hanlder: @escaping () -> ())
 
     func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, hanlder: @escaping () -> ())
 
@@ -36,12 +34,26 @@ protocol CoreDataWorkerProtocol{
 }
 
 final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGetOnly, CoreDataWorkerProtocolForDeleteOnly{
+    
+    // MARK: - Core Data stack
+
+    lazy var persistentContainer: NSPersistentContainer = {
+
+        let container = NSPersistentContainer(name: "DeliveryApp")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                 
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
 
     //Создание контекста для работы с CoreData
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
+    var context: NSManagedObjectContext { self.persistentContainer.newBackgroundContext() }
     
     //Модель для получения fetch request'ов
-    let managedObjectModel = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.managedObjectModel
+    var managedObjectModel: NSManagedObjectModel { self.persistentContainer.managedObjectModel }
     
     //Сохранение Данных в БД
     private func save (hanlder: @escaping () -> ()) {
@@ -60,14 +72,33 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             hanlder()
         }
     }
-
+    
+    private func saveInCurrentContext (currentContext: NSManagedObjectContext, hanlder: @escaping () -> ()) {
+        
+        if currentContext.hasChanges {
+            do {
+                try currentContext.save()
+                hanlder()
+            } catch {
+                
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+        else{
+            hanlder()
+        }
+    }
+    
     //Добавление записи в CoreData
     //TODO: ПЕРЕДЕЛАТЬ
     ///Функция добавляет новые записи в CoreData
-    func add(createObject: ()->(), hanlder: @escaping () -> ()) {
-
-        createObject()
-        save {
+    func add(createObject: (NSManagedObjectContext)->(), hanlder: @escaping () -> ()) {
+        
+        let currentContext = self.context
+        
+        createObject(currentContext)
+        saveInCurrentContext(currentContext: currentContext) {
             hanlder()
         }
     }
@@ -76,6 +107,8 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
     func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, hanlder: @escaping () -> ()){
        
         var predicate: NSPredicate?
+        
+        let currentContext = self.context
 
         if let condition = condition{
             let splitedCondition = condition.split(separator: "=")
@@ -87,14 +120,14 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             let request = Entity.fetchRequest()
             request.predicate = predicate
             
-            let objectsToDelete = try context.fetch(request) as! [Entity]
+            let objectsToDelete = try currentContext.fetch(request) as! [Entity]
             
             for object in objectsToDelete{
                 
-                context.delete(object)
+                currentContext.delete(object)
             }
             
-            save {
+            saveInCurrentContext(currentContext: currentContext) {
                 hanlder()
                 print("ПРОИЗОШЛО УДОЛЕНИЕ")
             }
@@ -109,6 +142,8 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
     func count<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> Int {
 
         var predicate: NSPredicate?
+        
+        let currentContext = self.context
 
         if let condition = condition{
             
@@ -123,7 +158,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             request.fetchOffset = offset ?? 0
             request.fetchLimit = limit ?? 0
 
-            let count = try context.count(for: request)
+            let count = try currentContext.count(for: request)
             return count
         }
         catch {
@@ -141,6 +176,8 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
     func get<Entity: NSManagedObject>(type: Entity.Type, sortingBy: [String]?, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> [Entity] {
 
         var predicate: NSPredicate?
+        
+        let currentContext = self.context
 
         if let condition = condition{
             
@@ -162,8 +199,8 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             request.fetchOffset = offset ?? 0
             request.fetchLimit = limit ?? 0
             request.sortDescriptors = sortDescriptors
-
-            let result: [Entity] = try context.fetch(request) as! [Entity]
+            
+            let result: [Entity] = try currentContext.fetch(request) as! [Entity]
             return result
         }
         catch {
@@ -176,6 +213,8 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
     func update<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, key: String, newValue: Any, handler: @escaping () -> ()){
         
         var predicate: NSPredicate?
+        
+        let currentContext = self.context
 
         if let condition = condition{
             
@@ -189,7 +228,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             let request = Entity.fetchRequest()
             request.predicate = predicate
 
-            results = try context.fetch(request) as! [Entity]
+            results = try currentContext.fetch(request) as! [Entity]
             
         } catch {
             
@@ -201,7 +240,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             result.setValue(newValue, forKey: key)
         }
         
-        save {
+        saveInCurrentContext(currentContext: currentContext) {
             
             handler()
         }
@@ -211,6 +250,8 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
     func changeIntegerValue<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, key: String, increaseOrDecrease: Bool, handler: @escaping () -> ()){
         
         var predicate: NSPredicate?
+        
+        let currentContext = self.context
 
         if let condition = condition{
             
@@ -223,8 +264,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
         do {
             let request = Entity.fetchRequest()
             request.predicate = predicate
-
-            results = try context.fetch(request) as! [Entity]
+            results = try currentContext.fetch(request) as! [Entity]
             
         } catch {
             
@@ -237,7 +277,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
                 
                 if increaseOrDecrease == false && oldValue == 1{
                     
-                    context.delete(result)
+                    currentContext.delete(result)
                 }
                 else if increaseOrDecrease == true{
                     
@@ -250,7 +290,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             }
         }
         
-        save {
+        saveInCurrentContext(currentContext: currentContext) {
             
             handler()
         }
