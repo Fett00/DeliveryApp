@@ -19,13 +19,13 @@ enum Images{
     static let trash = UIImage(systemName: "trash")!
 }
 
-enum URLs: String{
+enum URLs{
     
     //АПИ для получения категорий
-    case categoriesURL = "https://www.themealdb.com/api/json/v1/1/categories.php"
+    static let categoriesURL = "https://www.themealdb.com/api/json/v1/1/categories.php"
     
     //АПИ для получения блюд для категории
-    case mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
+    static let mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
 }
 
 enum Colors{
