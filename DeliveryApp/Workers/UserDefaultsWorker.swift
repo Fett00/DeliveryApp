@@ -19,23 +19,23 @@ enum UserDefaultsKeys: String{
 
 protocol UserDefaultsWorkerProtocol{
     
-    func getStringValue(withKey key: String, hanlder: @escaping (String?) -> ())
+    func getStringValue(withKey key: String, handler: @escaping (String?) -> ())
     
-    func setStringValue(withKey key: String, value: String, hanlder: @escaping () -> ())
+    func setStringValue(withKey key: String, value: String, handler: @escaping () -> ())
 }
 
 final class UserDefaultsWorker: UserDefaultsWorkerProtocol{
     
     let userDefaultsStorage = UserDefaults.standard
     
-    func getStringValue(withKey key: String, hanlder: @escaping (String?) -> ()){
+    func getStringValue(withKey key: String, handler: @escaping (String?) -> ()){
         
-        hanlder(userDefaultsStorage.string(forKey: key))
+        handler(userDefaultsStorage.string(forKey: key))
     }
     
-    func setStringValue(withKey key: String, value: String, hanlder: @escaping () -> ()){
+    func setStringValue(withKey key: String, value: String, handler: @escaping () -> ()){
         
         userDefaultsStorage.setValue(value, forKey: key)
-        hanlder()
+        handler()
     }
 }

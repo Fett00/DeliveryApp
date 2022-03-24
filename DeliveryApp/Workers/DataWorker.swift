@@ -136,7 +136,7 @@ final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtoco
                                     cdCategory.categoryName = category.strCategory
                                     cdCategory.categoryID = Int32(category.idCategory) ?? -1
                                 }
-                            } hanlder: {}
+                            } handler: {}
                         }
                     }
                 }
@@ -192,7 +192,7 @@ final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtoco
                         
                         self.mealModels = meals
                         
-                        //self.coreDataWorker.delete(type: CDCartContent.self, withCondition: nil, hanlder: {})
+                        //self.coreDataWorker.delete(type: CDCartContent.self, withCondition: nil, handler: {})
                         
                         DispatchQueue.main.async {
                             print("Meal from net")
@@ -215,7 +215,7 @@ final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtoco
                                     cdMeal.categoryName = category
                                     cdMeal.price = Int32(meal.price)
                                 }
-                            } hanlder: {}
+                            } handler: {}
                         }
                     }
                 }
@@ -252,7 +252,7 @@ final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtoco
                     cdModel.count = 1
                     cdModel.mealID = Int32(meal.idMeal) ?? -1
                     
-                } hanlder: {
+                } handler: {
                     print("Add to cart")
                     handler()
                 }

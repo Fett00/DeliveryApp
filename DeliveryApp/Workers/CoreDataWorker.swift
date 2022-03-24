@@ -10,7 +10,7 @@ import CoreData
 
 protocol CoreDataWorkerProtocolForDeleteOnly{
     
-    func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, hanlder: @escaping () -> ())
+    func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, handler: @escaping () -> ())
 }
 
 protocol CoreDataWorkerProtocolForGetOnly{
@@ -20,9 +20,9 @@ protocol CoreDataWorkerProtocolForGetOnly{
 
 protocol CoreDataWorkerProtocol{
 
-    func add(createObject: (NSManagedObjectContext)->(), hanlder: @escaping () -> ())
+    func add(createObject: (NSManagedObjectContext)->(), handler: @escaping () -> ())
 
-    func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, hanlder: @escaping () -> ())
+    func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, handler: @escaping () -> ())
 
     func count<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, withLimit limit: Int?, offset: Int?) -> Int
 
@@ -56,12 +56,12 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
     var managedObjectModel: NSManagedObjectModel { self.persistentContainer.managedObjectModel }
     
     //Сохранение Данных в БД
-    private func save (hanlder: @escaping () -> ()) {
+    private func save (handler: @escaping () -> ()) {
         
         if context.hasChanges {
             do {
                 try context.save()
-                hanlder()
+                handler()
             } catch {
                 
                 let nserror = error as NSError
@@ -69,16 +69,16 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             }
         }
         else{
-            hanlder()
+            handler()
         }
     }
     
-    private func saveInCurrentContext (currentContext: NSManagedObjectContext, hanlder: @escaping () -> ()) {
+    private func saveInCurrentContext (currentContext: NSManagedObjectContext, handler: @escaping () -> ()) {
         
         if currentContext.hasChanges {
             do {
                 try currentContext.save()
-                hanlder()
+                handler()
             } catch {
                 
                 let nserror = error as NSError
@@ -86,25 +86,25 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             }
         }
         else{
-            hanlder()
+            handler()
         }
     }
     
     //Добавление записи в CoreData
     //TODO: ПЕРЕДЕЛАТЬ
     ///Функция добавляет новые записи в CoreData
-    func add(createObject: (NSManagedObjectContext)->(), hanlder: @escaping () -> ()) {
+    func add(createObject: (NSManagedObjectContext)->(), handler: @escaping () -> ()) {
         
         let currentContext = self.context
         
         createObject(currentContext)
         saveInCurrentContext(currentContext: currentContext) {
-            hanlder()
+            handler()
         }
     }
 
     /// Функция удаляет заданные записи из CoreData
-    func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, hanlder: @escaping () -> ()){
+    func delete<Entity: NSManagedObject>(type: Entity.Type, withCondition condition: String?, handler: @escaping () -> ()){
        
         var predicate: NSPredicate?
         
@@ -128,7 +128,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol, CoreDataWorkerProtocolForGet
             }
             
             saveInCurrentContext(currentContext: currentContext) {
-                hanlder()
+                handler()
                 print("ПРОИЗОШЛО УДОЛЕНИЕ")
             }
         }
