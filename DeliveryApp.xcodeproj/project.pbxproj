@@ -41,6 +41,7 @@
 		5AC1CCC327BEB854000A1BEA /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC1CCC227BEB854000A1BEA /* UIViewController+Ext.swift */; };
 		5ACB230C276E9FFB00782216 /* JSONWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACB230B276E9FFB00782216 /* JSONWorker.swift */; };
 		5AE3AFB327983DE400C33980 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3AFB227983DE400C33980 /* CartViewController.swift */; };
+		5AF4F47127F4C42C005F61E6 /* LoadingBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF4F47027F4C42C005F61E6 /* LoadingBlurView.swift */; };
 		5AF58C0A27BA55E700FC186B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF58C0927BA55E700FC186B /* ProfileViewController.swift */; };
 		5AFDF9D227B08E280030AEC0 /* CDCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDF9CE27B08E280030AEC0 /* CDCategory+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
@@ -93,6 +94,7 @@
 		5AC1CCC227BEB854000A1BEA /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		5ACB230B276E9FFB00782216 /* JSONWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWorker.swift; sourceTree = "<group>"; };
 		5AE3AFB227983DE400C33980 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		5AF4F47027F4C42C005F61E6 /* LoadingBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBlurView.swift; sourceTree = "<group>"; };
 		5AF58C0927BA55E700FC186B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5AFDF9CE27B08E280030AEC0 /* CDCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +198,7 @@
 				5AA0069027BD5FFF003DF264 /* PersonalInformationViewController.swift */,
 				5AF58C0927BA55E700FC186B /* ProfileViewController.swift */,
 				5A5CA764275CEFF8003CFAA0 /* Cells */,
+				5AF4F46F27F4C406005F61E6 /* CustomViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -270,6 +273,14 @@
 				5A5CA749275CC819003CFAA0 /* DeliveryApp.xcdatamodeld */,
 			);
 			path = CoreDataItems;
+			sourceTree = "<group>";
+		};
+		5AF4F46F27F4C406005F61E6 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				5AF4F47027F4C42C005F61E6 /* LoadingBlurView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,6 +402,7 @@
 				5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */,
 				5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */,
 				5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */,
+				5AF4F47127F4C42C005F61E6 /* LoadingBlurView.swift in Sources */,
 				5A5CA766275CF017003CFAA0 /* CategoryCollectionViewCell.swift in Sources */,
 				5AA0069127BD5FFF003DF264 /* PersonalInformationViewController.swift in Sources */,
 				5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */,
