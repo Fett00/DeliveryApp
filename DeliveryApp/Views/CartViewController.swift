@@ -60,6 +60,14 @@ final class CartViewController: UIViewController {
         return button
     }()
     
+    //индикатор загрузки
+    private let loadingView: LoadingBlurView = {
+       
+        let loadingView = LoadingBlurView(frame: .zero, blurStyle: .dark, activityStyle: .medium)
+        
+        return loadingView
+    }()
+    
     init(dataWorker: DataWorkerForCartProtocol, data: DataWorkerCollectedDataForCartProtocol, imageWorker: ImageWorker){
         
         self.dataWorker = dataWorker
@@ -79,11 +87,17 @@ final class CartViewController: UIViewController {
         configureCartViewController()
         configureCartContentTableView()
         configureTotalAmount()
+        configureLoadingView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         loadMeals()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        
+        loadingView.frame = self.view.frame
     }
     
     private func configureCartViewController(){
@@ -97,6 +111,12 @@ final class CartViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItem = doneButton
         self.navigationItem.rightBarButtonItem = clearCartButton
+    }
+    
+    private func configureLoadingView(){
+        
+        view.addSubview(loadingView)
+        loadingView.frame = self.view.frame
     }
     
     //Конфигурация таблицы с выбранными блюдами
@@ -140,6 +160,8 @@ final class CartViewController: UIViewController {
     //Вызов удаления содержимого корзины
     @objc private func requestClearCart(){
         
+        self.loadingView.enableActivityWithAnimation {}
+        
         dataWorker.requestClearCart(withCondition: nil) {
             
             self.dataWorker.requestCartContent(withCondition: nil) {
@@ -148,7 +170,8 @@ final class CartViewController: UIViewController {
                 self.updateTotalAmount()
                 
                 self.checkCartFilling()
-                print("try reload cart")
+                self.loadingView.disableActivityWithAnimation {}
+                print("try reload empty cart")
             }
         }
     }
@@ -170,18 +193,21 @@ final class CartViewController: UIViewController {
     }
     
     @objc private func increaseMealCount(_ sender: UIButton){
-                
+        
         sender.showTapAnimation {
-            
+
+            self.loadingView.enableActivityWithAnimation {}
+
             guard let sendedView = sender.superview?.superview as? IndexPathCollector else { return }
-            
+
             let mealID = "\(self.data.cartContent[sendedView.indexPath.row].mealID)"
-            
+
             self.dataWorker.changeMealValue(mealID: mealID, increaseOrDecrease: true) {
-                
+
                 self.dataWorker.requestCartContent(withCondition: nil) {
                     self.cartContentTableView.reloadData()
                     self.updateTotalAmount()
+                    self.loadingView.disableActivityWithAnimation {}
                 }
             }
         }
@@ -190,6 +216,8 @@ final class CartViewController: UIViewController {
     @objc private func decreaseMealCount(_ sender: UIButton){
         
         sender.showTapAnimation {
+            
+            self.loadingView.enableActivityWithAnimation {}
             
             guard let sendedView = sender.superview?.superview as? IndexPathCollector else { return }
 
@@ -201,6 +229,7 @@ final class CartViewController: UIViewController {
                     self.cartContentTableView.reloadData()
                     self.updateTotalAmount()
                     self.checkCartFilling()
+                    self.loadingView.disableActivityWithAnimation {}
                 }
             }
         }
