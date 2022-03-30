@@ -55,7 +55,7 @@ class LoadingBlurView: UIView{
             
             self.alpha = 0.0
         } completion: { _ in
-            
+             
             self.activityView.stopAnimating()
             completionBlock()
         }
