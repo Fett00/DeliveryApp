@@ -72,7 +72,6 @@ class LoadingBlurView: UIView{
             
             completionBlock()
         }
-
     }
     
     func disableActivityWithAnimation(withDelay delay: TimeInterval, completionBlock: @escaping () -> ()){
