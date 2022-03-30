@@ -35,6 +35,14 @@ final class MainMenueViewController: UIViewController {
         return collectionView
     }()
     
+    //индикатор загрузки
+    private let loadingView: LoadingBlurView = {
+       
+        let loadingView = LoadingBlurView(frame: .zero, blurStyle: .dark, activityStyle: .medium)
+        
+        return loadingView
+    }()
+    
     private let dataWorker: DataWorkerForMainMenueProtocol //Объект для запроса данных
     private let imageWorker: ImageWorkerProtocol //Объект для работы с изображениями
     private let data: DataWorkerCollectedDataProtocol //Объект для получения данных
@@ -62,11 +70,13 @@ final class MainMenueViewController: UIViewController {
         configureMainMenue()
         configureCategoryCollectionView()
         configureMealsCollectionView()
+        configureLoadingView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        loadingView.frame = self.view.frame
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +84,12 @@ final class MainMenueViewController: UIViewController {
         
         dataWorker.requestCategories()
         //dataWorker.requsetMeals(for: "Beef") // Перенес в делегат после получения списка категорий
+    }
+    
+    func configureLoadingView(){
+        
+        view.addSubview(loadingView)
+        loadingView.frame = self.view.frame
     }
     
     private func configureMainMenue(){
@@ -197,6 +213,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
             
             if currentCategory != indexPath.row{
                 
+                self.loadingView.enableActivityWithAnimation {}
                 currentCategory = indexPath.row
                 dataWorker.requestMeals(for: data.categoryModels[currentCategory].strCategory)
                 
@@ -225,6 +242,7 @@ extension MainMenueViewController: DataWorkerDelegate{
             
             categoryCollectionView.reloadData()
             
+            self.loadingView.enableActivityWithAnimation {}
             dataWorker.requestMeals(for: data.categoryModels[currentCategory].strCategory)
         }
     }
@@ -233,6 +251,7 @@ extension MainMenueViewController: DataWorkerDelegate{
         
         mealsCollectionView.reloadData()
         self.navigationItem.title = self.data.categoryModels[self.currentCategory].strCategory
+        self.loadingView.disableActivityWithAnimation {}
     }
 }
 
