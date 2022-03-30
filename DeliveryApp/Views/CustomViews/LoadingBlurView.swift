@@ -51,7 +51,7 @@ class LoadingBlurView: UIView{
     
     func disableActivityWithAnimation(completionBlock: @escaping () -> ()){
         
-        UIView.animate(withDuration: 0.5, delay: 0.5, options: [ .curveEaseOut]) {
+        UIView.animate(withDuration: 0.25, delay: 0.5, options: [ .curveEaseOut]) {
             
             self.alpha = 0.0
         } completion: { _ in
@@ -59,6 +59,31 @@ class LoadingBlurView: UIView{
             self.activityView.stopAnimating()
             completionBlock()
         }
+    }
+    
+    func enableActivityWithAnimation(withDelay delay: TimeInterval, completionBlock: @escaping () -> ()){
+        
+        self.activityView.startAnimating()
+        
+        UIView.animate(withDuration: 0.5, delay: delay, options: [ .curveEaseOut]) {
+            
+            self.alpha = 1.0
+        } completion: { _ in
+            
+            completionBlock()
+        }
 
+    }
+    
+    func disableActivityWithAnimation(withDelay delay: TimeInterval, completionBlock: @escaping () -> ()){
+        
+        UIView.animate(withDuration: 0.5, delay: delay, options: [ .curveEaseOut]) {
+            
+            self.alpha = 0.0
+        } completion: { _ in
+            
+            self.activityView.stopAnimating()
+            completionBlock()
+        }
     }
 }
