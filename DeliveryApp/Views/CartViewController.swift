@@ -186,7 +186,7 @@ final class CartViewController: UIViewController {
         
         sender.showTapAnimation {
             
-            let personalVC = ProjectAssembler.shared.createPersonalInformationViewController()
+            let personalVC = ProjectCoordinator.shared.createPersonalInformationViewController()
             
             self.navigationController?.pushViewController(personalVC, animated: true)
         }

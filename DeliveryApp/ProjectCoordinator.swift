@@ -1,5 +1,5 @@
 //
-//  ProjectAssembler.swift
+//  ProjectCoordinator.swift
 //  DeliveryApp
 //
 //  Created by Садык Мусаев on 12.12.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProjectAssembler{
+class ProjectCoordinator{
     
     private let dataWorker = DataWorker() //Координация все отсальних воркеров. Работа с данными
     private let networkWorker = NetworkWorker() //Работа с сетью
@@ -19,7 +19,7 @@ class ProjectAssembler{
     private let userDefaultsWorker = UserDefaultsWorker()//Работа с user defaults
     
     //singleton
-    public static let shared = ProjectAssembler()
+    public static let shared = ProjectCoordinator()
     private init(){
         
         dataWorker.coreDataWorker = coreDataWorker

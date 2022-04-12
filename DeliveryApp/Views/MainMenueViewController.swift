@@ -139,7 +139,7 @@ final class MainMenueViewController: UIViewController {
     
     @objc private func openCart(){
         
-        let cartVC = ProjectAssembler.shared.createCartViewController()
+        let cartVC = ProjectCoordinator.shared.createCartViewController()
         
         self.present(cartVC, animated: true, completion: nil)
     }
@@ -227,7 +227,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
         }
         else if collectionView == mealsCollectionView {
             
-            let presentVC = ProjectAssembler.shared.createPresentMealViewController(meal: data.mealModels[indexPath.row], indexPath: indexPath)
+            let presentVC = ProjectCoordinator.shared.createPresentMealViewController(meal: data.mealModels[indexPath.row], indexPath: indexPath)
             
             self.present(presentVC, animated: true, completion: nil)
         }
