@@ -18,7 +18,9 @@ final class ProfileViewController: UIViewController {
         view.image = Images.avatar
         view.contentMode = .scaleAspectFill
         view.layer.cornerCurve = .continuous
-        view.layer.cornerRadius = 20
+        //view.layer.cornerRadius = 20
+        view.clipsToBounds = true
+        //view.layer.masksToBounds = true
         view.backgroundColor = .white
         
         return view
@@ -94,11 +96,11 @@ final class ProfileViewController: UIViewController {
         return textField
     }()
     
-    private let apartamentTextField: UITextField = { //Поле ввода номера квартиры
+    private let apartmentTextField: UITextField = { //Поле ввода номера квартиры
         
         let textField = UITextField()
         
-        textField.placeholder = "Apartament (optional)"
+        textField.placeholder = "Apartment (optional)"
         textField.font = UIFont.preferredFont(forTextStyle: .title2)
         textField.clearButtonMode = .whileEditing
         textField.borderStyle = .roundedRect
@@ -146,17 +148,18 @@ final class ProfileViewController: UIViewController {
         cityTextField.delegate = self
         streetTextField.delegate = self
         homeTextField.delegate = self
-        apartamentTextField.delegate = self
+        apartmentTextField.delegate = self
         
-        view.addSubview(avatarImageView, nameTextField, phoneNumberTextField, cityTextField, streetTextField, homeTextField, apartamentTextField)
+        view.addSubview(avatarImageView, nameTextField, phoneNumberTextField, cityTextField, streetTextField, homeTextField, apartmentTextField)
         
         let safeArea = view.safeAreaLayoutGuide
         
         avatarImageView.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: nil, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 0, width: 0, height: 0)
         avatarImageView.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 1/3).isActive = true
-        avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 28/25).isActive = true
+        avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor).isActive = true
         
-        nameTextField.constraints(top: safeArea.topAnchor, bottom: nil, leading: avatarImageView.trailingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
+        nameTextField.constraints(top: nil, bottom: nil, leading: avatarImageView.trailingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
+        nameTextField.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
         
         phoneNumberTextField.constraints(top: avatarImageView.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
@@ -166,10 +169,15 @@ final class ProfileViewController: UIViewController {
         
         homeTextField.constraints(top: streetTextField.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
-        apartamentTextField.constraints(top: homeTextField.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
+        apartmentTextField.constraints(top: homeTextField.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
-        let apartamentBottomAnchor = apartamentTextField.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: -20)
-        apartamentBottomAnchor.priority = .defaultHigh
+        let apartmentBottomAnchor = apartmentTextField.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: -20)
+        apartmentBottomAnchor.priority = .defaultHigh
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
     }
     
     private func loadDataFromUserDefaults(){
@@ -194,9 +202,9 @@ final class ProfileViewController: UIViewController {
             
             self.homeTextField.text = home
         }
-        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.apartament.rawValue) { apartament in
+        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.apartment.rawValue) { apartment in
             
-            self.apartamentTextField.text = apartament
+            self.apartmentTextField.text = apartment
         }
     }
 }
@@ -220,8 +228,8 @@ extension ProfileViewController: UITextFieldDelegate{
             userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.street.rawValue, value: streetTextField.text!) {}
         case homeTextField:
             userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.home.rawValue, value: homeTextField.text!) {}
-        case apartamentTextField:
-            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.apartament.rawValue, value: apartamentTextField.text!) {}
+        case apartmentTextField:
+            userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.apartment.rawValue, value: apartmentTextField.text!) {}
         default:
             break
         }

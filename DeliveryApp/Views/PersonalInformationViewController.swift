@@ -83,11 +83,11 @@ final class PersonalInformationViewController: UIViewController {
         return textField
     }()
     
-    private let apartamentTextField: UITextField = { //Поле ввода номера квартиры
+    private let apartmentTextField: UITextField = { //Поле ввода номера квартиры
         
         let textField = UITextField()
         
-        textField.placeholder = "Apartament (optional)"
+        textField.placeholder = "Apartment (optional)"
         textField.font = UIFont.preferredFont(forTextStyle: .title2)
         textField.clearButtonMode = .whileEditing
         textField.borderStyle = .roundedRect
@@ -160,7 +160,7 @@ final class PersonalInformationViewController: UIViewController {
         secStack.addArrangedSubview(cityTextField)
         secStack.addArrangedSubview(streetTextField)
         thdStack.addArrangedSubview(homeTextField)
-        thdStack.addArrangedSubview(apartamentTextField)
+        thdStack.addArrangedSubview(apartmentTextField)
         
         globalStack.axis = .vertical
         globalStack.alignment = .fill
@@ -202,9 +202,9 @@ final class PersonalInformationViewController: UIViewController {
             
             self.homeTextField.text = home
         }
-        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.apartament.rawValue) { apartament in
+        userDefaultWorker.getStringValue(withKey: UserDefaultsKeys.apartment.rawValue) { apartment in
             
-            self.apartamentTextField.text = apartament
+            self.apartmentTextField.text = apartment
         }
     }
     
@@ -243,7 +243,7 @@ final class PersonalInformationViewController: UIViewController {
                 self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.city.rawValue, value: self.cityTextField.text!) {}
                 self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.street.rawValue, value: self.streetTextField.text!) {}
                 self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.home.rawValue, value: self.homeTextField.text!) {}
-                self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.apartament.rawValue, value: self.apartamentTextField.text!) {}
+                self.userDefaultWorker.setStringValue(withKey: UserDefaultsKeys.apartment.rawValue, value: self.apartmentTextField.text!) {}
                 
                 self.coreDataWorker.delete(type: CDCartContent.self, withCondition: nil) {} //Очистка корзины, после удачной покупки
             }

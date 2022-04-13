@@ -13,7 +13,7 @@ enum UserDefaultsKeys: String{
     case street = "street"
     case city = "city"
     case name = "name"
-    case apartament = "apartament"
+    case apartment = "apartment"
     case phone = "phone"
 }
 
