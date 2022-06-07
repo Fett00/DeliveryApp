@@ -60,12 +60,12 @@ extension UIView {
     
     func showTapAnimation(_ completionBlock: @escaping () -> ()) {
         
-        isUserInteractionEnabled = false
+        //isUserInteractionEnabled = false
         
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: { [weak self] in
             
             guard let strongSelf = self else { return }
-            strongSelf.alpha = 0.7
+            strongSelf.alpha = 0.6
             completionBlock()
             
         }) { done in
@@ -78,7 +78,7 @@ extension UIView {
             }) { [weak self] (_) in
                 
                 guard let strongSelf = self else { return }
-                strongSelf.isUserInteractionEnabled = true
+                //strongSelf.isUserInteractionEnabled = true
             }
         }
     }

@@ -9,15 +9,94 @@ import UIKit
 
 class UnionTextTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static var id: String { CategoryCollectionViewCell.description() }//идентификатор ячейки
+    
+    enum CellType{ //Тип ячейки (верняя, нижняя или центральная)
+        
+        case header
+        case middle
+        case footer
+        case single
     }
+    
+    //Поле для ввода текста
+    private let textField: UITextField = {
+        
+        let textField = UITextField()
+        
+        textField.font = UIFont.preferredFont(forTextStyle: .title2)
+        textField.backgroundColor = .secondarySystemFill
+        textField.textAlignment = .center
+        return textField
+    }()
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        // Configure the view for the selected state
+        configureCell()
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureCell(){
+        
+        self.addSubview(textField)
+        
+        self.clipsToBounds = true
+        self.layer.cornerCurve = .continuous
+        self.selectionStyle = .none
+    }
+    
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        
+        textField.frame = self.contentView.bounds
+    }
+    
+    func setUpCell(model: ProfileTextFieldModel, textFieldDelegate: UITextFieldDelegate, cellType: UnionTextTableViewCell.CellType){
+        
+        textField.placeholder = model.placeholder
+        textField.textContentType = model.contentType
+        textField.delegate = textFieldDelegate
+        
+        switch cellType{
+            
+        case .footer:
+            self.layer.cornerRadius = 10
+            self.layer.maskedCorners = [ .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            
+        case .header:
+            self.layer.cornerRadius = 10
+            self.layer.maskedCorners = [ .layerMaxXMinYCorner, .layerMaxXMinYCorner]
+            
+        case .middle:
+            self.layer.maskedCorners = [ .layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+            
+        case .single:
+            self.layer.cornerRadius = 10
+        }
+    }
+    
+    func startTextEditing(){
+        
+        textField.becomeFirstResponder()
+    }
 }
+
+/* для контроллера
+ 
+ let totalRows = tableView.numberOfRows(inSection: indexPath.section)
+ if totalRows == 1 {
+     cellPosition = .single
+ } else if indexPath.row == 0 {
+     cellPosition = .top
+ } else if indexPath.row == totalRows - 1 {
+     cellPosition = .bottom
+ } else {
+     cellPosition = .middle
+ }
+ */
