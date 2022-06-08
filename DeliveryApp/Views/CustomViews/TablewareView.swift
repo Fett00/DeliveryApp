@@ -130,7 +130,7 @@ class TablewareView: UIView {
         increaseButton.widthAnchor.constraint(equalTo: decreaseButton.heightAnchor, multiplier: 1/1).isActive = true
     }
     
-    @objc func decreaseWareCount(){
+    @objc private func decreaseWareCount(){
         
         if self.wareCounter != 0{
             
@@ -138,7 +138,7 @@ class TablewareView: UIView {
         }
     }
     
-    @objc func increaseWareCount(){
+    @objc private func increaseWareCount(){
         
         self.wareCounter += 1
     }
