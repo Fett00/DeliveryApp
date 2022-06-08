@@ -134,7 +134,8 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         
         bar.constraints(top: safeArea.topAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingleft: 0, paddingRight: 0, width: 0, height: 0)
         
-        mealImage.constraints(top: bar.bottomAnchor, bottom: safeArea.centerYAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 30, paddingRight: 30, width: 0, height: 0)
+        mealImage.constraints(top: bar.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 30, paddingRight: 30, width: 0, height: 0)
+        mealImage.heightAnchor.constraint(equalTo: mealImage.widthAnchor, multiplier: 1).isActive = true
         
         mealName.constraints(top: mealImage.bottomAnchor, bottom: nil, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingleft: 20, paddingRight: 20, width: 0, height: 0)
         
@@ -143,6 +144,8 @@ final class PresentMealViewController: UIViewController, IndexPathCollector{
         addToCartButton.constraints(top: nil, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 20, paddingleft: 20, paddingRight: 20, width: 0, height: 50)
         
         addToCartButton.topAnchor.constraint(greaterThanOrEqualTo: mealDescription.bottomAnchor, constant: 20).isActive = true
+        
+        mealDescription.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
     
     @objc private func addToCart(_ sender: UIButton){
