@@ -1,4 +1,14 @@
 # DeliveryApp
+
+<a href="https://swift.org">
+    <img src="https://img.shields.io/badge/swift-5.6-brightgreen.svg" alt="Swift 5.2">
+</a>
+<a href="https://swift.org">
+    <img src="https://img.shields.io/badge/ios-13.0-blue.svg" alt="Swift 5.2">
+</a>
+
+#
+
 Незамысловатый проект реализовывающий следующий функционал:
 * CRUD операции с CoreData
 * User Defaults
