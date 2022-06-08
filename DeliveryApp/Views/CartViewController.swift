@@ -153,6 +153,7 @@ final class CartViewController: UIViewController {
             
             self.cartContentTableView.reloadData()
             self.updateTotalAmount()
+            self.updateFooterView()
             
             self.checkCartFilling()
         }
@@ -168,6 +169,7 @@ final class CartViewController: UIViewController {
                 
                 self.cartContentTableView.reloadData()
                 self.updateTotalAmount()
+                self.updateFooterView()
                 
                 self.checkCartFilling()
                 self.loadingView.disableActivityWithAnimation {}
@@ -207,6 +209,7 @@ final class CartViewController: UIViewController {
                 self.dataWorker.requestCartContent(withCondition: nil) {
                     self.cartContentTableView.reloadData()
                     self.updateTotalAmount()
+                    self.updateFooterView()
                     self.loadingView.disableActivityWithAnimation {}
                 }
             }
@@ -228,6 +231,7 @@ final class CartViewController: UIViewController {
                 self.dataWorker.requestCartContent(withCondition: nil) {
                     self.cartContentTableView.reloadData()
                     self.updateTotalAmount()
+                    self.updateFooterView()
                     self.checkCartFilling()
                     self.loadingView.disableActivityWithAnimation {}
                 }
@@ -257,6 +261,20 @@ final class CartViewController: UIViewController {
         self.totalAmountLable.text = String(self.data.cartContent.reduce(into: 0, { partialResult, cartContent in
             partialResult += (cartContent.price * cartContent.count)
         })) + " ₽"
+    }
+    
+    private func updateFooterView(){
+        
+        if cartContentTableView.numberOfRows(inSection: 0) != 0 {
+            
+            let footerViewFrame = CGRect(origin: .zero, size: CGSize(width: cartContentTableView.frame.width, height: cartContentTableView.rowHeight))
+
+            cartContentTableView.tableFooterView = TablewareView(frame: footerViewFrame)
+        }
+        else {
+
+            cartContentTableView.tableFooterView = nil
+        }
     }
     
     deinit {
@@ -300,25 +318,12 @@ extension CartViewController: UITableViewDelegate{
                 
                 strongSelf.dataWorker.requestCartContent(withCondition: nil) {
                     strongSelf.cartContentTableView.reloadData()
+                    strongSelf.updateFooterView()
                 }
             }
         }
         
         return UISwipeActionsConfiguration(actions: [action])
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-
-        if tableView.numberOfRows(inSection: section) != 0 {
-            
-            let footerViewFrame = CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: tableView.rowHeight))
-
-            return TablewareView(frame: footerViewFrame)
-        }
-        else {
-
-            return nil
-        }
     }
 }
 
