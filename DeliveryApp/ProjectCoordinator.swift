@@ -32,7 +32,7 @@ class ProjectCoordinator{
     }
     
     ///Создание входной точки для приложения
-    func createEnteryPointOfProject() -> UIViewController{
+    func createEntryPointOfProject() -> UIViewController{
         
         UINavigationBar.appearance().tintColor = .label
         
@@ -42,13 +42,13 @@ class ProjectCoordinator{
         tabBar.tabBar.unselectedItemTintColor = .gray
         
         //Настройка вкладки с меню
-        let mainTab = UINavigationController(rootViewController: MainMenueViewController(dataWorker: dataWorker, imageWorker: imageWorker, data: dataWorker))
+        let mainTab = ProjectCoordinator.shared.createMainMenuViewController()
         
-        mainTab.tabBarItem = UITabBarItem(title: "Menue", image: Images.menue, tag: 0)
+        mainTab.tabBarItem = UITabBarItem(title: "Menu", image: Images.menu, tag: 0)
         //
         
         //Настройка вкладки с профилем пользователя
-        let profileTab = UINavigationController(rootViewController: ProfileViewController(userDefaultsWorker: userDefaultsWorker))
+        let profileTab = ProjectCoordinator.shared.createProfileViewController()
         
         profileTab.tabBarItem = UITabBarItem(title: "Profile", image: Images.profile, tag: 1)
         //
@@ -56,6 +56,16 @@ class ProjectCoordinator{
         tabBar.viewControllers = [mainTab, profileTab]
         
         return tabBar
+    }
+    
+    ///Создание контроллера корзины
+    func createProfileViewController() -> UIViewController{
+        UINavigationController(rootViewController: ProfileViewController(userDefaultsWorker: userDefaultsWorker))
+    }
+    
+    ///Создание контроллера корзины
+    func createMainMenuViewController() -> UIViewController{
+        UINavigationController(rootViewController: MainMenuViewController(dataWorker: dataWorker, imageWorker: imageWorker, data: dataWorker))
     }
     
     ///Создание контроллера корзины
