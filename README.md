@@ -45,8 +45,8 @@ graph TB
 ```
 ## Превью:
 
-<p float="left">
-  <img src="/Previews/Main.png" width="300" />
-  <img src="/Previews/Present.png" width="300" /> 
-  <img src="/Previews/Cart.png" width="300" />
+<p float="center">
+  <img src="/Previews/Main.png" width="250" />
+  <img src="/Previews/Present.png" width="250" /> 
+  <img src="/Previews/Cart.png" width="250" />
 </p>
