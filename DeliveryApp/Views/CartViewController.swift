@@ -18,7 +18,7 @@ final class CartViewController: UIViewController {
        
         let tableView = UITableView()
         
-        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 130.5
         
         return tableView
     }()
