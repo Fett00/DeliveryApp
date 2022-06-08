@@ -48,7 +48,6 @@ class MealCollectionViewCell: UICollectionViewCell, IndexPathCollector {
         
         button.setTitleColor(.label, for: .normal)
         button.backgroundColor = .secondarySystemFill
-        button.layer.borderWidth = 0.5
         button.layer.cornerCurve = .continuous
         button.layer.cornerRadius = 20
         button.addTarget(nil, action: Selector(("addToCart:")), for: .touchUpInside)
