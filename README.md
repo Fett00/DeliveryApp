@@ -18,7 +18,7 @@
 * Таблицы и коллекции
 * AutoLayout и ручной layout
 
-Архитектура:
+## Архитектура:
 
 ```mermaid
 graph TB
@@ -43,3 +43,10 @@ graph TB
     NetworkWorker(Network Worker) <--> DataWorker
     FooWorker(Foo Worker) <--> DataWorker
 ```
+## Превью:
+
+<p float="left">
+  <img src="/Previews/Main.png" width="300" />
+  <img src="/Previews/Present.png" width="300" /> 
+  <img src="/Previews/Cart.png" width="300" />
+</p>
