@@ -306,6 +306,20 @@ extension CartViewController: UITableViewDelegate{
         
         return UISwipeActionsConfiguration(actions: [action])
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
+        if tableView.numberOfRows(inSection: section) != 0 {
+            
+            let footerViewFrame = CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: tableView.rowHeight))
+
+            return TablewareView(frame: footerViewFrame)
+        }
+        else {
+
+            return nil
+        }
+    }
 }
 
 

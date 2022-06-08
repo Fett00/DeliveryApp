@@ -16,6 +16,7 @@
 		5A12D5982806486E0056AA03 /* ProfileViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A12D5972806486E0056AA03 /* ProfileViewController2.swift */; };
 		5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E634E27A04E5000A79E3E /* ImageWorker.swift */; };
 		5A1E635127A04E6A00A79E3E /* FileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E635027A04E6A00A79E3E /* FileWorker.swift */; };
+		5A2532A0285021780097F5C3 /* TablewareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A25329F285021780097F5C3 /* TablewareView.swift */; };
 		5A3CB6FB27B95D65008A4401 /* CDMeal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3CB6F927B95D65008A4401 /* CDMeal+CoreDataClass.swift */; };
 		5A3CB6FC27B95D65008A4401 /* CDMeal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3CB6FA27B95D65008A4401 /* CDMeal+CoreDataProperties.swift */; };
 		5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA740275CC819003CFAA0 /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 		5A12D5972806486E0056AA03 /* ProfileViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController2.swift; sourceTree = "<group>"; };
 		5A1E634E27A04E5000A79E3E /* ImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWorker.swift; sourceTree = "<group>"; };
 		5A1E635027A04E6A00A79E3E /* FileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWorker.swift; sourceTree = "<group>"; };
+		5A25329F285021780097F5C3 /* TablewareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablewareView.swift; sourceTree = "<group>"; };
 		5A3CB6F927B95D65008A4401 /* CDMeal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMeal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5A3CB6FA27B95D65008A4401 /* CDMeal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMeal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5A5CA73D275CC818003CFAA0 /* DeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				5AF4F47027F4C42C005F61E6 /* LoadingBlurView.swift */,
+				5A25329F285021780097F5C3 /* TablewareView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				5AA3FA6827CF813900324A60 /* UserDefaultsWorker.swift in Sources */,
 				5A5CA75A275CE18F003CFAA0 /* MealModel.swift in Sources */,
 				5A3CB6FB27B95D65008A4401 /* CDMeal+CoreDataClass.swift in Sources */,
+				5A2532A0285021780097F5C3 /* TablewareView.swift in Sources */,
 				5A5CA745275CC819003CFAA0 /* MainMenuViewController.swift in Sources */,
 				5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */,
 				5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */,
