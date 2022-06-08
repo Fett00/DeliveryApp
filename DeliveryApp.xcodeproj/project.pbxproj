@@ -12,13 +12,15 @@
 		5A004844276643E400C02952 /* ProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A004843276643E400C02952 /* ProjectCoordinator.swift */; };
 		5A0C6E0B27E8916B00207084 /* NetworkWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0C6E0A27E8916B00207084 /* NetworkWorkerTests.swift */; };
 		5A12D594280641BB0056AA03 /* UnionTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A12D593280641BB0056AA03 /* UnionTextTableViewCell.swift */; };
+		5A12D596280647FB0056AA03 /* ProfileTextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A12D595280647FB0056AA03 /* ProfileTextFieldModel.swift */; };
+		5A12D5982806486E0056AA03 /* ProfileViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A12D5972806486E0056AA03 /* ProfileViewController2.swift */; };
 		5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E634E27A04E5000A79E3E /* ImageWorker.swift */; };
 		5A1E635127A04E6A00A79E3E /* FileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E635027A04E6A00A79E3E /* FileWorker.swift */; };
 		5A3CB6FB27B95D65008A4401 /* CDMeal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3CB6F927B95D65008A4401 /* CDMeal+CoreDataClass.swift */; };
 		5A3CB6FC27B95D65008A4401 /* CDMeal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3CB6FA27B95D65008A4401 /* CDMeal+CoreDataProperties.swift */; };
 		5A5CA741275CC819003CFAA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA740275CC819003CFAA0 /* AppDelegate.swift */; };
 		5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA742275CC819003CFAA0 /* SceneDelegate.swift */; };
-		5A5CA745275CC819003CFAA0 /* MainMenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */; };
+		5A5CA745275CC819003CFAA0 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA744275CC819003CFAA0 /* MainMenuViewController.swift */; };
 		5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CA749275CC819003CFAA0 /* DeliveryApp.xcdatamodeld */; };
 		5A5CA74D275CC81C003CFAA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A5CA74C275CC81C003CFAA0 /* Assets.xcassets */; };
 		5A5CA750275CC81C003CFAA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A5CA74E275CC81C003CFAA0 /* LaunchScreen.storyboard */; };
@@ -64,6 +66,8 @@
 		5A0C6DFF27E8899600207084 /* DeliveryAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeliveryAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A0C6E0A27E8916B00207084 /* NetworkWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorkerTests.swift; sourceTree = "<group>"; };
 		5A12D593280641BB0056AA03 /* UnionTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionTextTableViewCell.swift; sourceTree = "<group>"; };
+		5A12D595280647FB0056AA03 /* ProfileTextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextFieldModel.swift; sourceTree = "<group>"; };
+		5A12D5972806486E0056AA03 /* ProfileViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController2.swift; sourceTree = "<group>"; };
 		5A1E634E27A04E5000A79E3E /* ImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWorker.swift; sourceTree = "<group>"; };
 		5A1E635027A04E6A00A79E3E /* FileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWorker.swift; sourceTree = "<group>"; };
 		5A3CB6F927B95D65008A4401 /* CDMeal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMeal+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -71,7 +75,7 @@
 		5A5CA73D275CC818003CFAA0 /* DeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A5CA740275CC819003CFAA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A5CA742275CC819003CFAA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenueViewController.swift; sourceTree = "<group>"; };
+		5A5CA744275CC819003CFAA0 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		5A5CA74A275CC819003CFAA0 /* DeliveryApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeliveryApp.xcdatamodel; sourceTree = "<group>"; };
 		5A5CA74C275CC81C003CFAA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A5CA74F275CC81C003CFAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 				5A5CA759275CE18F003CFAA0 /* MealModel.swift */,
 				5A5CA75B275CE31F003CFAA0 /* CategoryModel.swift */,
 				5A5E36A427BBD9BD00C84CE8 /* CartContentModel.swift */,
+				5A12D595280647FB0056AA03 /* ProfileTextFieldModel.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -194,11 +199,12 @@
 		5A5CA763275CEFEE003CFAA0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5A5CA744275CC819003CFAA0 /* MainMenueViewController.swift */,
+				5A5CA744275CC819003CFAA0 /* MainMenuViewController.swift */,
 				5A5CA757275CE14B003CFAA0 /* PresentMealViewController.swift */,
 				5AE3AFB227983DE400C33980 /* CartViewController.swift */,
 				5AA0069027BD5FFF003DF264 /* PersonalInformationViewController.swift */,
 				5AF58C0927BA55E700FC186B /* ProfileViewController.swift */,
+				5A12D5972806486E0056AA03 /* ProfileViewController2.swift */,
 				5A5CA764275CEFF8003CFAA0 /* Cells */,
 				5AF4F46F27F4C406005F61E6 /* CustomViews */,
 			);
@@ -401,7 +407,7 @@
 				5AA3FA6827CF813900324A60 /* UserDefaultsWorker.swift in Sources */,
 				5A5CA75A275CE18F003CFAA0 /* MealModel.swift in Sources */,
 				5A3CB6FB27B95D65008A4401 /* CDMeal+CoreDataClass.swift in Sources */,
-				5A5CA745275CC819003CFAA0 /* MainMenueViewController.swift in Sources */,
+				5A5CA745275CC819003CFAA0 /* MainMenuViewController.swift in Sources */,
 				5A5CA74B275CC819003CFAA0 /* DeliveryApp.xcdatamodeld in Sources */,
 				5A5CA75C275CE31F003CFAA0 /* CategoryModel.swift in Sources */,
 				5A5CA76B275CF773003CFAA0 /* NetworkWorker.swift in Sources */,
@@ -412,6 +418,7 @@
 				5A1E634F27A04E5000A79E3E /* ImageWorker.swift in Sources */,
 				5AC1CCC327BEB854000A1BEA /* UIViewController+Ext.swift in Sources */,
 				5A004844276643E400C02952 /* ProjectCoordinator.swift in Sources */,
+				5A12D596280647FB0056AA03 /* ProfileTextFieldModel.swift in Sources */,
 				5AC1CCC127BE6ED7000A1BEA /* Protocols.swift in Sources */,
 				5A00484027663BDC00C02952 /* CoreDataWorker.swift in Sources */,
 				5A5CA743275CC819003CFAA0 /* SceneDelegate.swift in Sources */,
@@ -421,6 +428,7 @@
 				5AF58C0A27BA55E700FC186B /* ProfileViewController.swift in Sources */,
 				5ACB230C276E9FFB00782216 /* JSONWorker.swift in Sources */,
 				5A5E36A227BBBF6200C84CE8 /* CDCartContent+CoreDataClass.swift in Sources */,
+				5A12D5982806486E0056AA03 /* ProfileViewController2.swift in Sources */,
 				5A00484227663C2300C02952 /* DataWorker.swift in Sources */,
 				5ABB07BA27A490B000A295FA /* ModelConverter.swift in Sources */,
 				5A5CA76D275E307C003CFAA0 /* Enums.swift in Sources */,

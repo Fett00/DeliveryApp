@@ -12,7 +12,7 @@ enum Images{
     static let emptyMeal = UIImage(named: "food-delivery")!
     static let avatar = UIImage(named: "AvatarImage")!
     static let cart = UIImage(systemName: "cart")!
-    static let menue = UIImage(systemName: "bag")!
+    static let menu = UIImage(systemName: "bag")!
     static let profile = UIImage(systemName: "person")!
     static let backArrow = UIImage(systemName: "arrow.backward")!
     static let downArrow = UIImage(systemName: "arrow.down")!

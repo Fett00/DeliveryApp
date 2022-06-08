@@ -13,7 +13,7 @@ protocol DataWorkerForAddToCartProtocol: AnyObject{
     func addMealToCart(byIndex: Int, handler: @escaping () -> ())
 }
 
-protocol DataWorkerForMainMenueProtocol: AnyObject, DataWorkerForAddToCartProtocol{
+protocol DataWorkerForMainMenuProtocol: AnyObject, DataWorkerForAddToCartProtocol{
     
     var delegate: DataWorkerDelegate? { get set }
     
@@ -54,7 +54,7 @@ protocol DataWorkerDelegate: AnyObject {
 
 
 
-final class DataWorker: DataWorkerForMainMenueProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol, DataWorkerCollectedDataForCartProtocol{
+final class DataWorker: DataWorkerForMainMenuProtocol, DataWorkerForCartProtocol, DataWorkerCollectedDataProtocol, DataWorkerCollectedDataForCartProtocol{
     
     weak var delegate: DataWorkerDelegate? //Заменить на множественное делегирование
     

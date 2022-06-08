@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainMenueViewController: UIViewController {
+final class MainMenuViewController: UIViewController {
     
     private var currentCategory:Int = 0 //Текущая категория
     
@@ -43,11 +43,11 @@ final class MainMenueViewController: UIViewController {
         return loadingView
     }()
     
-    private let dataWorker: DataWorkerForMainMenueProtocol //Объект для запроса данных
+    private let dataWorker: DataWorkerForMainMenuProtocol //Объект для запроса данных
     private let imageWorker: ImageWorkerProtocol //Объект для работы с изображениями
     private let data: DataWorkerCollectedDataProtocol //Объект для получения данных
     
-    init(dataWorker: DataWorkerForMainMenueProtocol, imageWorker: ImageWorkerProtocol, data: DataWorkerCollectedDataProtocol){
+    init(dataWorker: DataWorkerForMainMenuProtocol, imageWorker: ImageWorkerProtocol, data: DataWorkerCollectedDataProtocol){
         
         self.dataWorker = dataWorker
         self.imageWorker = imageWorker
@@ -67,7 +67,7 @@ final class MainMenueViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
 
-        configureMainMenue()
+        configureMainMenu()
         configureCategoryCollectionView()
         configureMealsCollectionView()
         configureLoadingView()
@@ -92,7 +92,7 @@ final class MainMenueViewController: UIViewController {
         loadingView.frame = self.view.frame
     }
     
-    private func configureMainMenue(){
+    private func configureMainMenu(){
         
         let cartImage = Images.cart
         
@@ -155,7 +155,7 @@ final class MainMenueViewController: UIViewController {
     }
 }
 
-extension MainMenueViewController: UICollectionViewDataSource{
+extension MainMenuViewController: UICollectionViewDataSource{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -203,7 +203,7 @@ extension MainMenueViewController: UICollectionViewDataSource{
     }
 }
 
-extension MainMenueViewController: UICollectionViewDelegate{
+extension MainMenuViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -234,7 +234,7 @@ extension MainMenueViewController: UICollectionViewDelegate{
     }
 }
 
-extension MainMenueViewController: DataWorkerDelegate{
+extension MainMenuViewController: DataWorkerDelegate{
     
     func updateCategories() {
         
