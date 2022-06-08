@@ -12,10 +12,10 @@ final class CartViewController: UIViewController {
     private let dataWorker: DataWorkerForCartProtocol //Объект для запроса данных
     private let imageWorker: ImageWorker
     private let data: DataWorkerCollectedDataForCartProtocol //Данные для заполнения корзины
-     
+    
     //Таблица с содержимым корзины
     private let cartContentTableView: UITableView = {
-       
+        
         let tableView = UITableView()
         
         tableView.rowHeight = 130.5
@@ -62,7 +62,7 @@ final class CartViewController: UIViewController {
     
     //индикатор загрузки
     private let loadingView: LoadingBlurView = {
-       
+        
         let loadingView = LoadingBlurView(frame: .zero, blurStyle: .dark, activityStyle: .medium)
         
         return loadingView
@@ -83,7 +83,7 @@ final class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureCartViewController()
         configureCartContentTableView()
         configureTotalAmount()
@@ -197,15 +197,15 @@ final class CartViewController: UIViewController {
     @objc private func increaseMealCount(_ sender: UIButton){
         
         sender.showTapAnimation {
-
+            
             self.loadingView.enableActivityWithAnimation {}
-
+            
             guard let sendedView = sender.superview?.superview as? IndexPathCollector else { return }
-
+            
             let mealID = "\(self.data.cartContent[sendedView.indexPath.row].mealID)"
-
+            
             self.dataWorker.changeMealValue(mealID: mealID, increaseOrDecrease: true) {
-
+                
                 self.dataWorker.requestCartContent(withCondition: nil) {
                     self.cartContentTableView.reloadData()
                     self.updateTotalAmount()
@@ -223,7 +223,7 @@ final class CartViewController: UIViewController {
             self.loadingView.enableActivityWithAnimation {}
             
             guard let sendedView = sender.superview?.superview as? IndexPathCollector else { return }
-
+            
             let mealID = "\(self.data.cartContent[sendedView.indexPath.row].mealID)"
             
             self.dataWorker.changeMealValue(mealID: mealID, increaseOrDecrease: false) {
@@ -267,12 +267,15 @@ final class CartViewController: UIViewController {
         
         if cartContentTableView.numberOfRows(inSection: 0) != 0 {
             
-            let footerViewFrame = CGRect(origin: .zero, size: CGSize(width: cartContentTableView.frame.width, height: cartContentTableView.rowHeight))
-
-            cartContentTableView.tableFooterView = TablewareView(frame: footerViewFrame)
+            if cartContentTableView.tableFooterView == nil {
+                
+                let footerViewFrame = CGRect(origin: .zero, size: CGSize(width: cartContentTableView.frame.width, height: cartContentTableView.rowHeight))
+                
+                cartContentTableView.tableFooterView = TablewareView(frame: footerViewFrame)
+            }
         }
         else {
-
+            
             cartContentTableView.tableFooterView = nil
         }
     }
